@@ -1854,7 +1854,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
     </div>
     <div class="hero-fx-layer fx-event">
       <div class="fx-title-bg">events</div>
-      <div class="fx-leads-host" id="fxLeadsHost"></div>
+      <div class="fx-leads-host" id="fxLeadsHost" style="display:none"></div>
     </div>
   </div>
   <div class="hero-grid">
@@ -2511,7 +2511,7 @@ document.querySelectorAll('video').forEach(function(v){
   const host = document.getElementById('fxLeadsHost');
   let leadCount = 0;
   let leadInterval = null;
-  function startLeads(){
+  function startLeads(){ return; // disabled
     if(leadInterval || !host) return;
     leadInterval = setInterval(function(){
       if(!hero || hero.getAttribute('data-active') !== 'event' || hero.classList.contains('fx-out')){
