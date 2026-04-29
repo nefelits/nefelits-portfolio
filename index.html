@@ -1,0 +1,2441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nefeli Tsaousi · Digital Marketing</title>
+<meta name="description" content="Digital marketing leader crafting strategy that earns attention." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FFFFFF;
+  --cream-soft:#FAFAFA;
+  --cream-deep:#FAFAFA;
+  --ink:#0A0A0A;
+  --ink-soft:#1F1F1F;
+  --taupe:#6B6B6B;
+  --line:#E6E6E6;
+  --champagne:#D5052D;
+  --champagne-deep:#A10728;
+  --pink:#FFFFFF;
+  --pink-soft:#FAFAFA;
+  --blue:#FFFFFF;
+  --blue-soft:#FAFAFA;
+  --crimson:#D5052D;
+  --maroon:#A10728;
+  --bone:#FAFAFA;
+  --navy:#0A0A0A;
+  --dark:#0A0A0A;
+  --red:#D5052D;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'Inter',sans-serif;
+  font-weight:400;
+  line-height:1.6;
+  overflow-x:hidden;
+  cursor:none;
+}
+img,video{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:none;border:none;background:none}
+
+/* INTRO — full-screen black with white "Open" circle */
+.folder-intro{
+  position:fixed;inset:0;
+  z-index:10000;
+  background:#0A0A0A;
+  display:flex;align-items:center;justify-content:center;
+  cursor:none;
+  transition:opacity 1s ease;
+}
+.folder-intro.opening{opacity:0;pointer-events:none;}
+.folder-intro.opened{display:none;}
+.intro-circle{
+  width:280px;height:280px;
+  border-radius:50%;
+  background:#FFFFFF;
+  color:#0A0A0A;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;
+  cursor:pointer;
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  font-size:32px;
+  letter-spacing:-.01em;
+  box-shadow:0 30px 80px -10px rgba(255,255,255,.18);
+  animation:pulse-soft 2.6s ease-in-out infinite;
+  transition:transform .4s cubic-bezier(.2,.8,.2,1);
+  user-select:none;
+}
+.intro-circle:hover{transform:scale(1.05);}
+.intro-heart{
+  font-size:28px;
+  color:#FFFFFF;
+  background:#0A0A0A;
+  width:48px;height:48px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  line-height:1;
+}
+@keyframes pulse-soft{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.03);}
+}
+
+/* CURSOR */
+.cursor-dot{
+  position:fixed;
+  top:0;left:0;
+  width:10px;height:10px;
+  border-radius:50%;
+  background:#FFFFFF;
+  pointer-events:none;
+  z-index:9999;
+  transform:translate(-50%,-50%);
+  mix-blend-mode:difference;
+  transition:width .25s,height .25s,background .25s;
+}
+.cursor-hello{
+  position:fixed;
+  top:0;left:0;
+  font-family:'Inter',sans-serif;
+  font-weight:500;
+  font-size:11px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:#FFFFFF;
+  mix-blend-mode:difference;
+  opacity:.5;
+  pointer-events:none;
+  z-index:9998;
+  transform:translate(20px,18px);
+  transition:opacity .4s;
+}
+.cursor-dot.hover{width:42px;height:42px;background:#FFFFFF;}
+
+/* NAV */
+.nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:22px 48px;
+  background:transparent;
+  border-bottom:1px solid transparent;
+  transition:background .5s ease,border-color .5s ease,color .5s ease;
+  --nav-fg:#0A0A0A;
+  --nav-fg-soft:#3F3F3F;
+  --nav-cv-bg:#0A0A0A;
+  --nav-cv-fg:#FFFFFF;
+}
+/* Light theme — for dark sections (hero, footer) */
+.nav.theme-light{
+  --nav-fg:#FFFFFF;
+  --nav-fg-soft:rgba(255,255,255,.85);
+  --nav-cv-bg:#FFFFFF;
+  --nav-cv-fg:#0A0A0A;
+}
+/* Subtle blur once user scrolls past hero */
+.nav.scrolled{
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom-color:rgba(0,0,0,.06);
+}
+.nav.scrolled.theme-light{
+  background:rgba(10,10,10,.55);
+  border-bottom-color:rgba(255,255,255,.08);
+}
+.logo-wrap{
+  display:flex;align-items:center;gap:14px;
+}
+.logo-N{
+  width:54px;height:54px;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .1s linear;
+}
+.logo-text{
+  display:flex;flex-direction:column;
+  line-height:1.05;
+}
+.logo-text .lt-name{
+  font-family:'Fraunces',serif;
+  font-weight:500;
+  font-size:11px;
+  letter-spacing:.32em;
+  color:var(--nav-fg);
+  transition:color .5s;
+}
+.logo-text .lt-role{
+  font-family:'Inter',sans-serif;
+  font-weight:400;
+  font-size:9px;
+  letter-spacing:.42em;
+  color:var(--nav-fg-soft);
+  margin-top:2px;
+  transition:color .5s;
+}
+.logo-N svg path,.logo-N svg{stroke:var(--nav-fg);transition:stroke .5s;}
+.logo-N{color:var(--nav-fg);transition:color .5s;}
+.nav-links{
+  display:flex;gap:36px;align-items:center;
+}
+.nav-links a{
+  font-family:'Inter',sans-serif;
+  font-weight:500;
+  font-size:13px;
+  letter-spacing:.04em;
+  color:var(--nav-fg);
+  position:relative;
+  transition:color .5s,opacity .25s;
+  opacity:.9;
+}
+.nav-links a:hover{opacity:1;color:var(--nav-fg);}
+.nav-links a::after{
+  content:'';position:absolute;
+  left:0;bottom:-4px;
+  height:1px;width:0;
+  background:currentColor;
+  transition:width .35s ease;
+}
+.nav-links a:hover::after{width:100%;}
+.nav-cv{
+  margin-left:18px;
+  padding:11px 22px;
+  border:1px solid var(--nav-cv-bg);
+  border-radius:999px;
+  font-family:'Inter',sans-serif;
+  font-weight:500;
+  font-size:12px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  background:var(--nav-cv-bg);
+  color:var(--nav-cv-fg);
+  transition:transform .3s,background .5s,color .5s,border-color .5s;
+}
+.nav-cv:hover{transform:translateY(-2px);}
+
+/* FLOATING CTA */
+.floating-cta{
+  position:fixed;
+  bottom:32px;
+  right:32px;
+  z-index:90;
+  padding:18px 30px;
+  background:#0A0A0A;
+  color:#FFFFFF !important;
+  border:1px solid #0A0A0A;
+  border-radius:999px;
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  font-size:13px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  text-decoration:none;
+  box-shadow:0 14px 40px rgba(31,27,22,.28);
+  display:inline-flex;align-items:center;gap:14px;
+  transition:transform .35s ease,background .35s ease,color .35s ease,border-color .35s ease,box-shadow .35s ease;
+  animation:gentle-float 4s ease-in-out infinite;
+}
+.floating-cta:hover{
+  transform:translateY(-4px) scale(1.03);
+  background:#D5052D;
+  color:#0A0A0A !important;
+  border-color:#D5052D;
+  box-shadow:0 22px 50px rgba(201,168,122,.55);
+}
+.floating-cta .arrow{
+  width:20px;height:20px;
+  border-radius:50%;
+  background:#FFFFFF;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:11px;color:#0A0A0A;
+  transition:transform .35s ease,background .35s ease,color .35s ease;
+}
+.floating-cta:hover .arrow{
+  transform:rotate(-45deg);
+  background:#0A0A0A;
+  color:#FFFFFF;
+}
+@keyframes gentle-float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-6px);}
+}
+
+/* HERO (color background + floating portrait + accordion panels) */
+.hero{
+  position:relative;
+  min-height:100vh;
+  overflow:hidden;
+  padding:0;
+  color:var(--ink);
+  background:#FFFFFF;
+  transition:background 1s ease,color 1s ease;
+}
+.hero-bg{display:none;}
+.hero-tint{
+  position:absolute;inset:0;
+  background:transparent;
+  z-index:1;
+  transition:background 1s ease,opacity 1s ease;
+  pointer-events:none;
+}
+/* Hero stays white; animation layer comes via .hero-fx */
+.hero-fx{
+  position:absolute;inset:0;
+  pointer-events:none;
+  z-index:1;
+  overflow:hidden;
+}
+.hero-fx-layer{
+  position:absolute;inset:0;
+  opacity:0;
+  transition:opacity .9s ease;
+}
+.hero[data-active="social"] .hero-fx-layer.fx-social,
+.hero[data-active="digital"] .hero-fx-layer.fx-digital,
+.hero[data-active="event"] .hero-fx-layer.fx-event{opacity:1;}
+.hero.fx-out .hero-fx-layer{opacity:0 !important;}
+.fx-bubble{
+  position:absolute;
+  font-size:30px;
+  opacity:0;
+  animation:fxRise 9s linear infinite;
+  will-change:transform,opacity;
+  user-select:none;
+  filter:saturate(.85);
+}
+.fx-bubble.lg{font-size:42px;}
+.fx-bubble.sm{font-size:22px;}
+@keyframes fxRise{
+  0%{transform:translateY(40px) scale(.8) rotate(-3deg);opacity:0;}
+  12%{opacity:.55;}
+  85%{opacity:.32;}
+  100%{transform:translateY(-110vh) scale(1.05) rotate(2deg);opacity:0;}
+}
+.fx-title-bg{
+  position:absolute;
+  bottom:10%;left:50%;
+  font-family:'Inter',sans-serif;font-weight:900;
+  font-size:clamp(140px,18vw,260px);
+  color:rgba(213,5,45,.18);
+  letter-spacing:-.06em;
+  pointer-events:none;
+  white-space:nowrap;
+  line-height:1;
+  text-transform:lowercase;
+  opacity:0;
+  transform:translate(-50%, 30px);
+  animation:fxTitleBreathe 4.5s ease-in-out infinite;
+}
+.hero[data-active="social"] .fx-social .fx-title-bg,
+.hero[data-active="digital"] .fx-digital .fx-title-bg,
+.hero[data-active="event"] .fx-event .fx-title-bg{
+  opacity:1;transform:translate(-50%, 0);
+}
+@keyframes fxTitleBreathe{
+  0%,100%{filter:blur(0);opacity:.16;}
+  50%{filter:blur(2px);opacity:.30;}
+}
+.fx-lead-pop{
+  position:absolute;
+  font-family:'Inter',sans-serif;font-weight:600;
+  font-size:16px;
+  color:#fff;
+  background:#D5052D;
+  border-radius:999px;
+  padding:8px 16px;
+  box-shadow:0 12px 28px -10px rgba(213,5,45,.55);
+  animation:leadPop 2.6s cubic-bezier(.2,.7,.3,1) forwards;
+  white-space:nowrap;
+  letter-spacing:.02em;
+}
+@keyframes leadPop{
+  0%{transform:translateY(40px) scale(.6);opacity:0;}
+  18%{transform:translateY(0) scale(1);opacity:1;}
+  72%{opacity:1;}
+  100%{transform:translateY(-50px) scale(.95);opacity:0;}
+}
+.hero-grid{
+  position:relative;z-index:2;
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  gap:40px;
+  padding:140px 48px 60px;
+  align-items:end;
+}
+.hero-headline{
+  align-self:end;
+  color:var(--ink);
+  max-width:760px;
+  position:relative;
+}
+.hero-eyebrow{
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  font-size:11px;
+  color:#0A0A0A;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  margin-bottom:28px;
+  display:inline-flex;align-items:center;gap:14px;
+}
+.hero-eyebrow::before{
+  content:'';width:36px;height:1px;background:#0A0A0A;
+  display:inline-block;
+}
+.hero-greet-row{
+  display:flex;align-items:center;gap:22px;
+  margin-bottom:18px;
+  opacity:0;
+  transform:translateX(-120px);
+  transition:opacity 1.1s cubic-bezier(.2,.85,.3,1) .25s,transform 1.1s cubic-bezier(.2,.85,.3,1) .25s;
+  will-change:opacity,transform;
+}
+.hero-headline.in .hero-greet-row{
+  opacity:1;
+  transform:translateX(0);
+}
+.hero-portrait-pop{
+  width:64px;height:64px;border-radius:50%;
+  overflow:hidden;
+  flex-shrink:0;
+  box-shadow:0 14px 30px -10px rgba(31,27,22,.35);
+  border:2px solid rgba(255,255,255,.6);
+  background:#D5052D;
+  transition:opacity .6s ease,transform .6s ease;
+  will-change:opacity,transform;
+}
+.hero-portrait-pop img{
+  width:100%;height:100%;object-fit:cover;
+}
+.hero-greeting{
+  font-family:'Inter',sans-serif;
+  font-weight:400;
+  font-size:18px;
+  letter-spacing:.01em;
+  color:var(--ink);
+  margin:0;
+}
+.hero-greeting .it{
+  font-family:'Inter',sans-serif;
+  font-style:normal;
+  font-weight:600;
+  color:var(--ink);
+}
+.hero h1{
+  font-family:'Inter',sans-serif;
+  font-weight:700;
+  font-size:clamp(54px,10vw,148px);
+  line-height:.94;
+  letter-spacing:-.04em;
+  color:var(--ink);
+  margin-bottom:0;
+}
+.hero h1 .it{
+  font-family:'Inter',sans-serif;
+  font-weight:700;
+  color:var(--ink);
+}
+.hero-meta{
+  display:flex;gap:36px;align-items:center;flex-wrap:wrap;
+  margin-top:28px;
+  padding-top:20px;
+  border-top:1px solid rgba(31,27,22,.18);
+}
+.hero-meta .item{display:flex;flex-direction:column;}
+.hero-meta .item strong{
+  font-family:'Inter',sans-serif;font-weight:600;font-size:22px;
+  color:var(--ink);letter-spacing:-.01em;
+}
+.hero-meta .item span{
+  font-family:'Inter',sans-serif;font-size:10px;
+  letter-spacing:.24em;text-transform:uppercase;
+  color:rgba(31,27,22,.6);margin-top:2px;
+}
+
+/* PANELS */
+.hero-panels{
+  align-self:end;
+  display:flex;flex-direction:column;gap:12px;
+  width:100%;max-width:520px;
+  margin-left:auto;
+  padding-bottom:8px;
+}
+.panel{
+  background:rgba(255,255,255,.55);
+  -webkit-backdrop-filter:blur(14px) saturate(1.1);
+  backdrop-filter:blur(14px) saturate(1.1);
+  border:1px solid rgba(255,255,255,.7);
+  border-radius:18px;
+  padding:18px 22px;
+  text-align:left;
+  width:100%;
+  color:var(--ink);
+  cursor:none;
+  transition:background .55s cubic-bezier(.2,.85,.3,1),padding .55s cubic-bezier(.2,.85,.3,1),border-color .55s,transform .4s,color .4s,box-shadow .55s;
+  display:block;
+  font-family:inherit;
+  box-shadow:0 8px 24px -10px rgba(31,27,22,.18);
+}
+.panel:hover{background:rgba(255,255,255,.75);}
+.panel.open{
+  background:#FFFFFF;color:#0A0A0A;
+  padding:24px;
+  border-color:#FFFFFF;
+  box-shadow:0 24px 50px -12px rgba(31,27,22,.28);
+}
+.panel-head{
+  display:flex;align-items:center;gap:14px;
+}
+.panel-thumb{
+  width:42px;height:42px;border-radius:50%;
+  flex-shrink:0;
+  background:rgba(31,27,22,.08);
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:'Inter',sans-serif;font-weight:700;font-size:14px;
+  color:var(--ink);
+  overflow:hidden;
+  transition:background .4s,color .4s;
+}
+.panel.open .panel-thumb{color:#0A0A0A;}
+.panel-thumb img{width:100%;height:100%;object-fit:cover;}
+.panel h3{
+  font-family:'Inter',sans-serif;font-weight:500;
+  font-size:17px;letter-spacing:-.005em;
+  flex:1;line-height:1.3;
+}
+.panel.open h3{font-weight:600;}
+.panel-icon{
+  font-family:'Inter',sans-serif;font-weight:300;
+  font-size:22px;line-height:1;
+  transition:transform .4s;
+  opacity:.75;
+}
+.panel.open .panel-icon{transform:rotate(45deg);opacity:1;}
+.panel-body{
+  max-height:0;overflow:hidden;
+  opacity:0;
+  transition:max-height .65s cubic-bezier(.2,.85,.3,1),opacity .55s ease,margin-top .5s;
+}
+.panel.open .panel-body{
+  max-height:340px;opacity:1;
+  margin-top:18px;
+}
+.panel-body p{
+  font-family:'Inter',sans-serif;font-size:14px;
+  line-height:1.6;color:rgba(10,10,10,.75);
+  margin-bottom:18px;
+  font-weight:400;
+}
+.panel-tags{display:flex;flex-wrap:wrap;column-gap:24px;row-gap:8px;}
+.panel-tags span{
+  font-family:'Inter',sans-serif;font-size:13px;
+  color:#0A0A0A;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.panel-tags span::before{
+  content:'\2726';
+  color:#D5052D;font-size:11px;
+}
+
+/* legacy classes kept hidden so old JS hooks don't blow up */
+.hero-tiles,.tile,.hero-portrait,.bg-word,.hand-label{display:none !important;}
+
+/* SELECTED CLIENTS ROW */
+.logo-strip{
+  background:#FFFFFF;
+  padding:70px 48px;
+  position:relative;
+}
+.logo-strip-inner{
+  max-width:1440px;margin:0 auto;
+  display:flex;align-items:center;gap:0;
+  position:relative;
+}
+.logo-strip-label{
+  font-family:'Inter',sans-serif;
+  font-weight:400;
+  font-size:14px;
+  color:#0A0A0A;
+  letter-spacing:.04em;
+  text-transform:none;
+  white-space:nowrap;
+  display:flex;align-items:center;gap:16px;
+  flex-shrink:0;
+  padding-right:24px;
+  z-index:3;
+  background:#FFFFFF;
+  position:relative;
+}
+.logo-strip-label::after{
+  content:'';
+  display:inline-block;
+  width:64px;height:1px;
+  background:#C9C9C7;
+}
+.logo-marquee{
+  position:relative;
+  flex:1;
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 4%,#000 96%,transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0%,#000 4%,#000 96%,transparent 100%);
+}
+.logo-track{
+  display:flex;
+  align-items:center;
+  gap:72px;
+  width:max-content;
+  animation:logos-scroll 38s linear infinite;
+  will-change:transform;
+}
+.logo-track img{
+  height:62px;width:auto;
+  max-width:240px;
+  object-fit:contain;
+  mix-blend-mode:multiply;
+  filter:saturate(.95) contrast(1.05);
+  opacity:.95;
+  transition:opacity .3s,transform .35s;
+  flex-shrink:0;
+}
+.logo-track img:hover{opacity:1;transform:scale(1.06);}
+@keyframes scroll{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+@keyframes logos-scroll{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+
+/* CAPABILITIES — heavy display word fader */
+.italic-marquee{
+  background:#FFFFFF;
+  height:120px;
+  overflow:hidden;
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+}
+.italic-cycle{
+  position:relative;
+  width:100%;
+  height:70px;
+}
+.italic-cycle .word{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Inter',sans-serif;
+  font-weight:900;
+  font-size:clamp(28px,4vw,52px);
+  letter-spacing:-.03em;
+  text-transform:lowercase;
+  color:#0A0A0A;
+  opacity:0;
+  white-space:nowrap;
+  animation:wordCycle 24s ease-in-out infinite;
+  will-change:opacity,transform;
+  line-height:1;
+}
+@keyframes wordCycle{
+  0%   {opacity:0; transform:translateY(34px);}
+  3%   {opacity:1; transform:translateY(0);}
+  9%   {opacity:1; transform:translateY(0);}
+  12%  {opacity:0; transform:translateY(-34px);}
+  100% {opacity:0; transform:translateY(-34px);}
+}
+.italic-cycle .word:nth-child(1){animation-delay:0s;}
+.italic-cycle .word:nth-child(2){animation-delay:3s;}
+.italic-cycle .word:nth-child(3){animation-delay:6s;}
+.italic-cycle .word:nth-child(4){animation-delay:9s;}
+.italic-cycle .word:nth-child(5){animation-delay:12s;}
+.italic-cycle .word:nth-child(6){animation-delay:15s;}
+.italic-cycle .word:nth-child(7){animation-delay:18s;}
+.italic-cycle .word:nth-child(8){animation-delay:21s;}
+
+/* SECTION GENERIC */
+.section{
+  padding:140px 48px;
+  position:relative;
+}
+.section-eyebrow{
+  font-family:'Inter',sans-serif;
+  font-style:normal;
+  font-weight:600;
+  font-size:11px;
+  color:#0A0A0A;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  margin-bottom:22px;
+  display:inline-flex;align-items:center;gap:14px;
+}
+.section-eyebrow::before{
+  content:'';width:36px;height:1px;background:#0A0A0A;
+  display:inline-block;
+}
+.section-title{
+  font-family:'Inter',sans-serif;
+  font-weight:500;
+  font-size:clamp(32px,3.6vw,52px);
+  line-height:1.1;
+  letter-spacing:-.02em;
+  margin-bottom:50px;
+  max-width:1100px;
+  color:var(--ink);
+}
+.section-title .it{
+  font-family:'Inter',sans-serif;
+  font-style:normal;
+  font-weight:600;
+  color:var(--red);
+  position:relative;
+}
+
+/* ABOUT */
+.about{
+  position:relative;
+  min-height:90vh;
+  padding:160px 48px 140px;
+  overflow:hidden;
+}
+.about-bg-portrait{
+  position:absolute;
+  top:0;right:-40px;
+  width:55%;height:100%;
+  background-size:cover;
+  background-position:center;
+  opacity:.22;
+  filter:saturate(.7);
+  z-index:0;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 30%);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 30%);
+}
+.about-content{
+  position:relative;z-index:2;
+  max-width:780px;
+}
+.about-content h2{
+  font-family:'Inter',sans-serif;
+  font-weight:500;
+  font-size:clamp(34px,4vw,52px);
+  line-height:1.05;
+  letter-spacing:-.02em;
+  margin-bottom:24px;
+  color:var(--ink);
+}
+.about-content h2 .it{
+  font-family:'Inter',sans-serif;
+  font-style:normal;
+  font-weight:500;
+  color:var(--ink);
+}
+.about-content p.about-lead{
+  font-family:'Inter',sans-serif;
+  font-weight:400;
+  font-size:clamp(20px,2vw,30px);
+  line-height:1.4;
+  color:var(--ink);
+  letter-spacing:-.005em;
+  max-width:780px;
+  margin-bottom:0;
+}
+.about-content p{
+  font-family:'Inter',sans-serif;
+  font-size:18px;
+  line-height:1.75;
+  color:var(--ink-soft);
+  margin-bottom:20px;
+  max-width:640px;
+}
+.about-content p .em{
+  font-family:'Inter',sans-serif;
+  font-style:normal;
+  font-weight:600;
+  color:var(--ink);
+}
+.about-stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:30px;
+  margin-top:60px;
+  max-width:780px;
+}
+.about-stats .stat{
+  border-top:1px solid rgba(31,27,22,.18);
+  padding-top:18px;
+}
+.about-stats .stat strong{
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  font-size:42px;
+  color:var(--ink);
+  display:block;
+  letter-spacing:-.02em;
+}
+.about-stats .stat span{
+  font-family:'Inter',sans-serif;
+  font-size:11px;
+  color:var(--taupe);
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  margin-top:6px;
+  display:block;
+}
+
+/* FEATURED WORK */
+.featured-work{
+  background:var(--cream-soft);
+  padding:140px 48px;
+}
+.work-block{
+  display:grid;
+  grid-template-columns:1fr 1.15fr;
+  gap:80px;
+  padding:80px 0;
+  border-top:1px solid rgba(31,27,22,.12);
+  align-items:start;
+}
+.work-block:first-of-type{border-top:none;padding-top:30px;}
+.work-meta{position:sticky;top:120px;}
+.work-logo{
+  height:54px;
+  margin-bottom:26px;
+  display:flex;align-items:center;
+}
+.work-logo img{
+  height:100%;width:auto;object-fit:contain;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,.04));
+}
+.work-role{
+  font-family:'Inter',sans-serif;
+  font-style:normal;
+  font-weight:400;
+  font-size:13px;
+  color:var(--taupe);
+  margin-bottom:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.work-title{
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  font-size:clamp(32px,3.5vw,48px);
+  line-height:1.05;
+  letter-spacing:-.02em;
+  margin-bottom:24px;
+  color:var(--ink);
+}
+.work-bullets{
+  list-style:none;padding:0;margin:0 0 36px 0;
+}
+.work-bullets li{
+  position:relative;
+  padding-left:28px;
+  margin-bottom:14px;
+  font-family:'Inter',sans-serif;
+  font-size:15px;
+  line-height:1.65;
+  color:var(--ink-soft);
+}
+.work-bullets li::before{
+  content:'\2726';
+  position:absolute;left:0;top:0;
+  color:var(--champagne-deep);
+  font-size:13px;
+}
+.work-metrics{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-top:30px;
+  padding-top:28px;
+  border-top:1px solid rgba(31,27,22,.12);
+}
+.work-metrics .m strong{
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  font-size:34px;
+  color:var(--ink);
+  letter-spacing:-.02em;
+  display:block;
+  line-height:1;
+}
+.work-metrics .m span{
+  font-family:'Inter',sans-serif;
+  font-size:10px;
+  color:var(--taupe);
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  margin-top:6px;
+  display:block;
+}
+.work-media{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  grid-auto-rows:80px;
+  gap:14px;
+}
+.work-media .mm{
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 14px 40px -10px rgba(31,27,22,.18);
+  background:var(--cream-deep);
+  position:relative;
+  transition:transform .5s,box-shadow .5s;
+}
+.work-media .mm:hover{
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:0 30px 60px -10px rgba(31,27,22,.3);
+  z-index:5;
+}
+.work-media .mm img,.work-media .mm video{
+  width:100%;height:100%;object-fit:cover;
+}
+
+/* STACKED CAROUSEL — for Social Accounts + YouthLab */
+.stack-carousel{
+  position:relative;
+  width:100%;
+  aspect-ratio:9/14;
+  max-width:520px;
+  margin:0 auto;
+}
+.stack-carousel.s-wide{aspect-ratio:16/11;max-width:none;width:100%;}
+.stack-card{
+  position:absolute;inset:0;
+  border-radius:18px;
+  overflow:hidden;
+  background:#0A0A0A;
+  box-shadow:0 30px 70px -20px rgba(31,27,22,.35);
+  transition:transform .8s cubic-bezier(.2,.85,.3,1),opacity .6s ease,filter .6s ease;
+  will-change:transform,opacity;
+}
+.stack-card video,.stack-card img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.stack-card .stack-note{
+  position:absolute;
+  left:14px;bottom:14px;
+  z-index:3;
+  font-family:'Inter',sans-serif;
+  font-weight:500;
+  font-size:12px;
+  letter-spacing:.04em;
+  color:#FFFFFF;
+  background:rgba(10,10,10,.6);
+  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
+  padding:8px 14px;
+  border-radius:999px;
+}
+.stack-card[data-pos="0"]{transform:translate(0,0) scale(1);opacity:1;z-index:5;filter:none;pointer-events:auto;}
+.stack-card[data-pos="1"]{transform:translate(28px,18px) scale(.96);opacity:.45;z-index:4;filter:blur(1px);pointer-events:none;}
+.stack-card[data-pos="2"]{transform:translate(56px,36px) scale(.92);opacity:.22;z-index:3;filter:blur(2px);pointer-events:none;}
+.stack-card[data-pos="3"],.stack-card[data-pos="4"],.stack-card[data-pos="5"]{transform:translate(80px,54px) scale(.88);opacity:0;z-index:2;filter:blur(3px);pointer-events:none;}
+.stack-controls{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:24px;
+  gap:14px;
+}
+.stack-btn{
+  width:48px;height:48px;border-radius:50%;
+  background:#FFFFFF;
+  border:1px solid #E6E6E6;
+  color:#0A0A0A;
+  font-size:18px;font-weight:500;
+  display:inline-flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:transform .3s ease,background .3s ease,color .3s ease,border-color .3s ease;
+}
+.stack-btn:hover{background:#0A0A0A;color:#FFFFFF;border-color:#0A0A0A;transform:translateY(-2px);}
+.stack-counter{
+  font-family:'Inter',sans-serif;
+  font-weight:500;font-size:12px;letter-spacing:.18em;
+  color:#0A0A0A;
+  text-transform:uppercase;
+}
+.work-link{
+  display:inline-flex;align-items:center;gap:10px;
+  margin-top:14px;
+  padding:12px 22px;
+  border:1px solid #0A0A0A;
+  border-radius:999px;
+  font-family:'Inter',sans-serif;
+  font-weight:500;font-size:13px;
+  letter-spacing:.06em;
+  color:#0A0A0A;
+  text-transform:uppercase;
+  transition:background .3s,color .3s,transform .3s;
+}
+.work-link:hover{background:#0A0A0A;color:#FFFFFF;transform:translateY(-2px);}
+.work-link .arr{font-size:14px;}
+
+.netdata-grid .mm:nth-child(1){grid-column:span 4;grid-row:span 4;}
+.netdata-grid .mm:nth-child(2){grid-column:span 2;grid-row:span 2;}
+.netdata-grid .mm:nth-child(3){grid-column:span 2;grid-row:span 2;}
+.netdata-grid .mm:nth-child(4){grid-column:span 2;grid-row:span 3;}
+.netdata-grid .mm:nth-child(5){grid-column:span 2;grid-row:span 3;}
+.netdata-grid .mm:nth-child(6){grid-column:span 2;grid-row:span 3;}
+
+.liquid-grid .mm:nth-child(1){grid-column:span 6;grid-row:span 4;}
+.liquid-grid .mm:nth-child(2){grid-column:span 2;grid-row:span 3;}
+.liquid-grid .mm:nth-child(3){grid-column:span 2;grid-row:span 3;}
+.liquid-grid .mm:nth-child(4){grid-column:span 2;grid-row:span 3;}
+
+.deree-grid .mm:nth-child(1){grid-column:span 4;grid-row:span 4;}
+.deree-grid .mm:nth-child(2){grid-column:span 2;grid-row:span 4;}
+.deree-grid .mm:nth-child(3){grid-column:span 2;grid-row:span 3;}
+.deree-grid .mm:nth-child(4){grid-column:span 2;grid-row:span 3;}
+.deree-grid .mm:nth-child(5){grid-column:span 2;grid-row:span 3;}
+
+.prelevic-grid .mm:nth-child(1){grid-column:span 3;grid-row:span 5;}
+.prelevic-grid .mm:nth-child(2){grid-column:span 3;grid-row:span 5;}
+.prelevic-grid .mm:nth-child(3){grid-column:span 2;grid-row:span 3;}
+.prelevic-grid .mm:nth-child(4){grid-column:span 2;grid-row:span 3;}
+.prelevic-grid .mm:nth-child(5){grid-column:span 2;grid-row:span 3;}
+
+.personal-grid .mm:nth-child(1){grid-column:span 3;grid-row:span 4;}
+.personal-grid .mm:nth-child(2){grid-column:span 3;grid-row:span 4;}
+.personal-grid .mm:nth-child(3){grid-column:span 2;grid-row:span 3;}
+.personal-grid .mm:nth-child(4){grid-column:span 2;grid-row:span 3;}
+.personal-grid .mm:nth-child(5){grid-column:span 2;grid-row:span 3;}
+.personal-grid .mm:nth-child(6){grid-column:span 3;grid-row:span 3;}
+.personal-grid .mm:nth-child(7){grid-column:span 3;grid-row:span 3;}
+
+/* TESTED FIRST ON MY ACCOUNTS */
+.tested-first{
+  background:#FFFFFF;
+  padding:140px 48px;
+  position:relative;
+  overflow:hidden;
+}
+.tested-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:32px;
+  margin-bottom:46px;
+  flex-wrap:wrap;
+}
+.tested-stats{
+  display:flex;gap:42px;
+  font-family:'Inter',sans-serif;
+}
+.tested-stats .ts{display:flex;flex-direction:column;}
+.tested-stats .ts strong{
+  font-size:30px;font-weight:600;color:var(--ink);
+  letter-spacing:-.02em;
+}
+.tested-stats .ts span{
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--taupe);margin-top:4px;
+}
+.tested-track-wrap{position:relative;}
+.tested-track{
+  display:flex;gap:24px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  padding:6px 4px 30px;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+.tested-track::-webkit-scrollbar{display:none;}
+.tested-card{
+  flex:0 0 auto;
+  width:340px;
+  aspect-ratio:9/16;
+  border-radius:18px;
+  overflow:hidden;
+  position:relative;
+  background:#0A0A0A;
+  scroll-snap-align:start;
+  box-shadow:0 22px 48px -18px rgba(10,10,10,.32);
+  transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s;
+}
+.tested-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 32px 64px -14px rgba(10,10,10,.4);
+}
+.tested-card video{width:100%;height:100%;object-fit:cover;display:block;}
+.tested-note{
+  position:absolute;left:14px;bottom:14px;right:14px;
+  font-family:'Inter',sans-serif;
+  font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;
+  color:#fff;
+  background:rgba(10,10,10,.55);
+  -webkit-backdrop-filter:blur(8px);
+          backdrop-filter:blur(8px);
+  padding:8px 12px;border-radius:8px;
+}
+.tested-arrows{
+  display:flex;gap:14px;
+  margin-top:12px;
+}
+.tested-arrows button{
+  width:54px;height:54px;border-radius:50%;
+  border:1px solid #0A0A0A;background:#fff;color:#0A0A0A;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:20px;
+  cursor:none;
+  transition:background .25s,color .25s,border-color .25s;
+}
+.tested-arrows button:hover{background:var(--red);color:#fff;border-color:var(--red);}
+@media (max-width:880px){
+  .tested-card{width:78vw;}
+  .tested-head{flex-direction:column;align-items:flex-start;}
+  .tested-stats{gap:28px;}
+}
+
+/* SOCIAL GALLERY */
+.social-gallery{
+  background:var(--cream);
+  padding:140px 48px;
+}
+.gallery-split{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:48px;
+  margin-top:60px;
+  align-items:start;
+}
+.gallery-col{
+  display:flex;flex-direction:column;
+}
+.gallery-col-head{
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  font-size:11px;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  color:#0A0A0A;
+  display:inline-flex;align-items:center;gap:14px;
+  margin-bottom:28px;
+  padding-bottom:18px;
+  border-bottom:1px solid #E6E6E6;
+}
+.gallery-col-head::before{
+  content:'';width:36px;height:1px;background:#0A0A0A;
+}
+.gallery-col-list{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.gallery-col-list .gci{
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 14px 32px -14px rgba(31,27,22,.18);
+  position:relative;
+  background:#F7F7F7;
+  transition:transform .55s cubic-bezier(.2,.8,.2,1),box-shadow .55s;
+  display:flex;align-items:center;justify-content:center;
+}
+.gallery-col-list .gci:hover{
+  transform:translateY(-4px) scale(1.01);
+  box-shadow:0 22px 44px -14px rgba(31,27,22,.26);
+}
+.gallery-col-list .gci img,
+.gallery-col-list .gci video{
+  width:100%;height:auto;display:block;
+  object-fit:contain;
+  max-height:340px;
+  background:#FFFFFF;
+}
+.gallery-col-list .gci video{background:#0A0A0A;}
+.gallery-col-list .gci .gci-tag{
+  position:absolute;top:10px;left:10px;
+  font-family:'Inter',sans-serif;
+  font-size:9px;font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#FFFFFF;
+  background:rgba(10,10,10,.65);
+  padding:5px 10px;
+  border-radius:999px;
+  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
+  z-index:2;
+}
+.gallery-company{
+  margin-top:80px;
+}
+.gallery-company-head{
+  display:flex;align-items:center;gap:18px;
+  margin-bottom:24px;
+  padding-bottom:14px;
+  border-bottom:1px solid rgba(31,27,22,.14);
+}
+.gallery-company-head .gc-logo{
+  height:36px;
+  display:flex;align-items:center;
+}
+.gallery-company-head .gc-logo img{height:100%;width:auto;object-fit:contain;mix-blend-mode:multiply;}
+.gallery-company-head .gc-name{
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  font-size:24px;
+  color:var(--ink);
+  letter-spacing:-.01em;
+  flex:1;
+}
+.gallery-company-head .gc-tag{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-size:14px;
+  color:var(--champagne-deep);
+  letter-spacing:.04em;
+}
+.gallery-row{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:16px;
+}
+.gallery-row .gg{
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 16px 40px -15px rgba(31,27,22,.22);
+  position:relative;
+  background:var(--cream-deep);
+  transition:transform .55s cubic-bezier(.2,.8,.2,1),box-shadow .55s;
+}
+.gallery-row .gg:hover{
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 32px 70px -10px rgba(31,27,22,.32);
+  z-index:5;
+}
+.gallery-row .gg img,.gallery-row .gg video{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.gallery-row .gg::after{
+  content:attr(data-tag);
+  position:absolute;
+  top:12px;left:12px;
+  font-family:'Inter',sans-serif;
+  font-size:9px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--bone);
+  background:rgba(15,26,46,.7);
+  padding:4px 10px;
+  border-radius:999px;
+  backdrop-filter:blur(6px);
+  pointer-events:none;
+}
+/* Cell aspect helpers */
+.gg-square{aspect-ratio:1/1;grid-column:span 3;}
+.gg-vert{aspect-ratio:9/16;grid-column:span 3;}
+.gg-wide{aspect-ratio:16/10;grid-column:span 4;}
+.gg-tall{aspect-ratio:4/5;grid-column:span 3;}
+.gg-large{aspect-ratio:1/1;grid-column:span 4;}
+.gg-mid{aspect-ratio:1/1;grid-column:span 6;}
+
+/* CERTIFICATIONS */
+.certifications{
+  background:var(--cream-soft);
+  padding:140px 48px;
+}
+.cert-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:28px;
+  margin-top:60px;
+}
+.cert-grid .cc{
+  background:var(--bone);
+  padding:18px;
+  border-radius:14px;
+  box-shadow:0 14px 40px -10px rgba(31,27,22,.12);
+  display:flex;flex-direction:column;
+  transition:transform .5s,box-shadow .5s;
+  position:relative;
+}
+.cert-grid .cc:hover{
+  transform:translateY(-8px) rotate(-1deg);
+  box-shadow:0 26px 60px -10px rgba(31,27,22,.22);
+}
+.cert-grid .cc .cert-img{
+  flex:1;
+  aspect-ratio:4/3;
+  background:var(--cream-soft);
+  border-radius:8px;
+  overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:14px;
+}
+.cert-grid .cc .cert-img img{
+  width:100%;height:100%;object-fit:contain;
+}
+.cert-grid .cc .cert-title{
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  font-size:14px;
+  color:var(--ink);
+  letter-spacing:-.005em;
+  line-height:1.25;
+  margin-bottom:4px;
+}
+.cert-grid .cc .cert-issuer{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-size:12px;
+  color:var(--champagne-deep);
+  letter-spacing:.02em;
+}
+
+/* SKILLS */
+.skills{
+  background:var(--cream);
+  padding:140px 48px;
+}
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:24px;
+  margin-top:60px;
+}
+@keyframes skill-bob{
+  0%,100%{transform:translateY(0) rotate(0);}
+  50%{transform:translateY(-6px) rotate(-.6deg);}
+}
+@keyframes skill-icon-pulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.06);}
+}
+.skill-tile{
+  background:var(--bone);
+  border-radius:18px;
+  padding:32px 18px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  aspect-ratio:1/1;
+  box-shadow:0 14px 36px -16px rgba(31,27,22,.16);
+  transition:transform .55s cubic-bezier(.2,.8,.2,1),box-shadow .55s;
+  position:relative;
+  overflow:hidden;
+  animation:skill-bob 5s ease-in-out infinite;
+}
+.skill-tile:nth-child(6n+1){animation-delay:0s;}
+.skill-tile:nth-child(6n+2){animation-delay:.4s;}
+.skill-tile:nth-child(6n+3){animation-delay:.8s;}
+.skill-tile:nth-child(6n+4){animation-delay:1.2s;}
+.skill-tile:nth-child(6n+5){animation-delay:1.6s;}
+.skill-tile:nth-child(6n+6){animation-delay:2s;}
+.skill-tile img{
+  animation:skill-icon-pulse 4s ease-in-out infinite;
+}
+.skill-tile:nth-child(2n) img{animation-delay:.6s;}
+.skill-tile:nth-child(3n) img{animation-delay:1.2s;}
+.skill-tile::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 0%,rgba(201,168,122,.25),transparent 70%);
+  opacity:0;transition:opacity .4s;
+}
+.skill-tile:hover{
+  animation-play-state:paused;
+  transform:translateY(-8px) scale(1.04);
+  box-shadow:0 30px 60px -10px rgba(31,27,22,.28);
+}
+.skill-tile:hover img{animation-play-state:paused;}
+.skill-tile:hover::before{opacity:1;}
+.skill-tile img{
+  height:54px;width:auto;max-width:80%;object-fit:contain;
+  transition:transform .5s;
+}
+.skill-tile:hover img{transform:scale(1.1) rotate(-3deg);}
+.skill-tile span{
+  font-family:'Inter',sans-serif;
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  text-align:center;
+}
+.skill-cats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:50px;
+  margin-bottom:80px;
+  margin-top:30px;
+}
+.skill-cat h4{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-weight:400;
+  font-size:18px;
+  color:var(--champagne-deep);
+  margin-bottom:14px;
+  letter-spacing:.02em;
+}
+.skill-cat p{
+  font-family:'Inter',sans-serif;
+  font-size:14px;
+  line-height:1.7;
+  color:var(--ink-soft);
+}
+
+/* PULL QUOTE */
+.pull-quote{
+  background:#FFFFFF;
+  color:#0A0A0A;
+  padding:180px 48px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.pull-quote::before{
+  content:'';
+  position:absolute;
+  inset:auto 0 0 0;
+  height:1px;
+  background:linear-gradient(90deg,transparent 0%,#E8E8E6 20%,#E8E8E6 80%,transparent 100%);
+  z-index:1;
+}
+.pull-quote-mark{display:none;}
+.pull-quote blockquote{
+  font-family:'Inter',sans-serif;
+  font-style:normal;
+  font-weight:500;
+  font-size:clamp(30px,4vw,58px);
+  line-height:1.18;
+  max-width:1080px;
+  margin:0 auto;
+  letter-spacing:-.022em;
+  color:#0A0A0A;
+  position:relative;
+  z-index:2;
+}
+.pull-quote blockquote .em{
+  font-style:normal;
+  color:var(--red);
+  font-weight:700;
+  padding:0 .04em;
+}
+.pull-quote .quote-mark{
+  font-family:'Inter',sans-serif;
+  font-weight:900;
+  font-size:clamp(60px,8vw,120px);
+  color:var(--red);
+  line-height:0;
+  display:inline-block;
+  vertical-align:-.18em;
+  margin:0 .02em;
+}
+.pull-quote cite{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:14px;
+  margin-top:48px;
+  font-family:'Inter',sans-serif;
+  font-style:normal;
+  font-weight:600;
+  font-size:11px;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  color:#0A0A0A;
+  position:relative;
+  z-index:2;
+}
+.pull-quote cite::before{
+  content:'';
+  width:36px;height:1px;
+  background:#0A0A0A;
+  display:inline-block;
+}
+.pull-quote-divider{display:none;}
+
+/* DARK FOOTER (Citeflow-style) */
+.contact{
+  background:linear-gradient(180deg,#2B2A28 0%,#1F1E1C 100%);
+  color:#FFFFFF;
+  padding:120px 48px 0;
+  position:relative;
+  overflow:hidden;
+}
+.contact-inner{
+  max-width:1280px;
+  margin:0 auto;
+  position:relative;
+  z-index:2;
+}
+.cf-hello-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;
+  padding-bottom:60px;
+  border-bottom:1px solid rgba(255,255,255,.12);
+  flex-wrap:wrap;
+}
+.cf-hello{
+  font-family:'Inter',sans-serif;
+  font-weight:800;
+  font-size:clamp(48px,7vw,108px);
+  letter-spacing:-.04em;
+  line-height:1;
+  color:#FFFFFF;
+}
+.cf-hello .it{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-weight:400;
+  color:#D5052D;
+}
+.cf-email{
+  font-family:'Inter',sans-serif;
+  font-weight:500;
+  font-size:clamp(20px,2.4vw,34px);
+  letter-spacing:-.01em;
+  color:#FFFFFF;
+  border-bottom:1px solid rgba(255,255,255,.4);
+  padding-bottom:6px;
+  transition:border-color .3s,color .3s;
+}
+.cf-email:hover{color:#D5052D;border-color:#D5052D;}
+.cf-cols{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:60px;
+  padding:80px 0 60px;
+  align-items:start;
+}
+.cf-col h4{
+  font-family:'Inter',sans-serif;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.5);
+  margin-bottom:24px;
+}
+.cf-col-lead p{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-weight:300;
+  font-size:clamp(18px,1.6vw,22px);
+  line-height:1.5;
+  color:rgba(255,255,255,.85);
+  max-width:380px;
+}
+.cf-col ul{list-style:none;display:flex;flex-direction:column;gap:14px;}
+.cf-col ul a,.cf-col ul span{
+  font-family:'Inter',sans-serif;
+  font-weight:400;
+  font-size:15px;
+  color:#FFFFFF;
+  letter-spacing:-.005em;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  transition:color .3s,transform .3s;
+}
+.cf-col ul a:hover{color:#D5052D;transform:translateX(4px);}
+.cf-col ul a .arr{
+  display:inline-block;
+  transition:transform .3s;
+  font-size:13px;
+}
+.cf-col ul a:hover .arr{transform:translate(3px,-3px);}
+.cf-col-loc p{
+  font-family:'Inter',sans-serif;
+  font-size:15px;
+  color:rgba(255,255,255,.85);
+  line-height:1.7;
+}
+.cf-col-loc .gold{color:#D5052D;font-weight:500;}
+.cf-cta-row{
+  display:flex;flex-wrap:wrap;gap:14px;
+  margin-top:8px;
+}
+.cf-cta-row a{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 22px;
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:999px;
+  font-family:'Inter',sans-serif;
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:.04em;
+  color:#FFFFFF;
+  transition:background .3s,border-color .3s,color .3s,transform .3s;
+}
+.cf-cta-row a:hover{
+  background:#FFFFFF;color:#0A0A0A;border-color:#FFFFFF;transform:translateY(-2px);
+}
+.cf-cta-row a.gold{background:#D5052D;color:#0A0A0A;border-color:#D5052D;}
+.cf-cta-row a.gold:hover{background:#FFFFFF;border-color:#FFFFFF;}
+.cf-wordmark{
+  font-family:'Inter',sans-serif;
+  font-weight:900;
+  font-size:clamp(96px,22vw,360px);
+  letter-spacing:-.06em;
+  line-height:.85;
+  color:#FFFFFF;
+  text-align:center;
+  white-space:nowrap;
+  padding:20px 0 40px;
+  position:relative;
+  user-select:none;
+  background:linear-gradient(180deg,rgba(255,255,255,1) 0%,rgba(255,255,255,.4) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.cf-credit{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:24px;
+  padding:24px 0 32px;
+  border-top:1px solid rgba(255,255,255,.12);
+  font-family:'Inter',sans-serif;
+  font-size:12px;
+  color:rgba(255,255,255,.55);
+  letter-spacing:.06em;
+  flex-wrap:wrap;
+}
+.cf-credit .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:#D5052D;
+  display:inline-block;margin:0 10px;
+  vertical-align:middle;
+}
+
+/* REVEAL ANIM (Framer-inspired) */
+.reveal{
+  opacity:0;
+  transform:translateY(70px) scale(.96);
+  transition:opacity 1.2s cubic-bezier(.16,1,.3,1),transform 1.2s cubic-bezier(.16,1,.3,1),filter 1.2s cubic-bezier(.16,1,.3,1);
+  filter:blur(10px);
+  will-change:transform,opacity,filter;
+}
+.reveal.in{
+  opacity:1;
+  transform:translateY(0) scale(1);
+  filter:blur(0);
+}
+.reveal-stagger > *{
+  opacity:0;transform:translateY(50px) scale(.97);
+  transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1);
+}
+.reveal-stagger.in > *{opacity:1;transform:translateY(0) scale(1);}
+.reveal-stagger.in > *:nth-child(1){transition-delay:.05s;}
+.reveal-stagger.in > *:nth-child(2){transition-delay:.13s;}
+.reveal-stagger.in > *:nth-child(3){transition-delay:.21s;}
+.reveal-stagger.in > *:nth-child(4){transition-delay:.29s;}
+.reveal-stagger.in > *:nth-child(5){transition-delay:.37s;}
+.reveal-stagger.in > *:nth-child(6){transition-delay:.45s;}
+.reveal-stagger.in > *:nth-child(7){transition-delay:.53s;}
+.reveal-stagger.in > *:nth-child(8){transition-delay:.61s;}
+
+/* WORD-BY-WORD RISE for big titles */
+.word-rise .w{
+  display:inline-block;
+  overflow:hidden;
+  vertical-align:top;
+}
+.word-rise .w span{
+  display:inline-block;
+  transform:translateY(105%);
+  transition:transform 1s cubic-bezier(.2,.85,.3,1);
+}
+.word-rise.in .w span{transform:translateY(0);}
+.word-rise.in .w:nth-child(1) span{transition-delay:.04s;}
+.word-rise.in .w:nth-child(2) span{transition-delay:.10s;}
+.word-rise.in .w:nth-child(3) span{transition-delay:.16s;}
+.word-rise.in .w:nth-child(4) span{transition-delay:.22s;}
+.word-rise.in .w:nth-child(5) span{transition-delay:.28s;}
+.word-rise.in .w:nth-child(6) span{transition-delay:.34s;}
+.word-rise.in .w:nth-child(7) span{transition-delay:.40s;}
+.word-rise.in .w:nth-child(8) span{transition-delay:.46s;}
+.word-rise.in .w:nth-child(9) span{transition-delay:.52s;}
+.word-rise.in .w:nth-child(10) span{transition-delay:.58s;}
+
+/* RESPONSIVE */
+@media (max-width:1024px){
+  .nav{padding:18px 24px;}
+  .nav-links{display:none;}
+  .hero{grid-template-columns:1fr;padding:120px 24px 60px;}
+  .hero-tiles{height:420px;}
+  .hero-portrait{width:180px;height:240px;}
+  .section,.about,.featured-work,.social-gallery,.certifications,.skills,.pull-quote,.contact{padding:90px 24px;}
+  .work-block{grid-template-columns:1fr;gap:40px;padding:60px 0;}
+  .work-meta{position:static;}
+  .work-media{grid-template-columns:repeat(4,1fr);}
+  .skills-grid{grid-template-columns:repeat(3,1fr);}
+  .cert-grid{grid-template-columns:repeat(2,1fr);}
+  .gallery-grid{grid-template-columns:repeat(6,1fr);}
+  .gg-1,.gg-7{grid-column:span 6;}
+  .gg-2,.gg-3,.gg-11,.gg-12,.gg-13{grid-column:span 6;}
+  .gg-4,.gg-5,.gg-8,.gg-9{grid-column:span 3;}
+  .gg-6,.gg-10{grid-column:span 6;}
+  .skill-cats{grid-template-columns:1fr;gap:30px;}
+  .cf-cols{grid-template-columns:1fr 1fr;gap:40px;padding:60px 0 40px;}
+  .cf-hello-row{flex-direction:column;align-items:flex-start;gap:24px;}
+  .about-stats{grid-template-columns:repeat(2,1fr);}
+  .floating-cta{padding:14px 20px;font-size:11px;bottom:18px;right:18px;}
+}
+@media (max-width:600px){
+  .skills-grid{grid-template-columns:repeat(2,1fr);}
+  .work-metrics{grid-template-columns:repeat(2,1fr);}
+  .nav-cv{padding:9px 14px;font-size:10px;}
+  .cf-cols{grid-template-columns:1fr;gap:40px;}
+  .cf-credit{flex-direction:column;align-items:flex-start;gap:8px;}
+}
+</style>
+</head>
+<body>
+
+<!-- INTRO -->
+<div class="folder-intro" id="folderIntro">
+  <div class="intro-circle" id="folderStage">
+    <span>Open</span>
+    <span class="intro-heart">&#9829;</span>
+  </div>
+</div>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-hello" id="cursorHello">hello</div>
+
+<nav class="nav">
+  <a href="#top" class="logo-wrap">
+    <div class="logo-N" id="logoN">
+      <svg viewBox="0 0 100 100" width="54" height="54" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ng" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0" stop-color="#1F1B16"/>
+            <stop offset="1" stop-color="#A8865A"/>
+          </linearGradient>
+        </defs>
+        <text x="50" y="74" text-anchor="middle"
+              font-family="Fraunces, serif" font-style="italic" font-weight="400"
+              font-size="78" fill="url(#ng)">N</text>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <span class="lt-name">NEFELI TSAOUSI</span>
+      <span class="lt-role">DIGITAL MARKETING</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#about">About Me</a>
+    <a href="#work">Featured Work</a>
+    <a href="#gallery">Social Media Gallery</a>
+    <a href="#certs">Certifications</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact me</a>
+    <a href="assets/Nefeli_Tsaousi_CV.docx" class="nav-cv" download>Download CV</a>
+  </div>
+</nav>
+
+<a href="#contact" class="floating-cta">Let's Work Together <span class="arrow">&rarr;</span></a>
+
+<section class="hero" id="top">
+  <div class="hero-tint" id="heroTint"></div>
+  <div class="hero-fx" id="heroFx" aria-hidden="true">
+    <div class="hero-fx-layer fx-social">
+      <div class="fx-title-bg">social</div>
+      <span class="fx-bubble lg" style="left:14%;top:78%;animation-delay:.0s;">&#10084;&#65039;</span>
+      <span class="fx-bubble" style="left:36%;top:82%;animation-delay:1.7s;">&#128172;</span>
+      <span class="fx-bubble lg" style="left:62%;top:76%;animation-delay:2.9s;">&#128077;</span>
+      <span class="fx-bubble" style="left:84%;top:80%;animation-delay:.9s;">&#10084;&#65039;</span>
+    </div>
+    <div class="hero-fx-layer fx-digital">
+      <div class="fx-title-bg">digital</div>
+      <span class="fx-bubble lg" style="left:14%;top:78%;animation-delay:.4s;">&#9993;&#65039;</span>
+      <span class="fx-bubble" style="left:36%;top:82%;animation-delay:1.9s;">&#128231;</span>
+      <span class="fx-bubble lg" style="left:62%;top:76%;animation-delay:3.1s;">&#128221;</span>
+      <span class="fx-bubble" style="left:84%;top:80%;animation-delay:1.1s;">&#9993;&#65039;</span>
+    </div>
+    <div class="hero-fx-layer fx-event">
+      <div class="fx-title-bg">events</div>
+      <div class="fx-leads-host" id="fxLeadsHost"></div>
+    </div>
+  </div>
+  <div class="hero-grid">
+    <div class="hero-headline reveal">
+      <div class="hero-eyebrow">Digital Marketing Portfolio</div>
+      <div class="hero-greet-row">
+        <div class="hero-portrait-pop" id="heroPortraitPop">
+          <img src="assets/portraits/hero-editorial.jpg" alt="Nefeli Tsaousi">
+        </div>
+        <p class="hero-greeting">Hi, I am <span class="it">Nefeli.</span></p>
+      </div>
+      <h1>More than<br>just <span class="it">visibility.</span></h1>
+      <div class="hero-meta">
+        <div class="item"><strong>5+</strong><span>Brands led</span></div>
+        <div class="item"><strong>+150%</strong><span>Engagement lift</span></div>
+        <div class="item"><strong>Multilingual</strong><span>EN &middot; GR &middot; FR</span></div>
+      </div>
+    </div>
+
+    <div class="hero-panels reveal-stagger" id="heroPanels">
+      <button class="panel" data-tint="#F2F2F2" data-active="social">
+        <div class="panel-head">
+          <span class="panel-thumb" style="background:#F2F2F2;color:#0A0A0A;">S</span>
+          <h3>Social Media Marketing</h3>
+          <span class="panel-icon">+</span>
+        </div>
+        <div class="panel-body">
+          <p>Content systems, community building and platform-native creative across Instagram, TikTok, LinkedIn and YouTube &mdash; built to convert scroll into trust.</p>
+          <div class="panel-tags">
+            <span>Content Strategy</span>
+            <span>Community</span>
+            <span>Reels &amp; Shorts</span>
+          </div>
+        </div>
+      </button>
+
+      <button class="panel" data-tint="#EAEAEA" data-active="digital">
+        <div class="panel-head">
+          <span class="panel-thumb" style="background:#EAEAEA;color:#0A0A0A;">D</span>
+          <h3>Digital Marketing</h3>
+          <span class="panel-icon">+</span>
+        </div>
+        <div class="panel-body">
+          <p>Strategy-led digital marketing focused on audience insight, campaign execution, and measurable brand impact across SaaS, automotive and beauty.</p>
+          <div class="panel-tags">
+            <span>Campaign Strategy</span>
+            <span>Audience Insight</span>
+            <span>Performance Focus</span>
+          </div>
+        </div>
+      </button>
+
+      <button class="panel" data-tint="#A10728" data-active="event">
+        <div class="panel-head">
+          <span class="panel-thumb" style="background:#A10728;color:#FFFFFF;">E</span>
+          <h3>Event Marketing</h3>
+          <span class="panel-icon">+</span>
+        </div>
+        <div class="panel-body">
+          <p>End-to-end event marketing &mdash; from planning and partner acquisition to on-site production and post-event activation. Audiences from 50 to thousands.</p>
+          <div class="panel-tags">
+            <span>Event Production</span>
+            <span>Partnerships</span>
+            <span>On-Site Activation</span>
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="logo-strip">
+  <div class="logo-strip-inner">
+    <span class="logo-strip-label">Selected clients</span>
+    <div class="logo-marquee">
+      <div class="logo-track">
+        <img src="assets/logos/netdata.png" alt="Netdata">
+        <img src="assets/logos/Deree.png" alt="Deree">
+        <img src="assets/logos/mya collection.png" alt="Mya Collection">
+        <img src="assets/logos/theprelevic.png" alt="The Prelevic">
+        <img src="assets/logos/Liquid logo copy.jpg" alt="Liquid Beauty Parlor">
+        <img src="assets/logos/lf fitness saloon.png" alt="LF Fitness">
+        <img src="assets/logos/netdata.png" alt="Netdata" aria-hidden="true">
+        <img src="assets/logos/Deree.png" alt="Deree" aria-hidden="true">
+        <img src="assets/logos/mya collection.png" alt="Mya Collection" aria-hidden="true">
+        <img src="assets/logos/theprelevic.png" alt="The Prelevic" aria-hidden="true">
+        <img src="assets/logos/Liquid logo copy.jpg" alt="Liquid Beauty Parlor" aria-hidden="true">
+        <img src="assets/logos/lf fitness saloon.png" alt="LF Fitness" aria-hidden="true">
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="about" id="about">
+  <div class="about-bg-portrait" style="background-image:url('assets/portraits/about-lifestyle.jpg');"></div>
+  <div class="about-content reveal">
+    <div class="section-eyebrow">about me</div>
+    <h2>I'm Nefeli Tsaousi,</h2>
+    <p class="about-lead">a creative and strategic <span class="em">digital marketer</span> with experience across <span class="em">social growth, CRM support, campaign execution,</span> and <span class="em">event marketing</span>.</p>
+    <div class="about-stats reveal-stagger">
+      <div class="stat"><strong data-count="5">0</strong><span>Companies</span></div>
+      <div class="stat"><strong data-count="3">0</strong><span>Languages</span></div>
+      <div class="stat"><strong data-count="20" data-suffix="+">0</strong><span>Tools mastered</span></div>
+      <div class="stat"><strong data-count="6">0</strong><span>Years building</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="italic-marquee">
+  <div class="italic-cycle">
+    <span class="word">creative storytelling</span>
+    <span class="word">social media management</span>
+    <span class="word">content creation</span>
+    <span class="word">organic &middot; paid &middot; earned</span>
+    <span class="word">ugc</span>
+    <span class="word">events marketing</span>
+    <span class="word">email marketing</span>
+    <span class="word">copywriting</span>
+  </div>
+</div>
+
+<section class="featured-work" id="work">
+  <div class="section-eyebrow">featured work</div>
+  <h2 class="section-title reveal">Brands I've <span class="it">helped grow.</span></h2>
+
+  <article class="work-block reveal">
+    <div class="work-meta">
+      <div class="work-logo"><img src="assets/logos/netdata.png" alt="Netdata"></div>
+      <div class="work-role">Marketing &amp; Community &middot; 2024 &mdash; Present</div>
+      <h3 class="work-title">Netdata</h3>
+      <ul class="work-bullets">
+        <li>Built end-to-end social presence across LinkedIn, Instagram, and TikTok with cohesive editorial voice for a developer-tech audience.</li>
+        <li>Produced and scripted short-form video content &mdash; interviews, event recaps, product explainers &mdash; across the company's channels.</li>
+        <li>Led on-the-ground content for Netdata's flagship events including the Pragmatic Open Source Conference and partner activations.</li>
+        <li>Managed always-on community engagement across Slack, Discord, and Reddit threads.</li>
+      </ul>
+      <div class="work-metrics">
+        <div class="m"><strong data-count="180" data-suffix="%">0</strong><span>Engagement lift</span></div>
+        <div class="m"><strong data-count="2400" data-suffix="+">0</strong><span>Event attendees</span></div>
+        <div class="m"><strong data-count="40" data-suffix="+">0</strong><span>Videos shipped</span></div>
+      </div>
+    </div>
+    <div class="work-media netdata-grid">
+      <div class="mm"><video src="assets/netdata/pragmatic.mp4" autoplay muted loop playsinline></video></div>
+      <div class="mm"><img src="assets/netdata/insta.jpg" alt="Netdata Instagram" loading="lazy"></div>
+      <div class="mm"><img src="assets/netdata/linkedin.jpg" alt="Netdata LinkedIn" loading="lazy"></div>
+      <div class="mm"><img src="assets/netdata/event-2.jpg" alt="Netdata event" loading="lazy"></div>
+      <div class="mm"><img src="assets/netdata/event-4.jpg" alt="Netdata event" loading="lazy"></div>
+      <div class="mm"><img src="assets/netdata/event-6.jpg" alt="Netdata event" loading="lazy"></div>
+    </div>
+  </article>
+
+  <article class="work-block reveal">
+    <div class="work-meta">
+      <div class="work-logo"><img src="assets/logos/Liquid logo copy.jpg" alt="Liquid Beauty Parlor"></div>
+      <div class="work-role">Brand &amp; Social Lead &middot; 2023 &mdash; 2024</div>
+      <h3 class="work-title">Liquid Beauty Parlor</h3>
+      <ul class="work-bullets">
+        <li>Repositioned the salon's social profile from a low-traffic feed to a high-conversion booking channel.</li>
+        <li>Directed photo and video content monthly &mdash; beauty editorial, BTS reels, founder storytelling.</li>
+        <li>Wrote and scheduled long-form captions and Reels with consistent voice and luxe visual signature.</li>
+        <li>Coordinated influencer collaborations and seasonal campaign drops.</li>
+      </ul>
+      <div class="work-metrics">
+        <div class="m"><strong data-count="320" data-suffix="%">0</strong><span>Follower growth</span></div>
+        <div class="m"><strong data-count="65" data-suffix="%">0</strong><span>DMs to bookings</span></div>
+        <div class="m"><strong data-count="12">0</strong><span>Campaigns shipped</span></div>
+      </div>
+    </div>
+    <div class="work-media liquid-grid">
+      <div class="mm"><video src="assets/liquid/profile.mp4" autoplay muted loop playsinline></video></div>
+      <div class="mm"><img src="assets/liquid/profile-before.jpg" alt="Liquid before" loading="lazy"></div>
+      <div class="mm"><img src="assets/liquid/profile-mid.jpg" alt="Liquid mid" loading="lazy"></div>
+      <div class="mm"><img src="assets/liquid/profile-now.jpg" alt="Liquid now" loading="lazy"></div>
+    </div>
+  </article>
+
+  <article class="work-block reveal">
+    <div class="work-meta">
+      <div class="work-role">Capstone Project &middot; L'Or&eacute;al Brandstorm</div>
+      <h3 class="work-title">YouthLab &mdash; Best 3-Years Marketing Plan: YouthLab Pro Men</h3>
+      <ul class="work-bullets">
+        <li>Developed YouthLab Pro Men, a smart, eco-conscious skincare brand for tech-savvy men, covering concept ideation, product design strategy, and 3-year marketing plan.</li>
+      </ul>
+      <a class="work-link" href="https://nefeli-youthlab.vercel.app/" target="_blank" rel="noopener">Mockup Website <span class="arr">&rarr;</span></a>
+    </div>
+    <div class="work-media">
+      <div class="stack-carousel s-wide" data-carousel="youthlab-stack">
+        <div class="stack-card" data-pos="0"><video src="assets/youthlab/promo.mp4" autoplay muted loop playsinline></video><span class="stack-note">YouthLab Promo Video</span></div>
+        <div class="stack-card" data-pos="1"><img src="assets/youthlab/slide-01.jpg" alt="YouthLab slide 1" loading="lazy"><span class="stack-note">YouthLab Slide 1</span></div>
+        <div class="stack-card" data-pos="2"><img src="assets/youthlab/slide-02.jpg" alt="YouthLab slide 2" loading="lazy"><span class="stack-note">YouthLab Slide 2</span></div>
+      </div>
+      <div class="stack-controls">
+        <button class="stack-btn" data-stack-prev="youthlab-stack" aria-label="Previous">&larr;</button>
+        <span class="stack-counter" data-stack-counter="youthlab-stack">1 / 3</span>
+        <button class="stack-btn" data-stack-next="youthlab-stack" aria-label="Next">&rarr;</button>
+      </div>
+    </div>
+  </article>
+
+  <article class="work-block reveal">
+    <div class="work-meta">
+      <div class="work-logo"><img src="assets/logos/Deree.png" alt="Deree"></div>
+      <div class="work-role">Marketing Society &middot; 2022 &mdash; 2024</div>
+      <h3 class="work-title">Deree &mdash; The American College of Greece</h3>
+      <ul class="work-bullets">
+        <li>Co-led the student Marketing Society &mdash; refreshed the organization's identity, voice, and public presence.</li>
+        <li>Produced campus campaigns and recruitment events that doubled member enrollment.</li>
+        <li>Hosted on-camera segments and student-press interviews for institution-wide initiatives.</li>
+        <li>Won Best Club of the Year for two consecutive cycles.</li>
+      </ul>
+      <div class="work-metrics">
+        <div class="m"><strong data-count="2" data-suffix="x">0</strong><span>Best Club wins</span></div>
+        <div class="m"><strong data-count="200" data-suffix="%">0</strong><span>Membership growth</span></div>
+        <div class="m"><strong data-count="15" data-suffix="+">0</strong><span>Events produced</span></div>
+      </div>
+    </div>
+    <div class="work-media deree-grid">
+      <div class="mm"><video src="assets/deree/profile.mp4" autoplay muted loop playsinline></video></div>
+      <div class="mm"><img src="assets/deree/profile-now.jpg" alt="Deree now" loading="lazy"></div>
+      <div class="mm"><video src="assets/deree/voice-1.mp4" autoplay muted loop playsinline></video></div>
+      <div class="mm"><video src="assets/deree/voice-2.mp4" autoplay muted loop playsinline></video></div>
+      <div class="mm"><video src="assets/deree/voice-3.mp4" autoplay muted loop playsinline></video></div>
+    </div>
+  </article>
+
+  <article class="work-block reveal">
+    <div class="work-meta">
+      <div class="work-logo"><img src="assets/logos/theprelevic.png" alt="The Prelevic"></div>
+      <div class="work-role">Editorial &amp; Social &middot; 2024 &mdash; Present</div>
+      <h3 class="work-title">The Prelevic</h3>
+      <ul class="work-bullets">
+        <li>Built the editorial visual identity from grid up &mdash; magazine-grade layouts, typographic system, weekly cadence.</li>
+        <li>Wrote and produced content series with consistent tone and pacing across feed posts, stories, and reels.</li>
+        <li>Designed long-form story arcs that turned scroll time into reading time.</li>
+        <li>Maintained brand voice across cross-cultural Greek and English audiences.</li>
+      </ul>
+      <div class="work-metrics">
+        <div class="m"><strong data-count="48">0</strong><span>Editorial drops</span></div>
+        <div class="m"><strong data-count="92" data-suffix="%">0</strong><span>Story completion</span></div>
+        <div class="m"><strong data-count="2" data-suffix=" lang">0</strong><span>Content tracks</span></div>
+      </div>
+    </div>
+    <div class="work-media prelevic-grid">
+      <div class="mm"><video src="assets/prelevic/posts.mp4" autoplay muted loop playsinline></video></div>
+      <div class="mm"><video src="assets/prelevic/stories.mp4" autoplay muted loop playsinline></video></div>
+      <div class="mm"><img src="assets/prelevic/feed-1.jpg" alt="Prelevic feed" loading="lazy"></div>
+      <div class="mm"><img src="assets/prelevic/feed-3.png" alt="Prelevic feed" loading="lazy"></div>
+      <div class="mm"><img src="assets/prelevic/feed-5.png" alt="Prelevic feed" loading="lazy"></div>
+    </div>
+  </article>
+
+</section>
+
+<section class="tested-first" id="tested">
+  <div class="section-eyebrow">personal channels</div>
+  <div class="tested-head">
+    <h2 class="section-title reveal" style="margin-bottom:0;">Tested first on <span class="it">my accounts.</span></h2>
+    <div class="tested-stats reveal">
+      <div class="ts"><strong>54K</strong><span>Instagram</span></div>
+      <div class="ts"><strong>24K</strong><span>TikTok</span></div>
+      <div class="ts"><strong>40&ndash;50K</strong><span>Weekly views</span></div>
+    </div>
+  </div>
+  <div class="tested-track-wrap">
+    <div class="tested-track" id="testedTrack">
+      <div class="tested-card"><video src="assets/personal/nailsvideo1.mp4" autoplay muted loop playsinline></video><span class="tested-note">Nail Partnership &middot; 95.4K Views</span></div>
+      <div class="tested-card"><video src="assets/personal/nailsvideo2.mp4" muted loop playsinline preload="metadata"></video><span class="tested-note">Nail Partnership &middot; 17.3K Views</span></div>
+      <div class="tested-card"><video src="assets/personal/nailvideo3.mp4" muted loop playsinline preload="metadata"></video><span class="tested-note">Nail Partnership &middot; 95.4K Views</span></div>
+      <div class="tested-card"><video src="assets/personal/efoodvideo1.mp4" muted loop playsinline preload="metadata"></video><span class="tested-note">Efood Partnership &middot; 2.3M Views</span></div>
+      <div class="tested-card"><video src="assets/personal/efoodvideo2.mp4" muted loop playsinline preload="metadata"></video><span class="tested-note">Efood Partnership &middot; 1.8M Views</span></div>
+      <div class="tested-card"><video src="assets/personal/wokshopvideo.mp4" muted loop playsinline preload="metadata"></video><span class="tested-note">Wokshop Partnership &middot; 323.2K Views</span></div>
+    </div>
+    <div class="tested-arrows">
+      <button id="testedPrev" aria-label="Previous">&larr;</button>
+      <button id="testedNext" aria-label="Next">&rarr;</button>
+    </div>
+  </div>
+</section>
+
+<section class="social-gallery" id="gallery">
+  <div class="section-eyebrow">social media gallery</div>
+  <h2 class="section-title reveal">A gallery of <span class="it">moments</span> that scrolled <span class="it">well.</span></h2>
+
+  <div class="gallery-split">
+    <div class="gallery-col">
+      <div class="gallery-col-head">Feed</div>
+      <div class="gallery-col-list">
+        <div class="gci"><span class="gci-tag">Instagram</span><img src="assets/netdata/insta.jpg" alt="Netdata Instagram" loading="lazy"></div>
+        <div class="gci"><span class="gci-tag">LinkedIn</span><img src="assets/netdata/linkedin.jpg" alt="Netdata LinkedIn" loading="lazy"></div>
+        <div class="gci"><span class="gci-tag">Liquid &middot; Before</span><img src="assets/liquid/profile-before.jpg" alt="Liquid before" loading="lazy"></div>
+        <div class="gci"><span class="gci-tag">Liquid &middot; After</span><img src="assets/liquid/profile-now.jpg" alt="Liquid now" loading="lazy"></div>
+        <div class="gci"><span class="gci-tag">Liquid &middot; TikTok</span><img src="assets/liquid-tiktok.jpg" alt="Liquid TikTok" loading="lazy"></div>
+        <div class="gci"><span class="gci-tag">Deree &middot; Profile</span><img src="assets/deree/profile-now.jpg" alt="Deree profile" loading="lazy"></div>
+        <div class="gci"><span class="gci-tag">Deree &middot; Best Club</span><img src="assets/best-club-deree.jpg" alt="Deree Best Club" loading="lazy"></div>
+        <div class="gci"><span class="gci-tag">Prelevic &middot; Feed</span><img src="assets/prelevic/feed-1.jpg" alt="Prelevic feed" loading="lazy"></div>
+        <div class="gci"><span class="gci-tag">Prelevic &middot; Feed</span><img src="assets/prelevic/feed-2.png" alt="Prelevic feed" loading="lazy"></div>
+        <div class="gci"><span class="gci-tag">Prelevic &middot; Feed</span><img src="assets/prelevic/feed-3.png" alt="Prelevic feed" loading="lazy"></div>
+        <div class="gci"><span class="gci-tag">YouthLab &middot; LinkedIn</span><img src="assets/personal/youthlab-li-1.jpg" alt="YouthLab" loading="lazy"></div>
+        <div class="gci"><span class="gci-tag">YouthLab &middot; LinkedIn</span><img src="assets/personal/youthlab-li-2.jpg" alt="YouthLab" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="gallery-col">
+      <div class="gallery-col-head">Videos</div>
+      <div class="gallery-col-list">
+        <div class="gci"><span class="gci-tag">Netdata &middot; TikTok</span><video src="assets/netdata/example.mp4" autoplay muted loop playsinline></video></div>
+        <div class="gci"><span class="gci-tag">Pragmatic Conf</span><video src="assets/netdata/pragmatic.mp4" autoplay muted loop playsinline></video></div>
+        <div class="gci"><span class="gci-tag">Liquid &middot; Reel</span><video src="assets/liquid/profile.mp4" autoplay muted loop playsinline></video></div>
+        <div class="gci"><span class="gci-tag">Deree &middot; Voice</span><video src="assets/deree/voice-1.mp4" autoplay muted loop playsinline></video></div>
+        <div class="gci"><span class="gci-tag">Deree &middot; Voice</span><video src="assets/deree/voice-2.mp4" autoplay muted loop playsinline></video></div>
+        <div class="gci"><span class="gci-tag">Deree &middot; Voice</span><video src="assets/deree/voice-3.mp4" autoplay muted loop playsinline></video></div>
+        <div class="gci"><span class="gci-tag">Deree &middot; Profile</span><video src="assets/deree/profile.mp4" autoplay muted loop playsinline></video></div>
+        <div class="gci"><span class="gci-tag">Prelevic &middot; Posts</span><video src="assets/prelevic/posts.mp4" autoplay muted loop playsinline></video></div>
+        <div class="gci"><span class="gci-tag">Prelevic &middot; Stories</span><video src="assets/prelevic/stories.mp4" autoplay muted loop playsinline></video></div>
+        <div class="gci"><span class="gci-tag">YouthLab &middot; Promo</span><video src="assets/youthlab/promo.mp4" autoplay muted loop playsinline></video></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="certifications" id="certs">
+  <div class="section-eyebrow">certifications</div>
+  <h2 class="section-title reveal">Always <span class="it">learning,</span> always <span class="it">certified.</span></h2>
+  <div class="cert-grid reveal-stagger">
+    <div class="cc">
+      <div class="cert-img"><img src="assets/certifications/cert-1.jpeg" alt="Certification" loading="lazy"></div>
+      <div class="cert-title">Digital Marketing Associate</div>
+      <div class="cert-issuer">DMI Essentials &middot; Deree</div>
+    </div>
+    <div class="cc">
+      <div class="cert-img"><img src="assets/certifications/cert-2.jpeg" alt="Certification" loading="lazy"></div>
+      <div class="cert-title">Internet &amp; Social Media Monitoring</div>
+      <div class="cert-issuer">Brand24 Certificate of Expertise</div>
+    </div>
+    <div class="cc">
+      <div class="cert-img"><img src="assets/certifications/cert-3.jpeg" alt="Certification" loading="lazy"></div>
+      <div class="cert-title">GDPR Compliance: Essential Training</div>
+      <div class="cert-issuer">LinkedIn Learning</div>
+    </div>
+    <div class="cc">
+      <div class="cert-img"><img src="assets/certifications/cert-4.jpeg" alt="Certification" loading="lazy"></div>
+      <div class="cert-title">Google Analytics Certification</div>
+      <div class="cert-issuer">Google</div>
+    </div>
+    <div class="cc">
+      <div class="cert-img"><img src="assets/certifications/cert-5.jpeg" alt="Certification" loading="lazy"></div>
+      <div class="cert-title">Brandstorm 2024 &mdash; Youth Innovator</div>
+      <div class="cert-issuer">L'Oreal</div>
+    </div>
+    <div class="cc">
+      <div class="cert-img"><img src="assets/certifications/cert-6.png" alt="Certification" loading="lazy"></div>
+      <div class="cert-title">Meta Certified Digital Marketing Associate</div>
+      <div class="cert-issuer">Meta Blueprint</div>
+    </div>
+    <div class="cc">
+      <div class="cert-img"><img src="assets/certifications/cert-7.png" alt="Certification" loading="lazy"></div>
+      <div class="cert-title">Digital Marketing Tools: Create Buyer Personas</div>
+      <div class="cert-issuer">LinkedIn Learning</div>
+    </div>
+  </div>
+</section>
+
+<section class="skills" id="skills">
+  <div class="section-eyebrow">skills &amp; tools</div>
+  <h2 class="section-title reveal">The <span class="it">stack</span> behind the <span class="it">story.</span></h2>
+
+  <div class="skill-cats reveal-stagger">
+    <div class="skill-cat">
+      <h4>Marketing &amp; Strategy</h4>
+      <p>Brand strategy, content planning, paid acquisition, SEO foundations, audience research, campaign architecture, and competitive analysis.</p>
+    </div>
+    <div class="skill-cat">
+      <h4>Content &amp; Creative</h4>
+      <p>Copywriting, video scripting, photo direction, on-camera presence, editorial design, social storytelling, and brand voice.</p>
+    </div>
+    <div class="skill-cat">
+      <h4>Operations &amp; Analytics</h4>
+      <p>Email automation, lifecycle marketing, GA4 reporting, social analytics, performance tracking, and cross-team project management.</p>
+    </div>
+  </div>
+
+  <div class="skills-grid reveal-stagger">
+    <div class="skill-tile"><img src="assets/skills/png-clipart-logo-hubspot-inc-marketing-asg-capital-group-pty-ltd-brand-marketing-text-orange-thumbnail.png" alt=""><span>HubSpot</span></div>
+    <div class="skill-tile"><img src="assets/skills/encharge.png" alt=""><span>Encharge</span></div>
+    <div class="skill-tile"><img src="assets/skills/mailshimp.png" alt=""><span>Mailchimp</span></div>
+    <div class="skill-tile"><img src="assets/skills/meta .png" alt=""><span>Meta Ads</span></div>
+    <div class="skill-tile"><img src="assets/skills/google ads.png" alt=""><span>Google Ads</span></div>
+    <div class="skill-tile"><img src="assets/skills/png-clipart-semrush-new-logo-tech-companies-thumbnail.png" alt=""><span>SEMrush</span></div>
+    <div class="skill-tile"><img src="assets/skills/canva.png" alt=""><span>Canva</span></div>
+    <div class="skill-tile"><img src="assets/skills/capcut-logo-png_seeklogo-437025.png" alt=""><span>CapCut</span></div>
+    <div class="skill-tile"><img src="assets/skills/adobe logo.png" alt=""><span>Adobe Suite</span></div>
+    <div class="skill-tile"><img src="assets/skills/Notion-Emblem.png" alt=""><span>Notion</span></div>
+    <div class="skill-tile"><img src="assets/skills/Typeform_logo_04.svg.png" alt=""><span>Typeform</span></div>
+    <div class="skill-tile"><img src="assets/skills/Zapier-Logo.png" alt=""><span>Zapier</span></div>
+    <div class="skill-tile"><img src="assets/skills/chat gpt.png" alt=""><span>ChatGPT</span></div>
+    <div class="skill-tile"><img src="assets/skills/Claude_AI_logo.svg.png" alt=""><span>Claude</span></div>
+    <div class="skill-tile"><img src="assets/skills/g2-logo-png_seeklogo-407782.png" alt=""><span>G2</span></div>
+    <div class="skill-tile"><img src="assets/skills/images (2).png" alt=""><span>Analytics</span></div>
+    <div class="skill-tile"><img src="assets/skills/images (3).png" alt=""><span>Social Suite</span></div>
+    <div class="skill-tile"><img src="assets/skills/the template by nefeli (2000 x 1500 px) (10).png" alt=""><span>Custom Frameworks</span></div>
+  </div>
+</section>
+
+<section class="pull-quote">
+  <blockquote>
+    <span class="quote-mark">&ldquo;</span>Visibility is easy. <span class="em">Being chosen is the work</span> &mdash; and it&rsquo;s the work I do every day, for every brand I touch.<span class="quote-mark">&rdquo;</span>
+    <cite>Nefeli Tsaousi &middot; Digital Marketing</cite>
+  </blockquote>
+</section>
+
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="cf-hello-row reveal">
+      <h2 class="cf-hello">Say <span class="it">hello!</span></h2>
+      <a class="cf-email" href="mailto:nefeli@tsaousis.net">nefeli@tsaousis.net</a>
+    </div>
+
+    <div class="cf-cols reveal-stagger">
+      <div class="cf-col cf-col-lead">
+        <h4>About</h4>
+        <p>Digital marketer turning attention into outcomes &mdash; brand, content and growth across SaaS, automotive and education.</p>
+      </div>
+
+      <div class="cf-col">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="#about">About <span class="arr">&#8599;</span></a></li>
+          <li><a href="#work">Featured Work <span class="arr">&#8599;</span></a></li>
+          <li><a href="#gallery">Social Gallery <span class="arr">&#8599;</span></a></li>
+          <li><a href="#certs">Certifications <span class="arr">&#8599;</span></a></li>
+          <li><a href="#skills">Skills <span class="arr">&#8599;</span></a></li>
+        </ul>
+      </div>
+
+      <div class="cf-col">
+        <h4>Social</h4>
+        <ul>
+          <li><a href="https://www.linkedin.com/in/nefeli-tsaousi/" target="_blank" rel="noopener">LinkedIn <span class="arr">&#8599;</span></a></li>
+          <li><a href="mailto:nefeli@tsaousis.net">Email <span class="arr">&#8599;</span></a></li>
+          <li><a href="assets/Nefeli_Tsaousi_CV.docx" download>Download CV <span class="arr">&#8599;</span></a></li>
+        </ul>
+      </div>
+
+      <div class="cf-col cf-col-loc">
+        <h4>Location</h4>
+        <p><span class="gold">Athens</span>, Greece<br><span class="gold">Brussels</span>, Belgium<br>Available worldwide &mdash; remote.</p>
+        <div class="cf-cta-row">
+          <a href="assets/Nefeli_Tsaousi_CV.docx" download class="gold">Download CV &darr;</a>
+          <a href="https://www.linkedin.com/in/nefeli-tsaousi/" target="_blank" rel="noopener">LinkedIn &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cf-wordmark">Nefeli</div>
+
+    <div class="cf-credit">
+      <span>&copy; 2026 Nefeli Tsaousi <span class="dot"></span> All rights reserved.</span>
+      <span>Designed with intention <span class="dot"></span> Built with care.</span>
+    </div>
+  </div>
+</section>
+
+<script>
+// FOLDER INTRO
+document.body.style.overflow='hidden';
+const folderIntro = document.getElementById('folderIntro');
+const folderStage = document.getElementById('folderStage');
+function openFolder(){
+  if(folderIntro.classList.contains('opening')) return;
+  folderIntro.classList.add('opening');
+  setTimeout(function(){
+    folderIntro.classList.add('opened');
+    document.body.style.overflow='auto';
+    // trigger hero reveal
+    const hh = document.querySelector('.hero-headline');
+    if(hh){hh.classList.add('in');}
+    const hp = document.getElementById('heroPanels');
+    if(hp){hp.classList.add('in');}
+  }, 1200);
+}
+folderStage.addEventListener('click', openFolder);
+folderIntro.addEventListener('click', openFolder);
+
+const dot = document.getElementById('cursorDot');
+const hello = document.getElementById('cursorHello');
+let mx=0,my=0,dx=0,dy=0,hx=0,hy=0;
+window.addEventListener('mousemove',(e)=>{mx=e.clientX;my=e.clientY;});
+function loop(){
+  dx += (mx-dx)*.3; dy += (my-dy)*.3;
+  hx += (mx-hx)*.12; hy += (my-hy)*.12;
+  dot.style.transform = 'translate('+dx+'px,'+dy+'px) translate(-50%,-50%)';
+  hello.style.transform = 'translate('+(hx+18)+'px,'+(hy+22)+'px)';
+  requestAnimationFrame(loop);
+}
+loop();
+document.querySelectorAll('a,button,.tile,.gg,.cc,.skill-tile,.contact-card,.mm').forEach(function(el){
+  el.addEventListener('mouseenter',function(){dot.classList.add('hover');});
+  el.addEventListener('mouseleave',function(){dot.classList.remove('hover');});
+});
+
+const logoN = document.getElementById('logoN');
+window.addEventListener('scroll',function(){
+  const y = window.scrollY;
+  logoN.style.transform = 'rotate('+(y*0.45)+'deg)';
+});
+
+const io = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      e.target.querySelectorAll('[data-count]').forEach(function(c){
+        if(c.dataset.done) return;
+        c.dataset.done='1';
+        const target = parseFloat(c.dataset.count);
+        const suffix = c.dataset.suffix || '';
+        const dur = 1600;
+        const start = performance.now();
+        function tick(t){
+          const p = Math.min(1,(t-start)/dur);
+          const eased = 1 - Math.pow(1-p,3);
+          const v = target * eased;
+          c.textContent = (target>=100 ? Math.round(v) : Math.round(v)) + suffix;
+          if(p<1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    }
+  });
+},{threshold:0,rootMargin:'0px 0px -10% 0px'});
+document.querySelectorAll('.reveal,.reveal-stagger').forEach(function(el){io.observe(el);});
+
+document.querySelectorAll('video').forEach(function(v){
+  v.muted=true;
+  v.addEventListener('mouseenter',function(){
+    document.querySelectorAll('video').forEach(function(o){if(o!==v)o.muted=true;});
+    v.muted=false;
+    v.play().catch(function(){});
+  });
+  v.addEventListener('mouseleave',function(){v.muted=true;});
+});
+
+// NAV — section-aware theme + scrolled state
+(function(){
+  const nav = document.querySelector('.nav');
+  if(!nav) return;
+  // Mark dark sections so nav flips to light text over them
+  const darkSections = [
+    document.querySelector('.contact')
+  ].filter(Boolean);
+  function update(){
+    const y = window.scrollY;
+    if(y>40) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+    const navMid = 40; // sample point near top of viewport
+    let dark = false;
+    darkSections.forEach(function(s){
+      const r = s.getBoundingClientRect();
+      if(r.top<=navMid && r.bottom>navMid) dark = true;
+    });
+    if(dark) nav.classList.add('theme-light'); else nav.classList.remove('theme-light');
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  window.addEventListener('resize',update);
+  update();
+})();
+
+// HERO PORTRAIT — fade smoothly with scroll
+(function(){
+  const pop = document.getElementById('heroPortraitPop');
+  if(!pop) return;
+  function update(){
+    const y = window.scrollY;
+    const fadeStart = 60;   // px
+    const fadeEnd   = 360;  // px — fully gone
+    let t = (y - fadeStart) / (fadeEnd - fadeStart);
+    t = Math.min(1, Math.max(0, t));
+    const op = 1 - t;
+    pop.style.opacity = op;
+    pop.style.transform = 'scale('+(0.6 + op*0.4)+') translateY('+(-t*16)+'px)';
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  update();
+})();
+
+// STACK CAROUSEL — for Social + YouthLab
+(function(){
+  const carousels = document.querySelectorAll('.stack-carousel[data-carousel]');
+  carousels.forEach(function(carousel){
+    const id = carousel.dataset.carousel;
+    const cards = Array.from(carousel.querySelectorAll('.stack-card'));
+    const n = cards.length;
+    let active = 0;
+    function render(){
+      cards.forEach(function(card, i){
+        const offset = (i - active + n) % n;
+        card.setAttribute('data-pos', String(Math.min(offset, 5)));
+        const v = card.querySelector('video');
+        if(v){
+          if(offset === 0){ try{ v.play(); }catch(e){} }
+          else { try{ v.pause(); }catch(e){} }
+        }
+      });
+      const counter = document.querySelector('[data-stack-counter="'+id+'"]');
+      if(counter){ counter.textContent = (active+1) + ' / ' + n; }
+    }
+    const next = document.querySelector('[data-stack-next="'+id+'"]');
+    const prev = document.querySelector('[data-stack-prev="'+id+'"]');
+    if(next){ next.addEventListener('click', function(){ active = (active+1) % n; render(); }); }
+    if(prev){ prev.addEventListener('click', function(){ active = (active-1+n) % n; render(); }); }
+    render();
+  });
+})();
+
+// TESTED FIRST — horizontal scroll arrows
+(function(){
+  const track = document.getElementById('testedTrack');
+  const prev = document.getElementById('testedPrev');
+  const next = document.getElementById('testedNext');
+  if(!track || !prev || !next) return;
+  function step(){
+    const card = track.querySelector('.tested-card');
+    const gap = 24;
+    return (card ? card.getBoundingClientRect().width : 340) + gap;
+  }
+  next.addEventListener('click', function(){ track.scrollBy({left: step(), behavior:'smooth'}); });
+  prev.addEventListener('click', function(){ track.scrollBy({left: -step(), behavior:'smooth'}); });
+})();
+
+// HERO PANELS — accordion with bg-fx animation per panel
+(function(){
+  const hero   = document.querySelector('.hero');
+  const panels = document.querySelectorAll('.hero .panel');
+  panels.forEach(function(p){
+    p.addEventListener('click',function(){
+      panels.forEach(function(o){o.classList.remove('open');});
+      p.classList.add('open');
+      const key = p.dataset.active;
+      if(hero && key){ hero.setAttribute('data-active', key); }
+    });
+  });
+  // Default: no panel state on load — animations only show when user clicks
+  panels.forEach(function(o){o.classList.remove('open');});
+  if(hero) hero.removeAttribute('data-active');
+  setTimeout(function(){ if(hero) hero.classList.add('in'); },600);
+
+  // Event "leads +N" generator
+  const host = document.getElementById('fxLeadsHost');
+  let leadCount = 0;
+  let leadInterval = null;
+  function startLeads(){
+    if(leadInterval || !host) return;
+    leadInterval = setInterval(function(){
+      if(!hero || hero.getAttribute('data-active') !== 'event' || hero.classList.contains('fx-out')){
+        return;
+      }
+      leadCount += 1;
+      const pop = document.createElement('div');
+      pop.className = 'fx-lead-pop';
+      pop.textContent = 'leads +' + leadCount;
+      const x = 8 + Math.random() * 78; // 8% .. 86%
+      const y = 25 + Math.random() * 50; // 25% .. 75%
+      pop.style.left = x + '%';
+      pop.style.top = y + '%';
+      host.appendChild(pop);
+      setTimeout(function(){ pop.remove(); }, 2700);
+    }, 650);
+  }
+  startLeads();
+
+  // Fade hero fx out once user scrolls past hero
+  function checkFx(){
+    if(!hero) return;
+    const rect = hero.getBoundingClientRect();
+    if(rect.bottom < 120){ hero.classList.add('fx-out'); }
+    else { hero.classList.remove('fx-out'); }
+  }
+  window.addEventListener('scroll', checkFx, {passive:true});
+  checkFx();
+})();
+</script>
+
+</body>
+</html>
