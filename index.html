@@ -434,7 +434,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   position:relative;z-index:2;
   min-height:100vh;
   display:grid;
-  grid-template-columns:1fr 1.5fr;
+  grid-template-columns:1.4fr 1fr;
   gap:40px;
   padding:140px 48px 60px;
   align-items:end;
@@ -707,7 +707,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   display:flex;align-items:center;justify-content:center;
   font-family:'Inter',sans-serif;
   font-weight:900;
-  font-size:clamp(80px,14vw,200px);
+  font-size:clamp(48px,6vw,90px);
   letter-spacing:-.04em;
   text-transform:lowercase;
   color:rgba(10,10,10,.055);
@@ -871,7 +871,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 }
 .work-block{
   display:grid;
-  grid-template-columns:1fr 1.15fr;
+  grid-template-columns:1fr 1.45fr;
   gap:80px;
   padding:80px 0;
   border-top:1px solid rgba(31,27,22,.12);
@@ -982,6 +982,15 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   aspect-ratio:9/14;
   max-width:520px;
   margin:0 auto;
+}
+.work-media>.stack-carousel{
+  grid-column:1/-1;
+  max-width:none;
+  min-height:420px;
+  aspect-ratio:unset;
+}
+.work-media>.stack-controls{
+  grid-column:1/-1;
 }
 .stack-carousel.s-wide{aspect-ratio:16/10;max-width:none;width:100%;}
 .stack-card{
@@ -1458,18 +1467,13 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 .pull-quote{
   background:#FFFFFF;
   color:#0A0A0A;
-  padding:180px 48px;
+  padding:120px 48px;
   text-align:center;
   position:relative;
   overflow:hidden;
 }
 .pull-quote::before{
-  content:'';
-  position:absolute;
-  inset:auto 0 0 0;
-  height:1px;
-  background:linear-gradient(90deg,transparent 0%,rgba(168,134,90,.4) 20%,rgba(168,134,90,.4) 80%,transparent 100%);
-  z-index:1;
+  display:none;
 }
 .pull-quote-mark{display:none;}
 .pull-quote blockquote{
@@ -1487,19 +1491,20 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 }
 .pull-quote blockquote .em{
   font-style:normal;
-  color:var(--red);
+  color:#0A0A0A;
   font-weight:700;
   padding:0 .04em;
 }
 .pull-quote .quote-mark{
-  font-family:'Inter',sans-serif;
-  font-weight:900;
-  font-size:clamp(60px,8vw,120px);
-  color:var(--red);
+  font-family:'Fraunces',serif;
+  font-weight:400;
+  font-style:italic;
+  font-size:clamp(28px,3vw,46px);
+  color:rgba(10,10,10,.3);
   line-height:0;
   display:inline-block;
-  vertical-align:-.18em;
-  margin:0 .02em;
+  vertical-align:-.1em;
+  margin:0 .06em;
 }
 .pull-quote cite{
   display:flex;
