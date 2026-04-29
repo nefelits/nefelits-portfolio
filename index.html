@@ -393,23 +393,25 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 }
 .fx-title-bg{
   position:absolute;
-  bottom:8%;left:50%;
+  top:6%;left:50%;
   font-family:'Inter',sans-serif;font-weight:900;
-  font-size:clamp(180px,22vw,320px);
-  color:rgba(168,134,90,0);
+  font-size:clamp(130px,19vw,290px);
+  color:rgba(10,10,10,.055);
   letter-spacing:-.06em;
   pointer-events:none;
   white-space:nowrap;
   line-height:1;
   text-transform:lowercase;
-  opacity:1;
-  transform:translate(-50%, 0);
-  transition:color .7s ease;
+  opacity:0;
+  transform:translate(-50%, 38px) scale(.96);
+  transition:opacity .9s cubic-bezier(.2,.85,.3,1),
+             transform .95s cubic-bezier(.2,.85,.3,1);
 }
 .hero[data-active="social"] .fx-social .fx-title-bg,
 .hero[data-active="digital"] .fx-digital .fx-title-bg,
 .hero[data-active="event"] .fx-event .fx-title-bg{
-  color:rgba(168,134,90,.16);
+  opacity:1;
+  transform:translate(-50%, 0) scale(1);
 }
 .fx-lead-pop{
   position:absolute;
@@ -1062,12 +1064,14 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 .work-link:hover{background:#0A0A0A;color:#FFFFFF;transform:translateY(-2px);}
 .work-link .arr{font-size:14px;}
 
-.netdata-grid .mm:nth-child(1){grid-column:span 4;grid-row:span 4;}
-.netdata-grid .mm:nth-child(2){grid-column:span 2;grid-row:span 2;}
-.netdata-grid .mm:nth-child(3){grid-column:span 2;grid-row:span 2;}
+.netdata-grid .mm:nth-child(1){grid-column:span 3;grid-row:span 4;}
+.netdata-grid .mm:nth-child(2){grid-column:span 3;grid-row:span 4;}
+.netdata-grid .mm:nth-child(3){grid-column:span 2;grid-row:span 3;}
 .netdata-grid .mm:nth-child(4){grid-column:span 2;grid-row:span 3;}
 .netdata-grid .mm:nth-child(5){grid-column:span 2;grid-row:span 3;}
-.netdata-grid .mm:nth-child(6){grid-column:span 2;grid-row:span 3;}
+.netdata-grid .mm:nth-child(6){grid-column:span 6;grid-row:span 3;}
+.netdata-grid .mm:nth-child(7){grid-column:span 3;grid-row:span 3;}
+.netdata-grid .mm:nth-child(8){grid-column:span 3;grid-row:span 3;}
 
 .liquid-grid .mm:nth-child(1){grid-column:span 6;grid-row:span 4;}
 .liquid-grid .mm:nth-child(2){grid-column:span 2;grid-row:span 3;}
@@ -1979,27 +1983,29 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   <article class="work-block reveal">
     <div class="work-meta">
       <div class="work-logo"><img src="assets/logos/netdata.png" alt="Netdata"></div>
-      <div class="work-role">Marketing &amp; Community &middot; 2024 &mdash; Present</div>
+      <div class="work-role">Events &amp; Digital Marketing Coordinator &middot; 2024 &mdash; 2025</div>
       <h3 class="work-title">Netdata</h3>
       <ul class="work-bullets">
-        <li>Built end-to-end social presence across LinkedIn, Instagram, and TikTok with cohesive editorial voice for a developer-tech audience.</li>
-        <li>Produced and scripted short-form video content &mdash; interviews, event recaps, product explainers &mdash; across the company's channels.</li>
-        <li>Led on-the-ground content for Netdata's flagship events including the Pragmatic Open Source Conference and partner activations.</li>
-        <li>Managed always-on community engagement across Slack, Discord, and Reddit threads.</li>
+        <li>Supported CRM and digital marketing initiatives through campaign execution, email lifecycle coordination, and performance monitoring.</li>
+        <li>Managed email campaigns for a 400K-user database, achieving 20% open rate and 5% CTR, rising to 10% CTR for event campaigns.</li>
+        <li>Contributed to marketing activities supporting around 400 daily trial sign-ups.</li>
+        <li>Supported reporting, campaign analysis, and insight sharing to improve future actions.</li>
       </ul>
       <div class="work-metrics">
-        <div class="m"><strong data-count="180" data-suffix="%">0</strong><span>Engagement lift</span></div>
-        <div class="m"><strong data-count="2400" data-suffix="+">0</strong><span>Event attendees</span></div>
-        <div class="m"><strong data-count="40" data-suffix="+">0</strong><span>Videos shipped</span></div>
+        <div class="m"><strong data-count="400" data-suffix="K">0</strong><span>User database</span></div>
+        <div class="m"><strong data-count="20" data-suffix="%">0</strong><span>Email open rate</span></div>
+        <div class="m"><strong data-count="400" data-suffix="+">0</strong><span>Daily trial sign-ups</span></div>
       </div>
     </div>
     <div class="work-media netdata-grid">
-      <div class="mm"><video src="assets/netdata/pragmatic.mp4" autoplay muted loop playsinline></video></div>
-      <div class="mm"><img src="assets/netdata/insta.jpg" alt="Netdata Instagram" loading="lazy"></div>
-      <div class="mm"><img src="assets/netdata/linkedin.jpg" alt="Netdata LinkedIn" loading="lazy"></div>
+      <div class="mm"><img src="assets/netdata/event-1.jpg" alt="Netdata event" loading="lazy"></div>
       <div class="mm"><img src="assets/netdata/event-2.jpg" alt="Netdata event" loading="lazy"></div>
+      <div class="mm"><img src="assets/netdata/event-3.jpg" alt="Netdata event" loading="lazy"></div>
       <div class="mm"><img src="assets/netdata/event-4.jpg" alt="Netdata event" loading="lazy"></div>
+      <div class="mm"><img src="assets/netdata/event-5.jpg" alt="Netdata event" loading="lazy"></div>
       <div class="mm"><img src="assets/netdata/event-6.jpg" alt="Netdata event" loading="lazy"></div>
+      <div class="mm"><img src="assets/netdata/insta.jpg" alt="Netdata Instagram profile" loading="lazy"></div>
+      <div class="mm"><img src="assets/netdata/tiktok.jpg" alt="Netdata TikTok profile" loading="lazy"></div>
     </div>
   </article>
 
