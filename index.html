@@ -211,15 +211,15 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   transition:background .5s ease,border-color .5s ease,color .5s ease;
   --nav-fg:#0A0A0A;
   --nav-fg-soft:#3F3F3F;
-  --nav-cv-bg:#0A0A0A;
+  --nav-cv-bg:#A8865A;
   --nav-cv-fg:#FFFFFF;
 }
 /* Light theme — for dark sections (hero, footer) */
 .nav.theme-light{
   --nav-fg:#FFFFFF;
   --nav-fg-soft:rgba(255,255,255,.85);
-  --nav-cv-bg:#FFFFFF;
-  --nav-cv-fg:#0A0A0A;
+  --nav-cv-bg:#A8865A;
+  --nav-cv-fg:#FFFFFF;
 }
 /* Subtle blur once user scrolls past hero */
 .nav.scrolled{
@@ -1081,7 +1081,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 
 .deree-grid .mm:nth-child(1){grid-column:span 6;grid-row:span 7;}
 
-.lf-fitness-grid .mm:nth-child(1){grid-column:span 6;grid-row:span 7;}
+.lf-fitness-grid{justify-items:center;}.lf-fitness-grid .mm:nth-child(1){grid-column:2/span 4;grid-row:span 5;}
 
 .prelevic-grid .mm:nth-child(1){grid-column:span 3;grid-row:span 5;}
 .prelevic-grid .mm:nth-child(2){grid-column:span 3;grid-row:span 5;}
@@ -1812,6 +1812,108 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   .cf-cols{grid-template-columns:1fr;gap:40px;}
   .cf-credit{flex-direction:column;align-items:flex-start;gap:8px;}
 }
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE RESPONSIVE  — max-width: 768px
+═══════════════════════════════════════════════════════ */
+@media (max-width:768px){
+
+  /* ── NAV ── */
+  .nav{ padding:14px 20px; }
+  .nav-links{ display:none; }
+  .logo-text .lt-role{ display:none; }
+  .logo-text .lt-name{ font-size:10px; }
+
+  /* ── INTRO ── */
+  .intro-mono svg{ width:80px;height:80px; }
+  .intro-name{ font-size:clamp(28px,9vw,52px); }
+  .intro-tagline{ font-size:13px; }
+
+  /* ── HERO GRID (panels) ── */
+  .hero-grid{
+    grid-template-columns:1fr;
+    padding:100px 20px 40px;
+    gap:24px;
+    align-items:start;
+  }
+  .hero-headline{ max-width:100%; }
+  .hero-h1{ font-size:clamp(36px,10vw,60px); }
+  .hero-panels{ width:100%; }
+  .panel-body{ max-height:none; }
+  .fx-title-bg{ font-size:clamp(60px,18vw,120px); }
+  .italic-marquee{ height:clamp(80px,14vw,140px); }
+
+  /* ── FEATURED WORK ── */
+  .featured-work{ padding:80px 20px 60px; }
+  .work-block{ grid-template-columns:1fr; gap:32px; padding:48px 0; }
+  .work-meta{ position:static; }
+  .work-title{ font-size:clamp(22px,7vw,36px); }
+  .work-media{
+    grid-template-columns:repeat(2,1fr);
+    grid-auto-rows:130px;
+    gap:10px;
+  }
+  /* Override all individual grid spans to 1 col × 2 rows on mobile */
+  .work-media .mm{ grid-column:span 1 !important; grid-row:span 2 !important; }
+  /* Full-width videos (single items) */
+  .deree-grid .mm:nth-child(1),
+  .lf-fitness-grid .mm:nth-child(1){ grid-column:1/-1 !important; grid-row:span 3 !important; }
+  .lf-fitness-grid{ justify-items:stretch; }
+  /* Netdata 2×2 stays as 2 cols */
+  .netdata-grid .mm{ grid-column:span 1 !important; grid-row:span 2 !important; }
+  /* Liquid 2 side by side */
+  .liquid-grid .mm{ grid-column:span 1 !important; grid-row:span 3 !important; }
+  .work-metrics{ grid-template-columns:repeat(2,1fr); gap:12px; }
+
+  /* ── ABOUT ── */
+  .about{ padding:80px 20px 60px; min-height:auto; }
+  .about-stats{ grid-template-columns:repeat(2,1fr); }
+  .about-bg-portrait{ width:100%; opacity:.1; }
+
+  /* ── PULL QUOTE ── */
+  .pull-quote{ padding:60px 20px; }
+  .pull-quote blockquote{ font-size:clamp(20px,5vw,32px); }
+
+  /* ── LOGO STRIP ── */
+  .logo-strip{ padding:24px 0; }
+
+  /* ── SOCIAL GALLERY ── */
+  .social-gallery{ padding:80px 20px 60px; }
+  .vid-card{ width:140px; }
+
+  /* ── CERTIFICATIONS ── */
+  .certifications{ padding:80px 20px; }
+  .cert-grid{ grid-template-columns:repeat(2,1fr); }
+
+  /* ── SKILLS ── */
+  .skills{ padding:80px 20px; }
+  .skills-grid{ grid-template-columns:repeat(2,1fr); }
+  .skill-cats{ grid-template-columns:1fr; }
+
+  /* ── CONTACT ── */
+  .contact{ padding:80px 20px; }
+  .cf-cols{ grid-template-columns:1fr; gap:32px; padding:40px 0 32px; }
+  .cf-hello-row{ flex-direction:column; align-items:flex-start; gap:16px; }
+
+  /* ── TESTED ── */
+  .tested-card{ width:90vw; }
+
+  /* ── FLOATING CTA ── */
+  .floating-cta{ bottom:14px;right:14px;padding:12px 18px;font-size:11px; }
+
+  /* ── SECTION HEADINGS ── */
+  .section-label{ font-size:10px; }
+  .section-h2{ font-size:clamp(28px,8vw,48px); }
+}
+
+@media (max-width:480px){
+  .hero-h1{ font-size:clamp(30px,11vw,50px); }
+  .work-media{ grid-auto-rows:110px; }
+  .cert-grid{ grid-template-columns:1fr; }
+  .skills-grid{ grid-template-columns:repeat(2,1fr); }
+  .work-metrics{ grid-template-columns:1fr 1fr; }
+  .vid-card{ width:120px; }
+}
 </style>
 </head>
 <body>
@@ -2123,6 +2225,10 @@ button{font-family:inherit;cursor:none;border:none;background:none}
         <li>Developed and executed a social media growth strategy, growing TikTok to 60K followers in 3 months.</li>
         <li>Monitored content performance and identified opportunities to improve reach and engagement.</li>
       </ul>
+      <div class="work-metrics">
+        <div class="m"><strong data-count="60" data-suffix="K">0</strong><span>TikTok followers</span></div>
+        <div class="m"><strong data-count="3">0</strong><span>Months to 60K</span></div>
+      </div>
     </div>
     <div class="work-media lf-fitness-grid">
       <div class="mm"><video src="assets/projects/lf-fitness/faih-video.mp4" autoplay muted loop playsinline></video></div>
@@ -2135,15 +2241,14 @@ button{font-family:inherit;cursor:none;border:none;background:none}
       <div class="work-role">Editorial &amp; Social &middot; 2024 &mdash; Present</div>
       <h3 class="work-title">The Prelevic</h3>
       <ul class="work-bullets">
-        <li>Built the editorial visual identity from grid up &mdash; magazine-grade layouts, typographic system, weekly cadence.</li>
-        <li>Wrote and produced content series with consistent tone and pacing across feed posts, stories, and reels.</li>
-        <li>Designed long-form story arcs that turned scroll time into reading time.</li>
-        <li>Maintained brand voice across cross-cultural Greek and English audiences.</li>
+        <li>Created Instagram content including captions, visuals, and video assets to support brand awareness.</li>
+        <li>Managed communications with influencers and customers across social channels.</li>
+        <li>Prepared monthly performance reports and supported Pinterest management.</li>
       </ul>
       <div class="work-metrics">
-        <div class="m"><strong data-count="48">0</strong><span>Editorial drops</span></div>
-        <div class="m"><strong data-count="92" data-suffix="%">0</strong><span>Story completion</span></div>
-        <div class="m"><strong data-count="2" data-suffix=" lang">0</strong><span>Content tracks</span></div>
+        <div class="m"><strong data-count="36">0</strong><span>Posts created</span></div>
+        <div class="m"><strong data-count="8">0</strong><span>Influencers managed</span></div>
+        <div class="m"><strong data-count="6">0</strong><span>Monthly reports</span></div>
       </div>
     </div>
     <div class="work-media prelevic-grid">
