@@ -29,6 +29,8 @@
   --navy:#0A0A0A;
   --dark:#0A0A0A;
   --red:#D5052D;
+  --gold:#C4973D;
+  --gold-soft:#F5EDD6;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -304,17 +306,9 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 .hero[data-active="digital"] .hero-fx-layer.fx-digital,
 .hero[data-active="event"] .hero-fx-layer.fx-event{opacity:1;}
 .hero.fx-out .hero-fx-layer{opacity:0 !important;}
-.fx-bubble{
-  position:absolute;
-  font-size:30px;
-  opacity:0;
-  animation:fxRise 9s linear infinite;
-  will-change:transform,opacity;
-  user-select:none;
-  filter:saturate(.85);
-}
-.fx-bubble.lg{font-size:42px;}
-.fx-bubble.sm{font-size:22px;}
+.fx-bubble{display:none !important;}
+.fx-bubble.lg{display:none !important;}
+.fx-bubble.sm{display:none !important;}
 @keyframes fxRise{
   0%{transform:translateY(40px) scale(.8) rotate(-3deg);opacity:0;}
   12%{opacity:.55;}
@@ -323,27 +317,23 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 }
 .fx-title-bg{
   position:absolute;
-  bottom:10%;left:50%;
+  bottom:8%;left:50%;
   font-family:'Inter',sans-serif;font-weight:900;
-  font-size:clamp(140px,18vw,260px);
-  color:rgba(213,5,45,.18);
+  font-size:clamp(180px,22vw,320px);
+  color:rgba(213,5,45,0);
   letter-spacing:-.06em;
   pointer-events:none;
   white-space:nowrap;
   line-height:1;
   text-transform:lowercase;
-  opacity:0;
-  transform:translate(-50%, 30px);
-  animation:fxTitleBreathe 4.5s ease-in-out infinite;
+  opacity:1;
+  transform:translate(-50%, 0);
+  transition:color .7s ease;
 }
 .hero[data-active="social"] .fx-social .fx-title-bg,
 .hero[data-active="digital"] .fx-digital .fx-title-bg,
 .hero[data-active="event"] .fx-event .fx-title-bg{
-  opacity:1;transform:translate(-50%, 0);
-}
-@keyframes fxTitleBreathe{
-  0%,100%{filter:blur(0);opacity:.16;}
-  50%{filter:blur(2px);opacity:.30;}
+  color:rgba(213,5,45,.16);
 }
 .fx-lead-pop{
   position:absolute;
@@ -679,7 +669,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   display:inline-flex;align-items:center;gap:14px;
 }
 .section-eyebrow::before{
-  content:'';width:36px;height:1px;background:#0A0A0A;
+  content:'';width:36px;height:1px;background:var(--gold);
   display:inline-block;
 }
 .section-title{
@@ -695,7 +685,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 .section-title .it{
   font-family:'Inter',sans-serif;
   font-style:normal;
-  font-weight:600;
+  font-weight:800;
   color:var(--red);
   position:relative;
 }
@@ -757,6 +747,8 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   max-width:640px;
 }
 .about-content p .em{
+  color:var(--red);
+  font-weight:700;
   font-family:'Inter',sans-serif;
   font-style:normal;
   font-weight:600;
@@ -793,7 +785,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 
 /* FEATURED WORK */
 .featured-work{
-  background:var(--cream-soft);
+  background:#FFFFFF;
   padding:140px 48px;
 }
 .work-block{
@@ -849,7 +841,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 .work-bullets li::before{
   content:'\2726';
   position:absolute;left:0;top:0;
-  color:var(--champagne-deep);
+  color:var(--gold);
   font-size:13px;
 }
 .work-metrics{
@@ -889,7 +881,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   border-radius:14px;
   overflow:hidden;
   box-shadow:0 14px 40px -10px rgba(31,27,22,.18);
-  background:var(--cream-deep);
+  background:#FFFFFF;
   position:relative;
   transition:transform .5s,box-shadow .5s;
 }
@@ -1135,7 +1127,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   overflow:hidden;
   box-shadow:0 14px 32px -14px rgba(31,27,22,.18);
   position:relative;
-  background:#F7F7F7;
+  background:#FFFFFF;
   transition:transform .55s cubic-bezier(.2,.8,.2,1),box-shadow .55s;
   display:flex;align-items:center;justify-content:center;
 }
@@ -1204,7 +1196,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   overflow:hidden;
   box-shadow:0 16px 40px -15px rgba(31,27,22,.22);
   position:relative;
-  background:var(--cream-deep);
+  background:#FFFFFF;
   transition:transform .55s cubic-bezier(.2,.8,.2,1),box-shadow .55s;
 }
 .gallery-row .gg:hover{
@@ -1240,7 +1232,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 
 /* CERTIFICATIONS */
 .certifications{
-  background:var(--cream-soft);
+  background:#FFFFFF;
   padding:140px 48px;
 }
 .cert-grid{
@@ -1265,7 +1257,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 .cert-grid .cc .cert-img{
   flex:1;
   aspect-ratio:4/3;
-  background:var(--cream-soft);
+  background:#FFFFFF;
   border-radius:8px;
   overflow:hidden;
   display:flex;align-items:center;justify-content:center;
@@ -1395,7 +1387,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   position:absolute;
   inset:auto 0 0 0;
   height:1px;
-  background:linear-gradient(90deg,transparent 0%,#E8E8E6 20%,#E8E8E6 80%,transparent 100%);
+  background:linear-gradient(90deg,transparent 0%,#D5052D 20%,#D5052D 80%,transparent 100%);
   z-index:1;
 }
 .pull-quote-mark{display:none;}
@@ -1776,9 +1768,9 @@ button{font-family:inherit;cursor:none;border:none;background:none}
     </div>
 
     <div class="hero-panels reveal-stagger" id="heroPanels">
-      <button class="panel" data-tint="#F2F2F2" data-active="social">
+      <button class="panel" data-tint="#FFF0F2" data-active="social">
         <div class="panel-head">
-          <span class="panel-thumb" style="background:#F2F2F2;color:#0A0A0A;">S</span>
+          <span class="panel-thumb" style="background:#D5052D;color:#FFFFFF;">S</span>
           <h3>Social Media Marketing</h3>
           <span class="panel-icon">+</span>
         </div>
@@ -1792,9 +1784,9 @@ button{font-family:inherit;cursor:none;border:none;background:none}
         </div>
       </button>
 
-      <button class="panel" data-tint="#EAEAEA" data-active="digital">
+      <button class="panel" data-tint="#FFF0F2" data-active="digital">
         <div class="panel-head">
-          <span class="panel-thumb" style="background:#EAEAEA;color:#0A0A0A;">D</span>
+          <span class="panel-thumb" style="background:#D5052D;color:#FFFFFF;">D</span>
           <h3>Digital Marketing</h3>
           <span class="panel-icon">+</span>
         </div>
@@ -2013,7 +2005,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 <section class="tested-first" id="tested">
   <div class="section-eyebrow">personal channels</div>
   <div class="tested-head">
-    <h2 class="section-title reveal" style="margin-bottom:0;">Tested first on <span class="it">my accounts.</span></h2>
+    <h2 class="section-title reveal" style="margin-bottom:0;">Strategies tested first on <span class="it">my socials</span></h2>
     <div class="tested-stats reveal">
       <div class="ts"><strong>54K</strong><span>Instagram</span></div>
       <div class="ts"><strong>24K</strong><span>TikTok</span></div>
