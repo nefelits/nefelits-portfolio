@@ -1071,25 +1071,15 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 .work-link:hover{background:#0A0A0A;color:#FFFFFF;transform:translateY(-2px);}
 .work-link .arr{font-size:14px;}
 
-.netdata-grid .mm:nth-child(1){grid-column:span 3;grid-row:span 4;}
-.netdata-grid .mm:nth-child(2){grid-column:span 3;grid-row:span 4;}
-.netdata-grid .mm:nth-child(3){grid-column:span 2;grid-row:span 3;}
-.netdata-grid .mm:nth-child(4){grid-column:span 2;grid-row:span 3;}
-.netdata-grid .mm:nth-child(5){grid-column:span 2;grid-row:span 3;}
-.netdata-grid .mm:nth-child(6){grid-column:span 2;grid-row:span 3;}
-.netdata-grid .mm:nth-child(7){grid-column:span 3;grid-row:span 7;}
-.netdata-grid .mm:nth-child(8){grid-column:span 3;grid-row:span 7;}
+.netdata-grid .mm:nth-child(1){grid-column:span 3;grid-row:span 7;}
+.netdata-grid .mm:nth-child(2){grid-column:span 3;grid-row:span 7;}
+.netdata-grid .mm:nth-child(3){grid-column:span 3;grid-row:span 7;}
+.netdata-grid .mm:nth-child(4){grid-column:span 3;grid-row:span 7;}
 
-.liquid-grid .mm:nth-child(1){grid-column:span 6;grid-row:span 4;}
-.liquid-grid .mm:nth-child(2){grid-column:span 2;grid-row:span 3;}
-.liquid-grid .mm:nth-child(3){grid-column:span 2;grid-row:span 3;}
-.liquid-grid .mm:nth-child(4){grid-column:span 2;grid-row:span 3;}
+.liquid-grid .mm:nth-child(1){grid-column:span 3;grid-row:span 6;}
+.liquid-grid .mm:nth-child(2){grid-column:span 3;grid-row:span 6;}
 
-.deree-grid .mm:nth-child(1){grid-column:span 4;grid-row:span 4;}
-.deree-grid .mm:nth-child(2){grid-column:span 2;grid-row:span 4;}
-.deree-grid .mm:nth-child(3){grid-column:span 2;grid-row:span 3;}
-.deree-grid .mm:nth-child(4){grid-column:span 2;grid-row:span 3;}
-.deree-grid .mm:nth-child(5){grid-column:span 2;grid-row:span 3;}
+.deree-grid .mm:nth-child(1){grid-column:span 6;grid-row:span 7;}
 
 .prelevic-grid .mm:nth-child(1){grid-column:span 3;grid-row:span 5;}
 .prelevic-grid .mm:nth-child(2){grid-column:span 3;grid-row:span 5;}
@@ -1330,6 +1320,49 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 .gg-tall{aspect-ratio:4/5;grid-column:span 3;}
 .gg-large{aspect-ratio:1/1;grid-column:span 4;}
 .gg-mid{aspect-ratio:1/1;grid-column:span 6;}
+
+/* VIDEO REEL MARQUEE */
+.vid-reel-wrap{
+  overflow:hidden;
+  width:100%;
+  margin-top:60px;
+  position:relative;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 5%,#000 95%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 5%,#000 95%,transparent 100%);
+}
+.vid-reel-track{
+  display:flex;
+  gap:14px;
+  width:max-content;
+  animation:vidReel 55s linear infinite;
+  will-change:transform;
+}
+.vid-reel-wrap:hover .vid-reel-track{animation-play-state:paused;}
+@keyframes vidReel{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+.vid-card{
+  width:200px;
+  aspect-ratio:9/16;
+  border-radius:16px;
+  overflow:hidden;
+  flex-shrink:0;
+  background:#0A0A0A;
+  box-shadow:0 14px 36px -12px rgba(31,27,22,.28);
+  position:relative;
+  transition:transform .4s,box-shadow .4s;
+}
+.vid-card:hover{transform:scale(1.04);box-shadow:0 24px 50px -10px rgba(31,27,22,.36);}
+.vid-card video{width:100%;height:100%;object-fit:cover;display:block;}
+.vid-card .vc-tag{
+  position:absolute;bottom:10px;left:10px;
+  font-family:'Inter',sans-serif;
+  font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  color:#FFFFFF;background:rgba(10,10,10,.6);
+  padding:4px 10px;border-radius:999px;
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+}
 
 /* CERTIFICATIONS */
 .certifications{
@@ -2005,39 +2038,33 @@ button{font-family:inherit;cursor:none;border:none;background:none}
       </div>
     </div>
     <div class="work-media netdata-grid">
-      <div class="mm"><img src="assets/netdata/event-1.jpg" alt="Netdata event" loading="lazy"></div>
-      <div class="mm"><img src="assets/netdata/event-2.jpg" alt="Netdata event" loading="lazy"></div>
-      <div class="mm"><img src="assets/netdata/event-3.jpg" alt="Netdata event" loading="lazy"></div>
-      <div class="mm"><img src="assets/netdata/event-4.jpg" alt="Netdata event" loading="lazy"></div>
-      <div class="mm"><img src="assets/netdata/event-5.jpg" alt="Netdata event" loading="lazy"></div>
-      <div class="mm"><img src="assets/netdata/event-6.jpg" alt="Netdata event" loading="lazy"></div>
-      <div class="mm mm-screen"><img src="assets/netdata/insta.jpg" alt="Netdata Instagram profile" loading="lazy"></div>
-      <div class="mm mm-screen"><img src="assets/netdata/tiktok.jpg" alt="Netdata TikTok profile" loading="lazy"></div>
+      <div class="mm mm-screen"><img src="assets/netdata/insta.jpg" alt="Netdata LinkedIn posts" loading="lazy"></div>
+      <div class="mm mm-screen"><img src="assets/netdata/tiktok.jpg" alt="Netdata social posts" loading="lazy"></div>
+      <div class="mm mm-screen"><img src="assets/netdata/event-3.jpg" alt="Netdata event post" loading="lazy"></div>
+      <div class="mm mm-screen"><img src="assets/netdata/event-4.jpg" alt="Netdata DevOpsDays post" loading="lazy"></div>
     </div>
   </article>
 
   <article class="work-block reveal">
     <div class="work-meta">
       <div class="work-logo"><img src="assets/logos/Liquid logo copy.jpg" alt="Liquid Beauty Parlor"></div>
-      <div class="work-role">Brand &amp; Social Lead &middot; 2023 &mdash; 2024</div>
+      <div class="work-role">Social Media Manager &amp; Content Creator</div>
       <h3 class="work-title">Liquid Beauty Parlor</h3>
       <ul class="work-bullets">
-        <li>Repositioned the salon's social profile from a low-traffic feed to a high-conversion booking channel.</li>
-        <li>Directed photo and video content monthly &mdash; beauty editorial, BTS reels, founder storytelling.</li>
-        <li>Wrote and scheduled long-form captions and Reels with consistent voice and luxe visual signature.</li>
-        <li>Coordinated influencer collaborations and seasonal campaign drops.</li>
+        <li>Created and executed content strategies to strengthen brand storytelling and customer engagement.</li>
+        <li>Delivered an average of 50K views every 30 days on Instagram and 1,000+ monthly profile interactions.</li>
+        <li>Built the TikTok profile from scratch to 1,140 followers and 20K likes in 4 months.</li>
+        <li>Used performance metrics to refine content direction and improve campaign effectiveness.</li>
       </ul>
       <div class="work-metrics">
-        <div class="m"><strong data-count="320" data-suffix="%">0</strong><span>Follower growth</span></div>
-        <div class="m"><strong data-count="65" data-suffix="%">0</strong><span>DMs to bookings</span></div>
-        <div class="m"><strong data-count="12">0</strong><span>Campaigns shipped</span></div>
+        <div class="m"><strong data-count="50" data-suffix="K">0</strong><span>Monthly views</span></div>
+        <div class="m"><strong data-count="1140" data-suffix="+">0</strong><span>TikTok followers</span></div>
+        <div class="m"><strong data-count="20" data-suffix="K">0</strong><span>TikTok likes</span></div>
       </div>
     </div>
     <div class="work-media liquid-grid">
-      <div class="mm"><video src="assets/liquid/profile.mp4" autoplay muted loop playsinline></video></div>
-      <div class="mm"><img src="assets/liquid/profile-before.jpg" alt="Liquid before" loading="lazy"></div>
-      <div class="mm"><img src="assets/liquid/profile-mid.jpg" alt="Liquid mid" loading="lazy"></div>
-      <div class="mm"><img src="assets/liquid/profile-now.jpg" alt="Liquid now" loading="lazy"></div>
+      <div class="mm"><video src="assets/projects/liquid-social/liquid-profile-video.mp4" autoplay muted loop playsinline></video></div>
+      <div class="mm"><video src="assets/projects/liquid/liquid-video.mp4" autoplay muted loop playsinline></video></div>
     </div>
   </article>
 
@@ -2067,26 +2094,21 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   <article class="work-block reveal">
     <div class="work-meta">
       <div class="work-logo"><img src="assets/logos/Deree.png" alt="Deree"></div>
-      <div class="work-role">Marketing Society &middot; 2022 &mdash; 2024</div>
+      <div class="work-role">Social Media Assistant, Marketing Department</div>
       <h3 class="work-title">Deree &mdash; The American College of Greece</h3>
       <ul class="work-bullets">
-        <li>Co-led the student Marketing Society &mdash; refreshed the organization's identity, voice, and public presence.</li>
-        <li>Produced campus campaigns and recruitment events that doubled member enrollment.</li>
-        <li>Hosted on-camera segments and student-press interviews for institution-wide initiatives.</li>
-        <li>Won Best Club of the Year for two consecutive cycles.</li>
+        <li>Created and coordinated short-form digital campaigns aligned with audience interests and institutional objectives.</li>
+        <li>Grew the deree_acg TikTok account to 10K followers in 6 months from launch.</li>
+        <li>Contributed to campaigns that generated around 200 prospective student inquiries and supported audience growth analysis.</li>
       </ul>
       <div class="work-metrics">
-        <div class="m"><strong data-count="2" data-suffix="x">0</strong><span>Best Club wins</span></div>
-        <div class="m"><strong data-count="200" data-suffix="%">0</strong><span>Membership growth</span></div>
-        <div class="m"><strong data-count="15" data-suffix="+">0</strong><span>Events produced</span></div>
+        <div class="m"><strong data-count="10" data-suffix="K">0</strong><span>TikTok followers</span></div>
+        <div class="m"><strong data-count="6" data-suffix=" mo">0</strong><span>To reach 10K</span></div>
+        <div class="m"><strong data-count="200" data-suffix="+">0</strong><span>Student inquiries</span></div>
       </div>
     </div>
     <div class="work-media deree-grid">
-      <div class="mm"><video src="assets/deree/profile.mp4" autoplay muted loop playsinline></video></div>
-      <div class="mm"><img src="assets/deree/profile-now.jpg" alt="Deree now" loading="lazy"></div>
-      <div class="mm"><video src="assets/deree/voice-1.mp4" autoplay muted loop playsinline></video></div>
-      <div class="mm"><video src="assets/deree/voice-2.mp4" autoplay muted loop playsinline></video></div>
-      <div class="mm"><video src="assets/deree/voice-3.mp4" autoplay muted loop playsinline></video></div>
+      <div class="mm"><video src="assets/projects/deree/deree-video.mp4" autoplay muted loop playsinline></video></div>
     </div>
   </article>
 
@@ -2148,39 +2170,40 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   <div class="section-eyebrow">social media gallery</div>
   <h2 class="section-title reveal">A gallery of <span class="it">moments</span> that scrolled <span class="it">well.</span></h2>
 
-  <div class="gallery-split">
-    <div class="gallery-col">
-      <div class="gallery-col-head">Feed</div>
-      <div class="gallery-col-list">
-        <div class="gci"><span class="gci-tag">Instagram</span><img src="assets/netdata/insta.jpg" alt="Netdata Instagram" loading="lazy"></div>
-        <div class="gci"><span class="gci-tag">LinkedIn</span><img src="assets/netdata/linkedin.jpg" alt="Netdata LinkedIn" loading="lazy"></div>
-        <div class="gci"><span class="gci-tag">Liquid &middot; Before</span><img src="assets/liquid/profile-before.jpg" alt="Liquid before" loading="lazy"></div>
-        <div class="gci"><span class="gci-tag">Liquid &middot; After</span><img src="assets/liquid/profile-now.jpg" alt="Liquid now" loading="lazy"></div>
-        <div class="gci"><span class="gci-tag">Liquid &middot; TikTok</span><img src="assets/liquid-tiktok.jpg" alt="Liquid TikTok" loading="lazy"></div>
-        <div class="gci"><span class="gci-tag">Deree &middot; Profile</span><img src="assets/deree/profile-now.jpg" alt="Deree profile" loading="lazy"></div>
-        <div class="gci"><span class="gci-tag">Deree &middot; Best Club</span><img src="assets/best-club-deree.jpg" alt="Deree Best Club" loading="lazy"></div>
-        <div class="gci"><span class="gci-tag">Prelevic &middot; Feed</span><img src="assets/prelevic/feed-1.jpg" alt="Prelevic feed" loading="lazy"></div>
-        <div class="gci"><span class="gci-tag">Prelevic &middot; Feed</span><img src="assets/prelevic/feed-2.png" alt="Prelevic feed" loading="lazy"></div>
-        <div class="gci"><span class="gci-tag">Prelevic &middot; Feed</span><img src="assets/prelevic/feed-3.png" alt="Prelevic feed" loading="lazy"></div>
-        <div class="gci"><span class="gci-tag">YouthLab &middot; LinkedIn</span><img src="assets/personal/youthlab-li-1.jpg" alt="YouthLab" loading="lazy"></div>
-        <div class="gci"><span class="gci-tag">YouthLab &middot; LinkedIn</span><img src="assets/personal/youthlab-li-2.jpg" alt="YouthLab" loading="lazy"></div>
-      </div>
-    </div>
-
-    <div class="gallery-col">
-      <div class="gallery-col-head">Videos</div>
-      <div class="gallery-col-list">
-        <div class="gci"><span class="gci-tag">Netdata &middot; TikTok</span><video src="assets/netdata/example.mp4" autoplay muted loop playsinline></video></div>
-        <div class="gci"><span class="gci-tag">Pragmatic Conf</span><video src="assets/netdata/pragmatic.mp4" autoplay muted loop playsinline></video></div>
-        <div class="gci"><span class="gci-tag">Liquid &middot; Reel</span><video src="assets/liquid/profile.mp4" autoplay muted loop playsinline></video></div>
-        <div class="gci"><span class="gci-tag">Deree &middot; Voice</span><video src="assets/deree/voice-1.mp4" autoplay muted loop playsinline></video></div>
-        <div class="gci"><span class="gci-tag">Deree &middot; Voice</span><video src="assets/deree/voice-2.mp4" autoplay muted loop playsinline></video></div>
-        <div class="gci"><span class="gci-tag">Deree &middot; Voice</span><video src="assets/deree/voice-3.mp4" autoplay muted loop playsinline></video></div>
-        <div class="gci"><span class="gci-tag">Deree &middot; Profile</span><video src="assets/deree/profile.mp4" autoplay muted loop playsinline></video></div>
-        <div class="gci"><span class="gci-tag">Prelevic &middot; Posts</span><video src="assets/prelevic/posts.mp4" autoplay muted loop playsinline></video></div>
-        <div class="gci"><span class="gci-tag">Prelevic &middot; Stories</span><video src="assets/prelevic/stories.mp4" autoplay muted loop playsinline></video></div>
-        <div class="gci"><span class="gci-tag">YouthLab &middot; Promo</span><video src="assets/youthlab/promo.mp4" autoplay muted loop playsinline></video></div>
-      </div>
+  <div class="vid-reel-wrap">
+    <div class="vid-reel-track" id="vidReelTrack">
+      <div class="vid-card"><video src="assets/netdata/example.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Netdata · TikTok</span></div>
+        <div class="vid-card"><video src="assets/netdata/pragmatic.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Pragmatic Conf</span></div>
+        <div class="vid-card"><video src="assets/liquid/profile.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Liquid · Reel</span></div>
+        <div class="vid-card"><video src="assets/projects/liquid-social/liquid-profile-video.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Liquid · Instagram</span></div>
+        <div class="vid-card"><video src="assets/projects/liquid/liquid-video.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Liquid · TikTok</span></div>
+        <div class="vid-card"><video src="assets/deree/voice-1.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Deree · Voice</span></div>
+        <div class="vid-card"><video src="assets/deree/voice-2.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Deree · Voice</span></div>
+        <div class="vid-card"><video src="assets/deree/voice-3.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Deree · Voice</span></div>
+        <div class="vid-card"><video src="assets/deree/profile.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Deree · Profile</span></div>
+        <div class="vid-card"><video src="assets/projects/deree/deree-video.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Deree · TikTok</span></div>
+        <div class="vid-card"><video src="assets/prelevic/posts.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Prelevic · Posts</span></div>
+        <div class="vid-card"><video src="assets/prelevic/stories.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Prelevic · Stories</span></div>
+        <div class="vid-card"><video src="assets/youthlab/promo.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">YouthLab · Promo</span></div>
+        <div class="vid-card"><video src="assets/personal/nailsvideo1.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Personal · Nails</span></div>
+        <div class="vid-card"><video src="assets/personal/efoodvideo1.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Personal · Efood</span></div>
+        <div class="vid-card"><video src="assets/personal/wokshopvideo.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Personal · Wokshop</span></div>
+        <div class="vid-card"><video src="assets/netdata/example.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Netdata · TikTok</span></div>
+        <div class="vid-card"><video src="assets/netdata/pragmatic.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Pragmatic Conf</span></div>
+        <div class="vid-card"><video src="assets/liquid/profile.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Liquid · Reel</span></div>
+        <div class="vid-card"><video src="assets/projects/liquid-social/liquid-profile-video.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Liquid · Instagram</span></div>
+        <div class="vid-card"><video src="assets/projects/liquid/liquid-video.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Liquid · TikTok</span></div>
+        <div class="vid-card"><video src="assets/deree/voice-1.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Deree · Voice</span></div>
+        <div class="vid-card"><video src="assets/deree/voice-2.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Deree · Voice</span></div>
+        <div class="vid-card"><video src="assets/deree/voice-3.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Deree · Voice</span></div>
+        <div class="vid-card"><video src="assets/deree/profile.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Deree · Profile</span></div>
+        <div class="vid-card"><video src="assets/projects/deree/deree-video.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Deree · TikTok</span></div>
+        <div class="vid-card"><video src="assets/prelevic/posts.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Prelevic · Posts</span></div>
+        <div class="vid-card"><video src="assets/prelevic/stories.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Prelevic · Stories</span></div>
+        <div class="vid-card"><video src="assets/youthlab/promo.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">YouthLab · Promo</span></div>
+        <div class="vid-card"><video src="assets/personal/nailsvideo1.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Personal · Nails</span></div>
+        <div class="vid-card"><video src="assets/personal/efoodvideo1.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Personal · Efood</span></div>
+        <div class="vid-card"><video src="assets/personal/wokshopvideo.mp4" autoplay muted loop playsinline preload="metadata"></video><span class="vc-tag">Personal · Wokshop</span></div>
     </div>
   </div>
 </section>
