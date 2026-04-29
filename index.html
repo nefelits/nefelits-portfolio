@@ -17,19 +17,19 @@
   --ink-soft:#1F1F1F;
   --taupe:#6B6B6B;
   --line:#E6E6E6;
-  --champagne:#D5052D;
-  --champagne-deep:#A10728;
+  --champagne:#A8865A;
+  --champagne-deep:#7A5C3A;
   --pink:#FFFFFF;
   --pink-soft:#FAFAFA;
   --blue:#FFFFFF;
   --blue-soft:#FAFAFA;
-  --crimson:#D5052D;
-  --maroon:#A10728;
+  --crimson:#A8865A;
+  --maroon:#7A5C3A;
   --bone:#FAFAFA;
   --navy:#0A0A0A;
   --dark:#0A0A0A;
-  --red:#D5052D;
-  --gold:#C4973D;
+  --red:#A8865A;
+  --gold:#A8865A;
   --gold-soft:#F5EDD6;
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -86,35 +86,18 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 
 /* Monogram */
 .intro-mono{
-  font-family:'Inter',sans-serif;
-  font-weight:900;
-  font-size:clamp(72px,10vw,130px);
-  color:#FFFFFF;
-  letter-spacing:-.05em;
-  line-height:1;
   opacity:0;
   transform:scale(.88) translateY(10px);
   animation:introMonoIn .9s cubic-bezier(.2,.85,.3,1) .3s forwards;
+  line-height:1;
 }
 @keyframes introMonoIn{
   to{opacity:1;transform:scale(1) translateY(0);}
 }
 
-/* Red accent line that draws itself */
-.intro-redline{
-  width:0;
-  height:2px;
-  background:linear-gradient(90deg,#D5052D,#A10728);
-  margin:22px auto 22px;
-  animation:introLine .7s cubic-bezier(.4,0,.2,1) 1.1s forwards;
-  border-radius:2px;
-}
-@keyframes introLine{
-  to{width:clamp(80px,8vw,120px);}
-}
-
 /* Full name */
 .intro-name{
+  margin-top:28px;
   font-family:'Inter',sans-serif;
   font-weight:300;
   font-size:clamp(13px,1.4vw,17px);
@@ -165,8 +148,8 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   user-select:none;
 }
 .intro-enter:hover{
-  border-color:#D5052D;
-  background:rgba(213,5,45,.08);
+  border-color:#A8865A;
+  background:rgba(168,134,90,.08);
   letter-spacing:.38em;
 }
 .intro-enter .ie-arrow{
@@ -342,9 +325,9 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 }
 .floating-cta:hover{
   transform:translateY(-4px) scale(1.03);
-  background:#D5052D;
+  background:#A8865A;
   color:#0A0A0A !important;
-  border-color:#D5052D;
+  border-color:#A8865A;
   box-shadow:0 22px 50px rgba(201,168,122,.55);
 }
 .floating-cta .arrow{
@@ -413,7 +396,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   bottom:8%;left:50%;
   font-family:'Inter',sans-serif;font-weight:900;
   font-size:clamp(180px,22vw,320px);
-  color:rgba(213,5,45,0);
+  color:rgba(168,134,90,0);
   letter-spacing:-.06em;
   pointer-events:none;
   white-space:nowrap;
@@ -426,17 +409,17 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 .hero[data-active="social"] .fx-social .fx-title-bg,
 .hero[data-active="digital"] .fx-digital .fx-title-bg,
 .hero[data-active="event"] .fx-event .fx-title-bg{
-  color:rgba(213,5,45,.16);
+  color:rgba(168,134,90,.16);
 }
 .fx-lead-pop{
   position:absolute;
   font-family:'Inter',sans-serif;font-weight:600;
   font-size:16px;
   color:#fff;
-  background:#D5052D;
+  background:#A8865A;
   border-radius:999px;
   padding:8px 16px;
-  box-shadow:0 12px 28px -10px rgba(213,5,45,.55);
+  box-shadow:0 12px 28px -10px rgba(168,134,90,.55);
   animation:leadPop 2.6s cubic-bezier(.2,.7,.3,1) forwards;
   white-space:nowrap;
   letter-spacing:.02em;
@@ -494,7 +477,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   flex-shrink:0;
   box-shadow:0 14px 30px -10px rgba(31,27,22,.35);
   border:2px solid rgba(255,255,255,.6);
-  background:#D5052D;
+  background:#A8865A;
   transition:opacity .6s ease,transform .6s ease;
   will-change:opacity,transform;
 }
@@ -628,7 +611,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 }
 .panel-tags span::before{
   content:'\2726';
-  color:#D5052D;font-size:11px;
+  color:#A8865A;font-size:11px;
 }
 
 /* legacy classes kept hidden so old JS hooks don't blow up */
@@ -1480,7 +1463,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   position:absolute;
   inset:auto 0 0 0;
   height:1px;
-  background:linear-gradient(90deg,transparent 0%,#D5052D 20%,#D5052D 80%,transparent 100%);
+  background:linear-gradient(90deg,transparent 0%,rgba(168,134,90,.4) 20%,rgba(168,134,90,.4) 80%,transparent 100%);
   z-index:1;
 }
 .pull-quote-mark{display:none;}
@@ -1572,7 +1555,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   font-family:'Fraunces',serif;
   font-style:italic;
   font-weight:400;
-  color:#D5052D;
+  color:#A8865A;
 }
 .cf-email{
   font-family:'Inter',sans-serif;
@@ -1584,7 +1567,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   padding-bottom:6px;
   transition:border-color .3s,color .3s;
 }
-.cf-email:hover{color:#D5052D;border-color:#D5052D;}
+.cf-email:hover{color:#A8865A;border-color:#A8865A;}
 .cf-cols{
   display:grid;
   grid-template-columns:2fr 1fr 1fr 1fr;
@@ -1622,7 +1605,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   gap:8px;
   transition:color .3s,transform .3s;
 }
-.cf-col ul a:hover{color:#D5052D;transform:translateX(4px);}
+.cf-col ul a:hover{color:#A8865A;transform:translateX(4px);}
 .cf-col ul a .arr{
   display:inline-block;
   transition:transform .3s;
@@ -1635,7 +1618,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   color:rgba(255,255,255,.85);
   line-height:1.7;
 }
-.cf-col-loc .gold{color:#D5052D;font-weight:500;}
+.cf-col-loc .gold{color:#A8865A;font-weight:500;}
 .cf-cta-row{
   display:flex;flex-wrap:wrap;gap:14px;
   margin-top:8px;
@@ -1655,7 +1638,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 .cf-cta-row a:hover{
   background:#FFFFFF;color:#0A0A0A;border-color:#FFFFFF;transform:translateY(-2px);
 }
-.cf-cta-row a.gold{background:#D5052D;color:#0A0A0A;border-color:#D5052D;}
+.cf-cta-row a.gold{background:#A8865A;color:#0A0A0A;border-color:#A8865A;}
 .cf-cta-row a.gold:hover{background:#FFFFFF;border-color:#FFFFFF;}
 .cf-wordmark{
   font-family:'Inter',sans-serif;
@@ -1687,7 +1670,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 }
 .cf-credit .dot{
   width:6px;height:6px;border-radius:50%;
-  background:#D5052D;
+  background:#A8865A;
   display:inline-block;margin:0 10px;
   vertical-align:middle;
 }
@@ -1783,8 +1766,19 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   <div class="intro-curtain intro-curtain-r"></div>
   <div class="intro-vignette"></div>
   <div class="intro-content">
-    <div class="intro-mono">NT</div>
-    <div class="intro-redline"></div>
+    <div class="intro-mono">
+      <svg viewBox="0 0 100 100" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="intro-ng" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0" stop-color="#FFFFFF"/>
+            <stop offset="1" stop-color="#A8865A"/>
+          </linearGradient>
+        </defs>
+        <text x="50" y="74" text-anchor="middle"
+              font-family="Fraunces, serif" font-style="italic" font-weight="400"
+              font-size="78" fill="url(#intro-ng)">N</text>
+      </svg>
+    </div>
     <div class="intro-name">Nefeli Tsaousi</div>
     <div class="intro-role">Digital Marketing Portfolio</div>
     <button class="intro-enter" id="folderStage">Enter <span class="ie-arrow">&#8594;</span></button>
@@ -1867,9 +1861,9 @@ button{font-family:inherit;cursor:none;border:none;background:none}
     </div>
 
     <div class="hero-panels reveal-stagger" id="heroPanels">
-      <button class="panel" data-tint="#FFF0F2" data-active="social">
+      <button class="panel" data-tint="#FAF7F2" data-active="social">
         <div class="panel-head">
-          <span class="panel-thumb" style="background:#D5052D;color:#FFFFFF;">S</span>
+          <span class="panel-thumb" style="background:#1F1B16;color:#FFFFFF;">S</span>
           <h3>Social Media Marketing</h3>
           <span class="panel-icon">+</span>
         </div>
@@ -1883,9 +1877,9 @@ button{font-family:inherit;cursor:none;border:none;background:none}
         </div>
       </button>
 
-      <button class="panel" data-tint="#FFF0F2" data-active="digital">
+      <button class="panel" data-tint="#FAF7F2" data-active="digital">
         <div class="panel-head">
-          <span class="panel-thumb" style="background:#D5052D;color:#FFFFFF;">D</span>
+          <span class="panel-thumb" style="background:#1F1B16;color:#FFFFFF;">D</span>
           <h3>Digital Marketing</h3>
           <span class="panel-icon">+</span>
         </div>
@@ -1899,9 +1893,9 @@ button{font-family:inherit;cursor:none;border:none;background:none}
         </div>
       </button>
 
-      <button class="panel" data-tint="#A10728" data-active="event">
+      <button class="panel" data-tint="#7A5C3A" data-active="event">
         <div class="panel-head">
-          <span class="panel-thumb" style="background:#A10728;color:#FFFFFF;">E</span>
+          <span class="panel-thumb" style="background:#7A5C3A;color:#FFFFFF;">E</span>
           <h3>Event Marketing</h3>
           <span class="panel-icon">+</span>
         </div>
