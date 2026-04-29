@@ -47,47 +47,140 @@ img,video{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:none;border:none;background:none}
 
-/* INTRO — full-screen black with white "Open" circle */
-.folder-intro{
+/* ═══════════════════════════════════════════
+   PREMIUM INTRO — cinematic curtain reveal
+═══════════════════════════════════════════ */
+.intro-screen{
   position:fixed;inset:0;
   z-index:10000;
-  background:#0A0A0A;
-  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
   cursor:none;
-  transition:opacity 1s ease;
+  pointer-events:auto;
 }
-.folder-intro.opening{opacity:0;pointer-events:none;}
-.folder-intro.opened{display:none;}
-.intro-circle{
-  width:280px;height:280px;
-  border-radius:50%;
-  background:#FFFFFF;
-  color:#0A0A0A;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:14px;
-  cursor:pointer;
+.intro-screen.opened{display:none;}
+
+/* Two curtain panels that split apart on open */
+.intro-curtain{
+  position:absolute;top:0;bottom:0;
+  width:50%;
+  background:#0A0A0A;
+  transition:transform 1.1s cubic-bezier(.76,0,.24,1);
+  will-change:transform;
+}
+.intro-curtain-l{left:0;}
+.intro-curtain-r{right:0;}
+.intro-screen.opening .intro-curtain-l{transform:translateX(-100%);}
+.intro-screen.opening .intro-curtain-r{transform:translateX(100%);}
+
+/* Content centred over curtains */
+.intro-content{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:0;
+  pointer-events:none;
+  z-index:2;
+  transition:opacity .45s ease;
+}
+.intro-screen.opening .intro-content{opacity:0;}
+
+/* Monogram */
+.intro-mono{
   font-family:'Inter',sans-serif;
-  font-weight:600;
-  font-size:32px;
-  letter-spacing:-.01em;
-  box-shadow:0 30px 80px -10px rgba(255,255,255,.18);
-  animation:pulse-soft 2.6s ease-in-out infinite;
-  transition:transform .4s cubic-bezier(.2,.8,.2,1);
+  font-weight:900;
+  font-size:clamp(72px,10vw,130px);
+  color:#FFFFFF;
+  letter-spacing:-.05em;
+  line-height:1;
+  opacity:0;
+  transform:scale(.88) translateY(10px);
+  animation:introMonoIn .9s cubic-bezier(.2,.85,.3,1) .3s forwards;
+}
+@keyframes introMonoIn{
+  to{opacity:1;transform:scale(1) translateY(0);}
+}
+
+/* Red accent line that draws itself */
+.intro-redline{
+  width:0;
+  height:2px;
+  background:linear-gradient(90deg,#D5052D,#A10728);
+  margin:22px auto 22px;
+  animation:introLine .7s cubic-bezier(.4,0,.2,1) 1.1s forwards;
+  border-radius:2px;
+}
+@keyframes introLine{
+  to{width:clamp(80px,8vw,120px);}
+}
+
+/* Full name */
+.intro-name{
+  font-family:'Inter',sans-serif;
+  font-weight:300;
+  font-size:clamp(13px,1.4vw,17px);
+  color:#FFFFFF;
+  letter-spacing:.38em;
+  text-transform:uppercase;
+  opacity:0;
+  animation:introFadeUp .8s ease 1.5s forwards;
+}
+
+/* Role */
+.intro-role{
+  font-family:'Inter',sans-serif;
+  font-weight:400;
+  font-size:clamp(10px,1vw,12px);
+  color:rgba(255,255,255,.38);
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  margin-top:10px;
+  opacity:0;
+  animation:introFadeUp .8s ease 1.85s forwards;
+}
+
+@keyframes introFadeUp{
+  from{opacity:0;transform:translateY(14px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* Enter button */
+.intro-enter{
+  margin-top:54px;
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:'Inter',sans-serif;
+  font-weight:500;
+  font-size:11px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:#FFFFFF;
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:999px;
+  padding:14px 32px;
+  background:transparent;
+  cursor:pointer;
+  pointer-events:auto;
+  opacity:0;
+  animation:introFadeUp .8s ease 2.4s forwards;
+  transition:border-color .3s,background .3s,letter-spacing .3s;
   user-select:none;
 }
-.intro-circle:hover{transform:scale(1.05);}
-.intro-heart{
-  font-size:28px;
-  color:#FFFFFF;
-  background:#0A0A0A;
-  width:48px;height:48px;
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  line-height:1;
+.intro-enter:hover{
+  border-color:#D5052D;
+  background:rgba(213,5,45,.08);
+  letter-spacing:.38em;
 }
-@keyframes pulse-soft{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.03);}
+.intro-enter .ie-arrow{
+  display:inline-block;
+  transition:transform .3s;
+}
+.intro-enter:hover .ie-arrow{transform:translateX(5px);}
+
+/* Subtle noise / vignette overlay on curtains */
+.intro-vignette{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.55) 100%);
+  pointer-events:none;
+  z-index:1;
 }
 
 /* CURSOR */
@@ -1685,10 +1778,16 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 <body>
 
 <!-- INTRO -->
-<div class="folder-intro" id="folderIntro">
-  <div class="intro-circle" id="folderStage">
-    <span>Open</span>
-    <span class="intro-heart">&#9829;</span>
+<div class="intro-screen" id="folderIntro">
+  <div class="intro-curtain intro-curtain-l"></div>
+  <div class="intro-curtain intro-curtain-r"></div>
+  <div class="intro-vignette"></div>
+  <div class="intro-content">
+    <div class="intro-mono">NT</div>
+    <div class="intro-redline"></div>
+    <div class="intro-name">Nefeli Tsaousi</div>
+    <div class="intro-role">Digital Marketing Portfolio</div>
+    <button class="intro-enter" id="folderStage">Enter <span class="ie-arrow">&#8594;</span></button>
   </div>
 </div>
 
@@ -2212,7 +2311,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 </section>
 
 <script>
-// FOLDER INTRO
+// PREMIUM INTRO
 document.body.style.overflow='hidden';
 const folderIntro = document.getElementById('folderIntro');
 const folderStage = document.getElementById('folderStage');
@@ -2222,15 +2321,13 @@ function openFolder(){
   setTimeout(function(){
     folderIntro.classList.add('opened');
     document.body.style.overflow='auto';
-    // trigger hero reveal
     const hh = document.querySelector('.hero-headline');
     if(hh){hh.classList.add('in');}
     const hp = document.getElementById('heroPanels');
     if(hp){hp.classList.add('in');}
   }, 1200);
 }
-folderStage.addEventListener('click', openFolder);
-folderIntro.addEventListener('click', openFolder);
+if(folderStage) folderStage.addEventListener('click', openFolder);
 
 const dot = document.getElementById('cursorDot');
 const hello = document.getElementById('cursorHello');
