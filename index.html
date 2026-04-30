@@ -2718,9 +2718,129 @@ body[data-section="work"]{background:#EBE7DD !important;}
 @media (prefers-reduced-motion: reduce){
   .t-card{transition:none !important;}
 }
+
+/* ═══════════════════════════════════════════
+   FINAL OVERRIDES: white bg, no italics on titles, faded bg-words
+═══════════════════════════════════════════ */
+
+/* WHITE base: body holds the white, sections are transparent so bg-words can show through */
+html, body{background:#FFFFFF !important;}
+.hero, .work-section, .about, .contact, .skills, .featured-work,
+section, .logo-strip, .testimonials, .pull-quote, #gallery, #certs{
+  background:transparent !important;
+}
+body[data-section]{background:#FFFFFF !important;}
+.italic-marquee{background:transparent !important;}
+.about, .about-section, #about{background:transparent !important;}
+.testimonials{background:transparent !important;}
+
+/* NO italics on section titles / accent words */
+.section-title,
+.section-title .it,
+.section-title em,
+.t-header .section-title,
+.t-header .section-title .it,
+.work-title,
+.work-title .it,
+.cf-hello,
+.cf-hello .it,
+h1, h1 .it,
+h2, h2 .it,
+h3, h3 .it{
+  font-style:normal !important;
+  font-family:'DM Sans',sans-serif !important;
+  font-weight:600 !important;
+}
+/* Keep accent in same family but tinted sage so it still reads as accent */
+.section-title .it,
+.t-header .section-title .it,
+.work-title .it,
+.cf-hello .it,
+h1 .it, h2 .it, h3 .it{
+  color:#1F2419 !important;
+}
+
+/* Hero h1 keeps its bigger weight scale */
+.hero h1, .hero h1 .it{font-weight:500 !important;}
+
+/* Body sections need to layer above the bg-words but stay transparent */
+section, .logo-strip{position:relative;z-index:1;}
+
+/* ═══ SCATTERED FADED SERVICE WORDS — across the whole document ═══ */
+body{position:relative;}
+.bg-words{
+  position:absolute;
+  top:0;left:0;right:0;
+  height:100%;
+  pointer-events:none;
+  user-select:none;
+  z-index:0;
+  overflow:hidden;
+}
+.bg-word{
+  position:absolute;
+  font-family:'DM Sans',sans-serif;
+  font-weight:800;
+  font-style:normal;
+  letter-spacing:-.045em;
+  text-transform:lowercase;
+  color:rgba(31,36,25,.07);
+  white-space:nowrap;
+  font-size:clamp(56px,11vw,180px);
+  line-height:1;
+}
+/* Scatter across the document — alternating sides, varied sizes */
+.bg-word.w1 {top:760px;   left:4%;   font-size:clamp(60px,12vw,200px);}
+.bg-word.w2 {top:1700px;  right:2%;  font-size:clamp(56px,10vw,170px);}
+.bg-word.w3 {top:2600px;  left:6%;   font-size:clamp(50px,9vw,160px);}
+.bg-word.w4 {top:3500px;  right:4%;  font-size:clamp(48px,8vw,140px);}
+.bg-word.w5 {top:4300px;  left:14%;  font-size:clamp(80px,16vw,260px);}
+.bg-word.w6 {top:5100px;  right:6%;  font-size:clamp(56px,11vw,180px);}
+.bg-word.w7 {top:5900px;  left:5%;   font-size:clamp(54px,10vw,170px);}
+.bg-word.w8 {top:6700px;  right:8%;  font-size:clamp(58px,11vw,180px);}
+.bg-word.w9 {top:7500px;  left:6%;   font-size:clamp(56px,10vw,170px);}
+.bg-word.w10{top:8400px;  right:4%;  font-size:clamp(52px,9vw,160px);}
+.bg-word.w11{top:9300px;  left:8%;   font-size:clamp(54px,10vw,170px);}
+.bg-word.w12{top:10200px; right:10%; font-size:clamp(70px,14vw,220px);}
+
+/* Mobile: tighter spacing, smaller words, edge-aligned */
+@media (max-width:768px){
+  .bg-word{font-size:clamp(40px,12vw,90px) !important;}
+  .bg-word.w1 {top:520px;}
+  .bg-word.w2 {top:1100px;}
+  .bg-word.w3 {top:1700px;}
+  .bg-word.w4 {top:2300px;}
+  .bg-word.w5 {top:2900px;}
+  .bg-word.w6 {top:3500px;}
+  .bg-word.w7 {top:4100px;}
+  .bg-word.w8 {top:4700px;}
+  .bg-word.w9 {top:5300px;}
+  .bg-word.w10{top:5900px;}
+  .bg-word.w11{top:6500px;}
+  .bg-word.w12{top:7100px;}
+}
+
+/* Sections that absolutely must stay opaque (intro screen) */
+.intro-screen{background:#FFFFFF !important;z-index:9999 !important;}
 </style>
 </head>
 <body>
+
+<!-- Faded service words scattered across the whole site -->
+<div class="bg-words" aria-hidden="true">
+  <span class="bg-word w1">creative storytelling</span>
+  <span class="bg-word w2">social media</span>
+  <span class="bg-word w3">content creation</span>
+  <span class="bg-word w4">organic &middot; paid &middot; earned</span>
+  <span class="bg-word w5">ugc</span>
+  <span class="bg-word w6">event marketing</span>
+  <span class="bg-word w7">email marketing</span>
+  <span class="bg-word w8">copywriting</span>
+  <span class="bg-word w9">brand strategy</span>
+  <span class="bg-word w10">community building</span>
+  <span class="bg-word w11">campaign execution</span>
+  <span class="bg-word w12">analytics</span>
+</div>
 
 <!-- INTRO -->
 <div class="intro-screen" id="folderIntro">
@@ -2932,18 +3052,7 @@ body[data-section="work"]{background:#EBE7DD !important;}
   </div>
 </section>
 
-<div class="italic-marquee">
-  <div class="italic-cycle">
-    <span class="word">creative storytelling</span>
-    <span class="word">social media management</span>
-    <span class="word">content creation</span>
-    <span class="word">organic &middot; paid &middot; earned</span>
-    <span class="word">ugc</span>
-    <span class="word">event marketing</span>
-    <span class="word">email marketing</span>
-    <span class="word">copywriting</span>
-  </div>
-</div>
+<!-- italic marquee removed — service words now scatter as faded background across the page (see .bg-words) -->
 
 <section class="featured-work" id="work">
   <div class="section-eyebrow">featured work</div>
