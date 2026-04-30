@@ -2396,11 +2396,12 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
 
 /* Pull quote — italic gold emphasis already, polish it */
 .pull-quote blockquote .em{
-  font-family:'Fraunces',serif !important;
-  font-style:italic !important;
-  font-weight:400 !important;
+  font-family:'DM Sans',sans-serif !important;
+  font-style:normal !important;
+  font-weight:700 !important;
   color:#A8B89D !important;
 }
+.pull-quote blockquote, .pull-quote blockquote *{font-style:normal !important;}
 .pull-quote .quote-mark{
   font-family:'Fraunces',serif;
   font-style:italic;
@@ -2525,6 +2526,21 @@ button.cta:hover,
 }
 .hero-meta{border-top-color:#D6D4CC !important;}
 
+/* Skill tiles: WHITE by default, sage-mint on hover */
+.skill-tile{
+  background:#FFFFFF !important;
+  border:1px solid rgba(31,36,25,.06) !important;
+  transition:background .35s ease, transform .55s cubic-bezier(.2,.8,.2,1),
+             box-shadow .55s ease, border-color .35s ease !important;
+}
+.skill-tile::before{display:none !important;}
+.skill-tile:hover{
+  background:#A8B89D !important;
+  border-color:#A8B89D !important;
+}
+.skill-tile:hover span{color:#1F2419 !important;}
+.skill-tile:hover img{filter:none;}
+
 /* Editorial italic accent → swap warm gold for deep sage */
 .section-title .it,
 .work-role,
@@ -2549,11 +2565,7 @@ em.it{color:#8A9B7E !important;}
 .cursor-ring{border-color:#A8B89D !important;}
 
 /* Section-theming body data attributes (Phase 2 morph) → keep within palette */
-body[data-section="hero"],
-body[data-section="work"],
-body[data-section="about"],
-body[data-section="contact"]{background:#F1EEE6 !important;}
-body[data-section="work"]{background:#EBE7DD !important;}
+/* (Earlier cream theming neutralised — body always white now) */
 
 /* Panel-thumb (legacy) */
 .panel-thumb{background:#BFCDB5 !important;color:#1F2419 !important;}
@@ -2847,7 +2859,10 @@ body[data-section]:not([data-section="contact"]){background:#FFFFFF !important;}
 .contact .cf-credit{color:rgba(255,255,255,.55) !important;}
 .contact .cf-hello .it{color:#A8B89D !important;}
 .contact .cf-col-loc .gold{color:#A8B89D !important;}
-body[data-section="contact"]{background:#1F1E1C !important;}
+/* Body stays WHITE even when the contact section is active; the .contact
+   element paints its own dark gradient. This prevents the page from going
+   dark when scrolling back up out of the footer. */
+body[data-section="contact"]{background:#FFFFFF !important;}
 
 /* NO italics on section titles / accent words */
 .section-title,
