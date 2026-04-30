@@ -2740,6 +2740,63 @@ body[data-section="work"]{background:#EBE7DD !important;}
 }
 
 /* ═══════════════════════════════════════════
+   HERO GREETING: big + typewriter
+═══════════════════════════════════════════ */
+.hero-greeting{
+  font-size:clamp(28px,4.4vw,56px) !important;
+  font-weight:500 !important;
+  letter-spacing:-.02em !important;
+  line-height:1.05 !important;
+  /* typewriter mechanics */
+  display:inline-block;
+  overflow:hidden;
+  white-space:nowrap;
+  max-width:0;
+  position:relative;
+  padding-right:.18em; /* room for caret */
+}
+.hero-greeting .it{
+  font-weight:700 !important;
+  letter-spacing:-.025em !important;
+}
+/* Blinking caret */
+.hero-greeting::after{
+  content:'';
+  display:inline-block;
+  width:.06em;
+  height:1em;
+  background:#1F2419;
+  margin-left:.04em;
+  vertical-align:-0.12em;
+  opacity:0;
+  animation:none;
+}
+/* When the headline is revealed (post-intro), run the typing + caret */
+.hero-headline.in .hero-greeting{
+  animation:heroType 1.7s steps(18,end) .35s forwards;
+}
+.hero-headline.in .hero-greeting::after{
+  opacity:1;
+  animation:caretBlink 1s steps(2,end) infinite;
+  animation-delay:2.05s;
+}
+@keyframes heroType{
+  from{max-width:0;}
+  to  {max-width:11em;}
+}
+@keyframes caretBlink{
+  0%,49%  {opacity:1;}
+  50%,100%{opacity:0;}
+}
+@media (max-width:900px){
+  .hero-greeting{font-size:clamp(26px,7vw,40px) !important;}
+}
+@media (prefers-reduced-motion: reduce){
+  .hero-greeting{max-width:none !important;animation:none !important;}
+  .hero-greeting::after{display:none !important;}
+}
+
+/* ═══════════════════════════════════════════
    FINAL OVERRIDES: white bg, no italics on titles, faded bg-words
 ═══════════════════════════════════════════ */
 
