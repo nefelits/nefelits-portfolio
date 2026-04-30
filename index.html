@@ -2883,13 +2883,16 @@ body[data-section="work"]{background:#EBE7DD !important;}
    The contact/footer keeps its intentional dark gradient. */
 html, body{background:#FFFFFF !important;}
 .hero, .work-section, .about, .skills, .featured-work,
-section:not(.contact), .logo-strip, .testimonials, .pull-quote, #gallery, #certs{
+section:not(.contact), .logo-strip, .testimonials, #gallery, #certs{
   background:transparent !important;
 }
 body[data-section]:not([data-section="contact"]){background:#FFFFFF !important;}
 .italic-marquee{background:transparent !important;}
 .about, .about-section, #about{background:transparent !important;}
 .testimonials{background:transparent !important;}
+/* Pull-quote sits just above the dark contact section; force its own white
+   background so the body theming for "contact" never bleeds through. */
+.pull-quote{background:#FFFFFF !important; position:relative; z-index:1;}
 
 /* Footer / contact: restore the dark "premium" look */
 .contact{
