@@ -1993,6 +1993,42 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 }
 .cl-item:nth-child(even) .cl-card{transform:rotate(1deg);}
 .cl-item:nth-child(3n) .cl-card{transform:rotate(-0.5deg);}
+
+/* ===== PHASE 1 POLISH: cursor, magnetic, tilt, letter-reveal ===== */
+
+/* Custom editorial cursor */
+.cursor-dot,.cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;mix-blend-mode:difference;will-change:transform;}
+.cursor-dot{width:6px;height:6px;background:#FFFFFF;transform:translate(-50%,-50%);transition:width .25s ease,height .25s ease,background .25s ease;}
+.cursor-ring{width:38px;height:38px;border:1px solid rgba(255,255,255,.6);transform:translate(-50%,-50%);transition:width .35s cubic-bezier(.2,.85,.3,1),height .35s cubic-bezier(.2,.85,.3,1),border-color .25s ease,opacity .25s ease;}
+body.has-cursor *{cursor:none !important;}
+body.has-cursor .cursor-ring.is-hovering{width:64px;height:64px;border-color:rgba(255,255,255,.95);}
+body.has-cursor .cursor-dot.is-hovering{width:0;height:0;}
+body.has-cursor .cursor-ring.is-text{width:90px;height:90px;background:rgba(255,255,255,.08);border-color:transparent;}
+.cursor-label{position:fixed;top:0;left:0;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:#FFFFFF;mix-blend-mode:difference;opacity:0;transition:opacity .25s ease;letter-spacing:.02em;}
+.cursor-label.is-visible{opacity:1;}
+@media (max-width:900px),(hover:none){.cursor-dot,.cursor-ring,.cursor-label{display:none !important;}body.has-cursor *{cursor:auto !important;}}
+
+/* Magnetic + tilt panels */
+.panel{will-change:transform;transition:transform .55s cubic-bezier(.2,.85,.3,1),box-shadow .4s ease;transform-style:preserve-3d;perspective:900px;}
+.panel.is-tilting{transition:transform .12s linear,box-shadow .4s ease;}
+.panel:hover{box-shadow:0 30px 60px -20px rgba(0,0,0,.18),0 12px 24px -10px rgba(0,0,0,.10);}
+.magnetic{display:inline-block;will-change:transform;transition:transform .5s cubic-bezier(.2,.85,.3,1);}
+
+/* Letter reveal */
+.split-line{display:block;overflow:hidden;line-height:1.05;}
+.split-char{display:inline-block;transform:translateY(110%) rotate(6deg);opacity:0;transition:transform 1s cubic-bezier(.2,.85,.3,1),opacity .8s ease;}
+.split-char.is-space{width:.28em;}
+.split-ready .split-char.is-in{transform:translateY(0) rotate(0);opacity:1;}
+
+/* Smooth scroll body lock */
+html.smooth-active{scroll-behavior:auto !important;}
+
+@media (prefers-reduced-motion: reduce){
+  .cursor-dot,.cursor-ring,.cursor-label{display:none !important;}
+  body.has-cursor *{cursor:auto !important;}
+  .panel.is-tilting,.magnetic{transform:none !important;transition:none !important;}
+  .split-char{transform:none !important;opacity:1 !important;}
+}
 </style>
 </head>
 <body>
@@ -2739,6 +2775,167 @@ document.querySelectorAll('video').forEach(function(v){
   }
   window.addEventListener('scroll', checkFx, {passive:true});
   checkFx();
+})();
+</script>
+
+<!-- ============================================
+     PHASE 1 POLISH: smooth scroll, custom cursor,
+     magnetic buttons, panel tilt, letter reveal
+============================================ -->
+<script>
+(function(){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouch = window.matchMedia('(hover:none)').matches || ('ontouchstart' in window);
+  const isDesktop = window.innerWidth > 900 && !isTouch;
+
+  /* ---------- 1. Smooth scroll (lerp-based, mini Lenis) ---------- */
+  if(!reduce){
+    let target = window.scrollY, current = window.scrollY, raf;
+    const ease = 0.10;
+    function update(){
+      current += (target - current) * ease;
+      if(Math.abs(target - current) < 0.4){current = target;}
+      window.scrollTo(0, current);
+      if(current !== target){raf = requestAnimationFrame(update);} else {raf = null;}
+    }
+    function onWheel(e){
+      // Don't hijack inside scrollable inner elements
+      const path = e.composedPath ? e.composedPath() : [];
+      for(const el of path){
+        if(el.nodeType !== 1) continue;
+        const cs = getComputedStyle(el);
+        if((cs.overflowY === 'auto' || cs.overflowY === 'scroll') && el.scrollHeight > el.clientHeight) return;
+      }
+      e.preventDefault();
+      target = Math.max(0, Math.min(document.body.scrollHeight - window.innerHeight, target + e.deltaY));
+      if(!raf) raf = requestAnimationFrame(update);
+    }
+    document.documentElement.classList.add('smooth-active');
+    window.addEventListener('wheel', onWheel, {passive:false});
+    // Sync target on user keyboard scroll / programmatic scroll
+    window.addEventListener('scroll', ()=>{ if(raf===null) target = current = window.scrollY; }, {passive:true});
+  }
+
+  /* ---------- 2. Custom editorial cursor ---------- */
+  if(isDesktop && !reduce){
+    const dot = document.createElement('div'); dot.className='cursor-dot';
+    const ring = document.createElement('div'); ring.className='cursor-ring';
+    const label = document.createElement('div'); label.className='cursor-label';
+    document.body.appendChild(dot); document.body.appendChild(ring); document.body.appendChild(label);
+    document.body.classList.add('has-cursor');
+    let mx=window.innerWidth/2, my=window.innerHeight/2, rx=mx, ry=my;
+    document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; dot.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`; label.style.transform=`translate(${mx}px,${my+34}px) translate(-50%,-50%)`; }, {passive:true});
+    function tick(){ rx += (mx-rx)*0.18; ry += (my-ry)*0.18; ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`; requestAnimationFrame(tick); }
+    tick();
+    // Hover states
+    const hoverables = 'a, button, .panel, .work-block, [data-cursor]';
+    document.addEventListener('mouseover', e=>{
+      const t = e.target.closest(hoverables);
+      if(!t) return;
+      ring.classList.add('is-hovering'); dot.classList.add('is-hovering');
+      const cl = t.getAttribute('data-cursor');
+      if(cl){ label.textContent = cl; label.classList.add('is-visible'); ring.classList.add('is-text'); }
+    });
+    document.addEventListener('mouseout', e=>{
+      const t = e.target.closest(hoverables);
+      if(!t) return;
+      ring.classList.remove('is-hovering','is-text'); dot.classList.remove('is-hovering');
+      label.classList.remove('is-visible');
+    });
+    // Hide off-window
+    document.addEventListener('mouseleave', ()=>{ dot.style.opacity=0; ring.style.opacity=0; });
+    document.addEventListener('mouseenter', ()=>{ dot.style.opacity=1; ring.style.opacity=1; });
+  }
+
+  /* ---------- 3. Magnetic buttons ---------- */
+  if(isDesktop && !reduce){
+    const magnets = document.querySelectorAll('.btn, .nav-cta, .nav-link, .magnetic');
+    magnets.forEach(el=>{
+      el.classList.add('magnetic');
+      el.addEventListener('mousemove', e=>{
+        const r = el.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width/2;
+        const y = e.clientY - r.top - r.height/2;
+        el.style.transform = `translate(${x*0.25}px,${y*0.35}px)`;
+      });
+      el.addEventListener('mouseleave', ()=>{ el.style.transform=''; });
+    });
+  }
+
+  /* ---------- 4. Panel cursor-tilt (3D feel) ---------- */
+  if(isDesktop && !reduce){
+    document.querySelectorAll('.panel').forEach(p=>{
+      p.addEventListener('mousemove', e=>{
+        const r = p.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        p.classList.add('is-tilting');
+        p.style.transform = `perspective(900px) rotateX(${(-y*6).toFixed(2)}deg) rotateY(${(x*8).toFixed(2)}deg) translateY(-4px)`;
+      });
+      p.addEventListener('mouseleave', ()=>{ p.classList.remove('is-tilting'); p.style.transform=''; });
+    });
+    // Cards too
+    document.querySelectorAll('.work-block').forEach(p=>{
+      p.addEventListener('mousemove', e=>{
+        const r = p.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        p.style.transform = `perspective(1200px) rotateX(${(-y*1.6).toFixed(2)}deg) rotateY(${(x*2).toFixed(2)}deg)`;
+        p.style.transition = 'transform .15s linear';
+      });
+      p.addEventListener('mouseleave', ()=>{ p.style.transform=''; p.style.transition='transform .55s cubic-bezier(.2,.85,.3,1)'; });
+    });
+  }
+
+  /* ---------- 5. Split-letter heading reveal ---------- */
+  if(!reduce){
+    const targets = document.querySelectorAll('.hero h1, .section-title, .about h2, .featured-work h2');
+    targets.forEach(el=>{
+      // Preserve <br> by splitting per node
+      const out = [];
+      el.childNodes.forEach(node=>{
+        if(node.nodeType === 3){ // text
+          const text = node.textContent;
+          for(const ch of text){
+            if(ch === ' '){ out.push('<span class="split-char is-space">&nbsp;</span>'); }
+            else { out.push(`<span class="split-char">${ch}</span>`); }
+          }
+        } else if(node.nodeType === 1){
+          if(node.tagName === 'BR'){ out.push('<br>'); }
+          else if(node.classList && node.classList.contains('it')){
+            const inner = [];
+            for(const ch of node.textContent){
+              if(ch === ' ') inner.push('<span class="split-char is-space">&nbsp;</span>');
+              else inner.push(`<span class="split-char">${ch}</span>`);
+            }
+            out.push(`<span class="it">${inner.join('')}</span>`);
+          } else {
+            out.push(node.outerHTML);
+          }
+        }
+      });
+      el.innerHTML = out.join('');
+      el.classList.add('split-ready');
+    });
+    const obs = new IntersectionObserver(entries=>{
+      entries.forEach(en=>{
+        if(en.isIntersecting){
+          const chars = en.target.querySelectorAll('.split-char');
+          chars.forEach((c,i)=>{ setTimeout(()=>c.classList.add('is-in'), i*22); });
+          obs.unobserve(en.target);
+        }
+      });
+    }, {threshold:0.2});
+    targets.forEach(t=>obs.observe(t));
+  }
+
+  /* ---------- 6. Add cursor labels to key CTAs ---------- */
+  if(isDesktop && !reduce){
+    document.querySelectorAll('.work-block').forEach(w=>w.setAttribute('data-cursor','View'));
+    document.querySelectorAll('.panel').forEach(p=>p.setAttribute('data-cursor','Open'));
+    const contact = document.querySelector('a[href*="contact"], a[href*="mailto"]');
+    if(contact) contact.setAttribute('data-cursor','Say hi');
+  }
 })();
 </script>
 
