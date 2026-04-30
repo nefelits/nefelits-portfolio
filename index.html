@@ -2811,16 +2811,29 @@ em.it{color:#8A9B7E !important;}
   opacity:0;
   animation:none;
 }
-/* Type as soon as the page loads — no need to wait for an intersection
-   observer to flip .in. The greeting types itself, then the caret blinks. */
-.hero-greeting{
-  animation:heroType 1.7s steps(18,end) .4s forwards;
+/* JS-driven typewriter: characters are revealed one-by-one by JS once the
+   intro is dismissed. Hide the original text up front so nothing flashes. */
+.hero-greeting{visibility:hidden;}
+.hero-greeting.is-typing,
+.hero-greeting.is-typed{visibility:visible;max-width:none;overflow:visible;white-space:normal;}
+.hero-greeting .hg-char{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(.08em);
+  transition:opacity .04s linear, transform .12s ease-out;
 }
-.hero-greeting::after{
-  opacity:1;
+.hero-greeting .hg-char.is-on{opacity:1;transform:translateY(0);}
+.hero-greeting .hg-caret{
+  display:inline-block;
+  width:.06em;height:1em;
+  background:#1F2419;
+  margin-left:.04em;
+  vertical-align:-0.12em;
   animation:caretBlink 1s steps(2,end) infinite;
-  animation-delay:2.1s;
 }
+.hero-greeting.is-typed .hg-caret{animation:caretBlink 1s steps(2,end) infinite;}
+/* Hide the legacy ::after caret entirely */
+.hero-greeting::after{display:none !important;}
 @keyframes heroType{
   from{max-width:0;}
   to  {max-width:11em;}
@@ -3610,9 +3623,71 @@ function openFolder(){
     if(hh){hh.classList.add('in');}
     const hp = document.getElementById('heroPanels');
     if(hp){hp.classList.add('in');}
+    // Kick off the realistic typewriter for the greeting
+    typeHeroGreeting();
   }, 1200);
 }
 if(folderStage) folderStage.addEventListener('click', openFolder);
+
+/* ---------- Realistic typewriter for "Hi, I am Nefeli." ----------
+   Character-by-character reveal with variable per-character delay so the
+   typing feels human (faster on common letters, slower at punctuation,
+   tiny "thinking" pauses, occasional micro-jitter on the comma & period). */
+function typeHeroGreeting(){
+  const el = document.querySelector('.hero-greeting');
+  if(!el || el.classList.contains('is-typing') || el.classList.contains('is-typed')) return;
+  // Snapshot original markup: "Hi, I am <span class="it">Nefeli.</span>"
+  const itText = el.querySelector('.it') ? el.querySelector('.it').textContent : '';
+  const beforeIt = 'Hi, I am ';
+  // Build the typing target: array of {ch, accent}
+  const seq = [];
+  for(const c of beforeIt) seq.push({ch:c, accent:false});
+  for(const c of itText)   seq.push({ch:c, accent:true});
+  // Wipe element and rebuild as empty char spans + caret
+  el.innerHTML = '';
+  const charEls = seq.map(({ch, accent})=>{
+    const s = document.createElement('span');
+    s.className = 'hg-char' + (accent ? ' it' : '');
+    // Use non-breaking space so spaces hold layout while hidden
+    s.textContent = ch === ' ' ? '\u00A0' : ch;
+    el.appendChild(s);
+    return s;
+  });
+  const caret = document.createElement('span');
+  caret.className = 'hg-caret';
+  el.appendChild(caret);
+  el.classList.add('is-typing');
+
+  // Per-character delay: human-feeling rhythm
+  function delayFor(ch, i){
+    if(ch === ',') return 240 + Math.random()*60;     // pause after comma
+    if(ch === '.') return 280 + Math.random()*80;     // settle at the end
+    if(ch === ' ') return 70  + Math.random()*40;     // brief between words
+    if(i === beforeIt.length) return 320;             // tiny "thinking" pause before name
+    // Base typing speed + jitter
+    return 60 + Math.random()*70;
+  }
+
+  let i = 0;
+  function step(){
+    if(i >= charEls.length){
+      el.classList.remove('is-typing');
+      el.classList.add('is-typed');
+      return;
+    }
+    charEls[i].classList.add('is-on');
+    const ch = seq[i].ch;
+    i++;
+    setTimeout(step, delayFor(ch, i));
+  }
+  // Small lead-in pause so the curtain finishes opening before typing starts
+  setTimeout(step, 220);
+}
+
+/* If the intro was already dismissed somehow (e.g. cached state), still type. */
+if(folderIntro && folderIntro.classList.contains('opened')){
+  typeHeroGreeting();
+}
 
 const dot = document.getElementById('cursorDot');
 const hello = document.getElementById('cursorHello');
