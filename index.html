@@ -545,39 +545,6 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 
 /* PANELS */
 
-/* ── Hero laptop visual ── */
-.hero-laptop{
-  align-self:center;
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.hero-laptop-inner{
-  position:relative;
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 28px 80px rgba(31,27,22,.20),0 8px 24px rgba(31,27,22,.10);
-  transform:rotate(-1.5deg) translateY(0);
-  animation:laptopFloat 7s ease-in-out infinite;
-  transition:transform .6s cubic-bezier(.2,.85,.3,1),box-shadow .6s;
-  max-width:480px;
-  width:100%;
-}
-.hero-laptop-inner:hover{
-  transform:rotate(0deg) translateY(-6px) scale(1.02);
-  box-shadow:0 40px 100px rgba(31,27,22,.24),0 12px 32px rgba(31,27,22,.12);
-}
-.hero-laptop-img{
-  display:block;
-  width:100%;
-  height:auto;
-  object-fit:cover;
-}
-@keyframes laptopFloat{
-  0%,100%{transform:rotate(-1.5deg) translateY(0);}
-  50%{transform:rotate(-0.5deg) translateY(-10px);}
-}
 .hero-panels{
   align-self:end;
   display:flex;flex-direction:column;gap:12px;
@@ -1971,31 +1938,28 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 .yt-thumb-link:hover .yt-play-btn { transform:translate(-50%,-50%) scale(1.1); }
 
 /* ── CLOTHESLINE ─────────────────────────── */
-/* ── Clothesline (editorial scroll) ── */
 .clothesline{
   position:absolute;
-  top:68px;
+  top:78px;
   left:0;right:0;
-  height:140px;
+  height:110px;
   z-index:3;
   pointer-events:none;
   overflow:hidden;
-  -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 12%,#000 88%,transparent 100%);
-  mask-image:linear-gradient(to right,transparent 0%,#000 12%,#000 88%,transparent 100%);
 }
 .cl-rope{
   position:absolute;
-  top:18px;
+  top:14px;
   left:0;right:0;
   height:1.5px;
-  background:linear-gradient(90deg,transparent 0%,rgba(80,60,40,.6) 4%,rgba(80,60,40,.6) 96%,transparent 100%);
+  background:linear-gradient(90deg,transparent 0%,rgba(80,60,40,.55) 5%,rgba(80,60,40,.55) 95%,transparent 100%);
 }
 .cl-track{
   display:flex;
   align-items:flex-start;
   gap:0;
   width:max-content;
-  animation:clScroll 26s linear infinite;
+  animation:clScroll 28s linear infinite;
 }
 @keyframes clScroll{
   from{transform:translateX(0);}
@@ -2005,40 +1969,30 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   display:flex;
   flex-direction:column;
   align-items:center;
-  margin-right:120px;
-  animation:clSwing 4.2s ease-in-out infinite;
-  transform-origin:top center;
+  margin-right:80px;
 }
-.cl-item:nth-child(2){animation-duration:3.8s;animation-delay:-1.4s;}
-.cl-item:nth-child(3){animation-duration:4.6s;animation-delay:-2.8s;}
-.cl-item:nth-child(4){animation-duration:4.0s;animation-delay:-0.6s;}
-.cl-item:nth-child(5){animation-duration:3.6s;animation-delay:-2.0s;}
-.cl-item:nth-child(6){animation-duration:4.4s;animation-delay:-1.0s;}
-.cl-item:nth-child(7){animation-duration:4.2s;animation-delay:-3.3s;}
-.cl-item:nth-child(8){animation-duration:3.9s;animation-delay:-1.8s;}
-.cl-item:nth-child(9){animation-duration:4.5s;animation-delay:-0.9s;}
-.cl-item:nth-child(10){animation-duration:3.7s;animation-delay:-2.5s;}
-.cl-item:nth-child(11){animation-duration:4.1s;animation-delay:-1.6s;}
-.cl-item:nth-child(12){animation-duration:4.3s;animation-delay:-3.0s;}
-@keyframes clSwing{
-  0%,100%{transform:rotate(-2.5deg);}
-  50%{transform:rotate(2.5deg);}
+.cl-pin{
+  width:14px;
+  height:28px;
+  flex-shrink:0;
 }
-.cl-label{
-  margin-top:4px;
-  font-family:'Cormorant Garamond','Cormorant',Georgia,serif;
-  font-style:italic;
-  font-size:20px;
+.cl-card{
+  margin-top:2px;
+  background:#FFFFFF;
+  border:1px solid rgba(0,0,0,.10);
+  padding:7px 18px;
+  font-family:'Inter',sans-serif;
+  font-size:11px;
   font-weight:500;
-  letter-spacing:.04em;
+  letter-spacing:.14em;
+  text-transform:uppercase;
   color:#1F1B16;
   white-space:nowrap;
-  padding:10px 26px;
-  background:rgba(247,245,242,.88);
-  border-radius:3px;
-  box-shadow:0 8px 28px rgba(0,0,0,.10),0 2px 6px rgba(0,0,0,.07);
-  border:1px solid rgba(168,134,90,.18);
+  box-shadow:0 3px 10px rgba(0,0,0,.08);
+  transform:rotate(-1deg);
 }
+.cl-item:nth-child(even) .cl-card{transform:rotate(1deg);}
+.cl-item:nth-child(3n) .cl-card{transform:rotate(-0.5deg);}
 </style>
 </head>
 <body>
@@ -2096,12 +2050,80 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   <div class="clothesline" aria-hidden="true">
     <div class="cl-rope"></div>
     <div class="cl-track">
-    <div class="cl-item"><svg viewBox="0 0 16 34" width="13" height="26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <rect x="6" y="0" width="4" height="18" rx="2" fill="#A8865A"/>
-  <ellipse cx="8" cy="17" rx="4" ry="4" fill="none" stroke="#8B6B3D" stroke-width="1.3"/>
-  <rect x="1" y="15" width="6" height="19" rx="3" fill="#A8865A"/>
-  <rect x="9" y="15" width="6" height="19" rx="3" fill="#9A7A50"/>
-</svg><div class="cl-label">Social Media Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Social Media Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Digital Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Event Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Social Media Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Digital Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Event Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Social Media Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Digital Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Event Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Social Media Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Digital Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Event Marketing</div></div>
+    </div>
+  </div>
     <div class="cl-item"><svg viewBox="0 0 16 34" width="13" height="26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <rect x="6" y="0" width="4" height="18" rx="2" fill="#A8865A"/>
   <ellipse cx="8" cy="17" rx="4" ry="4" fill="none" stroke="#8B6B3D" stroke-width="1.3"/>
@@ -2255,10 +2277,54 @@ button{font-family:inherit;cursor:none;border:none;background:none}
       </div>
     </div>
 
-    <div class="hero-laptop reveal-stagger">
-      <div class="hero-laptop-inner">
-        <img src="assets/hero-laptop.jpg" alt="Digital marketing workspace" class="hero-laptop-img">
-      </div>
+    <div class="hero-panels reveal-stagger" id="heroPanels">
+      <button class="panel" data-tint="#FAF7F2" data-active="social">
+        <div class="panel-head">
+          <span class="panel-thumb" style="background:#1F1B16;color:#FFFFFF;">S</span>
+          <h3>Social Media Marketing</h3>
+          <span class="panel-icon">+</span>
+        </div>
+        <div class="panel-body">
+          <p>Content systems, community building and platform-native creative across Instagram, TikTok, LinkedIn and YouTube - built to convert scroll into trust.</p>
+          <div class="panel-tags">
+            <span>Content Strategy</span>
+            <span>Community</span>
+            <span>Reels &amp; Shorts</span>
+          </div>
+        </div>
+      </button>
+
+      <button class="panel" data-tint="#FAF7F2" data-active="digital">
+        <div class="panel-head">
+          <span class="panel-thumb" style="background:#1F1B16;color:#FFFFFF;">D</span>
+          <h3>Digital Marketing</h3>
+          <span class="panel-icon">+</span>
+        </div>
+        <div class="panel-body">
+          <p>Strategy-led digital marketing focused on audience insight, campaign execution, and measurable brand impact across SaaS, automotive and beauty.</p>
+          <div class="panel-tags">
+            <span>Campaign Strategy</span>
+            <span>Audience Insight</span>
+            <span>Performance Focus</span>
+          </div>
+        </div>
+      </button>
+
+      <button class="panel" data-tint="#7A5C3A" data-active="event">
+        <div class="panel-head">
+          <span class="panel-thumb" style="background:#7A5C3A;color:#FFFFFF;">E</span>
+          <h3>Event Marketing</h3>
+          <span class="panel-icon">+</span>
+        </div>
+        <div class="panel-body">
+          <p>End-to-end event marketing - from planning and partner acquisition to on-site production and post-event activation. Audiences from 50 to thousands.</p>
+          <div class="panel-tags">
+            <span>Event Production</span>
+            <span>Partnerships</span>
+            <span>On-Site Activation</span>
+          </div>
+        </div>
+      </button>
     </div>
       </button>
 
