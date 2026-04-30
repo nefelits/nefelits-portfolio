@@ -2568,12 +2568,16 @@ body[data-section="work"]{background:#EBE7DD !important;}
   justify-content:center;
   overflow:hidden;
 }
-/* Giant background headline — scroll-driven horizontal drift (like the recording) */
+/* Giant background headline — centered, scroll-driven horizontal drift */
 .t-bg-text{
   position:absolute;
   top:50%;left:0;right:0;
   transform:translateY(-50%);
-  display:flex;flex-direction:column;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
   gap:.04em;
   pointer-events:none;
   user-select:none;
