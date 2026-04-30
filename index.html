@@ -454,10 +454,11 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   align-items:end;
 }
 .hero-headline{
-  align-self:end;
+  align-self:start;
   color:var(--ink);
   max-width:760px;
   position:relative;
+  padding-top:20px;
 }
 .hero-eyebrow{
   font-family:'Inter',sans-serif;
@@ -2117,20 +2118,24 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
   letter-spacing:-.04em !important;
 }
 
-/* Hero background floating words — shift right for cohesion */
+/* Hero background floating words — left-of-center, off the headline column */
 .fx-title-bg{
-  left:auto !important;
-  right:-2% !important;
-  transform:translate(0, 38px) scale(.96) !important;
+  left:38% !important;
+  right:auto !important;
+  transform:translate(-50%, 38px) scale(.96) !important;
 }
 .hero[data-active="social"] .fx-social .fx-title-bg,
 .hero[data-active="digital"] .fx-digital .fx-title-bg,
 .hero[data-active="event"] .fx-event .fx-title-bg{
-  transform:translate(0, 0) scale(1) !important;
+  transform:translate(-50%, 0) scale(1) !important;
 }
 @media (max-width:900px){
-  .fx-title-bg{right:-4% !important;}
+  .fx-title-bg{left:50% !important;}
 }
+
+/* S / D / E panel circles → editorial dusty rose */
+.panel-thumb{background:#D49A9A !important;color:#FFFFFF !important;}
+.panel.open .panel-thumb{background:#C97B7B !important;}
 .hero h1 .it{
   font-family:'Fraunces',serif !important;
   font-style:italic !important;
@@ -2341,7 +2346,7 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
     <div class="hero-panels reveal-stagger" id="heroPanels">
       <button class="panel" data-tint="#FAF7F2" data-active="social">
         <div class="panel-head">
-          <span class="panel-thumb" style="background:#1F1B16;color:#FFFFFF;">S</span>
+          <span class="panel-thumb">S</span>
           <h3>Social Media Marketing</h3>
           <span class="panel-icon">+</span>
         </div>
@@ -2357,7 +2362,7 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
 
       <button class="panel" data-tint="#FAF7F2" data-active="digital">
         <div class="panel-head">
-          <span class="panel-thumb" style="background:#1F1B16;color:#FFFFFF;">D</span>
+          <span class="panel-thumb">D</span>
           <h3>Digital Marketing</h3>
           <span class="panel-icon">+</span>
         </div>
@@ -2373,7 +2378,7 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
 
       <button class="panel" data-tint="#7A5C3A" data-active="event">
         <div class="panel-head">
-          <span class="panel-thumb" style="background:#7A5C3A;color:#FFFFFF;">E</span>
+          <span class="panel-thumb">E</span>
           <h3>Event Marketing</h3>
           <span class="panel-icon">+</span>
         </div>
