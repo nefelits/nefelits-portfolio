@@ -2157,169 +2157,184 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
   .hero h1{font-size:clamp(54px,14vw,120px) !important;}
 }
 
-/* ============ KINETIC SIGNATURE — rotating wordmark + gradient mesh ============ */
-.hero-signature{
+/* ============ HERO POSTER — editorial portrait card + rotating stamp ============ */
+.hero-poster{
   position:relative;
   width:100%;
   min-height:560px;
   display:flex;align-items:center;justify-content:center;
   align-self:center;
-  pointer-events:none;
   isolation:isolate;
   margin-top:24px;
 }
 
-/* Animated gradient mesh blob behind the wordmark */
-.hs-mesh{
-  position:absolute; inset:-10%;
+/* Soft sage gradient mesh behind the card */
+.hp-mesh{
+  position:absolute; inset:-8% -10%;
   background:
-    radial-gradient(46% 38% at 32% 28%, rgba(168,184,157,.55) 0%, rgba(168,184,157,0) 60%),
-    radial-gradient(40% 36% at 72% 70%, rgba(191,205,181,.50) 0%, rgba(191,205,181,0) 65%),
-    radial-gradient(36% 32% at 60% 30%, rgba(199,210,187,.45) 0%, rgba(199,210,187,0) 65%),
-    radial-gradient(50% 44% at 30% 78%, rgba(138,155,126,.30) 0%, rgba(138,155,126,0) 65%);
-  filter:blur(40px) saturate(1.05);
-  animation:hsMesh 16s ease-in-out infinite alternate;
+    radial-gradient(40% 36% at 30% 26%, rgba(168,184,157,.55) 0%, rgba(168,184,157,0) 60%),
+    radial-gradient(38% 34% at 76% 70%, rgba(191,205,181,.45) 0%, rgba(191,205,181,0) 65%),
+    radial-gradient(44% 40% at 30% 78%, rgba(138,155,126,.30) 0%, rgba(138,155,126,0) 65%);
+  filter:blur(50px) saturate(1.05);
+  animation:hpMesh 18s ease-in-out infinite alternate;
   z-index:0;
 }
-@keyframes hsMesh{
-  0%   {transform:scale(1)    translate(0,0)         rotate(0deg);}
-  50%  {transform:scale(1.08) translate(-2%, 1%)     rotate(8deg);}
-  100% {transform:scale(1.04) translate(2%,-1.5%)    rotate(-6deg);}
+@keyframes hpMesh{
+  0%   {transform:scale(1)    translate(0,0);}
+  100% {transform:scale(1.07) translate(2%,-1.5%);}
 }
 
-/* Two concentric rotating rings of text (outer + inner, opposite directions) */
-.hs-orbit{
-  position:absolute; inset:50% auto auto 50%;
-  width:520px; height:520px;
-  margin:-260px 0 0 -260px;
-  pointer-events:none;
-  z-index:2;
-}
-.hs-orbit-outer{animation:hsRotate 26s linear infinite;}
-.hs-orbit-inner{
-  width:340px;height:340px;margin:-170px 0 0 -170px;
-  animation:hsRotate 18s linear infinite reverse;
-}
-@keyframes hsRotate{
-  from{transform:rotate(0deg);}
-  to  {transform:rotate(360deg);}
-}
-.hs-circle{width:100%;height:100%;display:block;overflow:visible;}
-.hs-text{
-  font-family:'DM Sans',sans-serif;
-  font-weight:600;
-  font-size:11px;
-  letter-spacing:.32em;
-  text-transform:uppercase;
-  fill:#1F2419;
-}
-.hs-text-inner{
-  font-size:9.5px;
-  letter-spacing:.42em;
-  fill:#5C6B53;
-}
-
-/* Central mark + pulsing aura */
-.hs-core{
+/* Editorial card */
+.hp-card{
   position:relative;
-  width:120px;height:120px;
-  border-radius:50%;
-  background:linear-gradient(140deg,#1F2419 0%, #2B3025 100%);
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:
-    0 30px 60px -20px rgba(31,36,25,.45),
-    0 10px 24px -8px rgba(31,36,25,.30),
-    inset 0 1px 0 rgba(255,255,255,.10);
-  z-index:3;
-  animation:hsCoreFloat 7s ease-in-out infinite;
-}
-@keyframes hsCoreFloat{
-  0%,100%{transform:translateY(0);}
-  50%    {transform:translateY(-8px);}
-}
-.hs-mark{
-  font-family:'Fraunces',serif;
-  font-style:italic;
-  font-weight:400;
-  font-size:54px;
-  line-height:1;
-  color:#BFCDB5;
-  letter-spacing:-.04em;
-  user-select:none;
-}
-.hs-pulse{
-  position:absolute; inset:-12px;
-  border-radius:50%;
-  border:1.5px solid rgba(168,184,157,.55);
-  animation:hsPulse 2.6s ease-out infinite;
-  pointer-events:none;
-}
-@keyframes hsPulse{
-  0%  {transform:scale(.85);opacity:.85;}
-  80% {transform:scale(1.45);opacity:0;}
-  100%{transform:scale(1.45);opacity:0;}
-}
-
-/* Editorial corner stat chips */
-.hs-stat{
-  position:absolute;
-  display:flex;flex-direction:column;gap:4px;
-  font-family:'DM Sans',sans-serif;
-  z-index:4;
-  padding:14px 16px;
-  background:rgba(255,255,255,.72);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
+  width:min(440px,90%);
+  background:#FFFFFF;
   border:1px solid rgba(31,36,25,.06);
-  border-radius:14px;
-  box-shadow:0 12px 30px -14px rgba(31,36,25,.18);
-  animation:hsChipFloat 9s ease-in-out infinite;
+  border-radius:24px;
+  padding:18px 18px 22px;
+  display:flex;flex-direction:column;gap:18px;
+  box-shadow:
+    0 40px 80px -32px rgba(31,36,25,.30),
+    0 14px 30px -14px rgba(31,36,25,.16),
+    inset 0 1px 0 rgba(255,255,255,.95);
+  z-index:2;
+  animation:hpFloat 9s ease-in-out infinite;
 }
-.hs-stat-tl{top:6%; left:4%;  animation-delay:0s;}
-.hs-stat-br{bottom:8%; right:4%; animation-delay:-4.5s;}
-.hs-stat-num{
-  font-family:'Fraunces',serif;
-  font-style:italic;
-  font-weight:400;
-  font-size:30px;
-  line-height:1;
-  color:#1F2419;
-  letter-spacing:-.02em;
-}
-.hs-stat-lbl{
-  font-size:10px;
-  letter-spacing:.22em;
-  text-transform:uppercase;
-  color:rgba(31,36,25,.62);
-  line-height:1.35;
-}
-@keyframes hsChipFloat{
+@keyframes hpFloat{
   0%,100%{transform:translateY(0);}
   50%    {transform:translateY(-10px);}
 }
 
+.hp-photo{
+  position:relative;
+  aspect-ratio: 4 / 5;
+  overflow:hidden;
+  border-radius:16px;
+  background:#A8B89D;
+}
+.hp-photo img{
+  width:100%;height:100%;object-fit:cover;
+  display:block;
+  filter:saturate(.92) contrast(1.03);
+  transition:transform 1.2s cubic-bezier(.2,.8,.2,1);
+}
+.hp-card:hover .hp-photo img{transform:scale(1.04);}
+.hp-photo-grain{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(255,255,255,.18), transparent 60%),
+    linear-gradient(180deg, transparent 60%, rgba(31,36,25,.18) 100%);
+  pointer-events:none;
+}
+
+.hp-meta{
+  display:flex;flex-direction:column;gap:10px;
+  padding:0 6px 4px;
+  font-family:'DM Sans',sans-serif;
+  color:#1F2419;
+}
+.hp-meta-row{
+  display:flex;align-items:center;gap:10px;
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(31,36,25,.62);
+}
+.hp-meta-foot{padding-top:8px;border-top:1px solid rgba(31,36,25,.06);margin-top:4px;}
+.hp-meta-key{flex:0 0 auto;}
+.hp-meta-val{
+  margin-left:auto;
+  letter-spacing:.04em;
+  text-transform:none;
+  color:#1F2419;
+  font-weight:500;
+  font-size:13px;
+}
+.hp-dot{
+  width:9px;height:9px;border-radius:50%;
+  background:#8A9B7E;
+  box-shadow:0 0 0 4px rgba(168,184,157,.30);
+  animation:hpDot 1.6s ease-in-out infinite;
+}
+@keyframes hpDot{
+  0%,100%{box-shadow:0 0 0 4px rgba(168,184,157,.30);}
+  50%    {box-shadow:0 0 0 9px rgba(168,184,157,.10);}
+}
+.hp-meta-lbl{
+  color:#1F2419;
+  font-weight:600;
+  letter-spacing:.18em;
+  font-size:11px;
+}
+.hp-meta-headline{
+  font-family:'DM Sans',sans-serif;
+  font-weight:500;
+  font-size:clamp(20px,1.9vw,26px);
+  line-height:1.18;
+  letter-spacing:-.018em;
+  color:#1F2419;
+}
+.hp-meta-headline em{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-weight:400;
+  color:#8A9B7E;
+  padding:0 .04em;
+}
+
+/* Rotating "AVAILABLE FOR WORK" stamp at the corner */
+.hp-stamp{
+  position:absolute;
+  top:-26px; right:-26px;
+  width:148px; height:148px;
+  z-index:3;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+}
+.hp-stamp-svg{
+  position:absolute; inset:0;
+  width:100%;height:100%;
+  animation:hpRotate 22s linear infinite;
+}
+@keyframes hpRotate{
+  from{transform:rotate(0deg);}
+  to  {transform:rotate(360deg);}
+}
+.hp-stamp-text{
+  font-family:'DM Sans',sans-serif;
+  font-weight:600;
+  font-size:11.5px;
+  letter-spacing:.30em;
+  text-transform:uppercase;
+  fill:#1F2419;
+}
+.hp-stamp-mark{
+  position:relative;
+  width:54px;height:54px;
+  border-radius:50%;
+  background:#1F2419;
+  color:#BFCDB5;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-size:22px;
+  box-shadow:0 14px 30px -10px rgba(31,36,25,.50);
+}
+
 @media (max-width:1024px){
-  .hero-signature{min-height:460px;}
-  .hs-orbit{width:420px;height:420px;margin:-210px 0 0 -210px;}
-  .hs-orbit-inner{width:280px;height:280px;margin:-140px 0 0 -140px;}
-  .hs-core{width:100px;height:100px;}
-  .hs-mark{font-size:46px;}
+  .hero-poster{min-height:480px;}
+  .hp-card{width:min(400px,94%);}
 }
 @media (max-width:900px){
-  .hero-signature{min-height:380px;margin-top:8px;}
-  .hs-orbit{width:340px;height:340px;margin:-170px 0 0 -170px;}
-  .hs-orbit-inner{width:220px;height:220px;margin:-110px 0 0 -110px;}
-  .hs-core{width:88px;height:88px;}
-  .hs-mark{font-size:40px;}
-  .hs-stat{padding:10px 12px;}
-  .hs-stat-num{font-size:22px;}
-  .hs-stat-lbl{font-size:9px;letter-spacing:.18em;}
+  .hero-poster{min-height:auto;margin-top:8px;}
+  .hp-card{width:min(360px,100%);padding:14px 14px 18px;}
+  .hp-stamp{width:120px;height:120px;top:-18px;right:-18px;}
+  .hp-stamp-text{font-size:10px;letter-spacing:.26em;}
+  .hp-stamp-mark{width:46px;height:46px;font-size:18px;}
+  .hp-meta-headline{font-size:18px;}
 }
 @media (prefers-reduced-motion: reduce){
-  .hs-orbit-outer,.hs-orbit-inner,.hs-mesh,.hs-core,.hs-pulse,.hs-stat{
-    animation:none !important;
-  }
-  .hs-pulse{display:none;}
+  .hp-mesh,.hp-card,.hp-stamp-svg,.hp-dot{animation:none !important;}
 }
 
 /* S / D / E panel circles (legacy — still applied if panels ever return) */
@@ -3087,44 +3102,47 @@ body{position:relative;}
       </button>
     </div>
 
-    <!-- KINETIC SIGNATURE — animated rotating wordmark with gradient mesh -->
-    <div class="hero-signature" aria-hidden="true">
-      <div class="hs-mesh"></div>
-      <div class="hs-orbit hs-orbit-outer">
-        <svg viewBox="0 0 200 200" class="hs-circle">
+    <!-- HERO POSTER — editorial portrait card with floating availability badge -->
+    <div class="hero-poster" aria-hidden="true">
+      <div class="hp-mesh"></div>
+
+      <div class="hp-card">
+        <div class="hp-photo">
+          <img src="assets/portraits/hero-editorial.jpg" alt="" loading="lazy">
+          <div class="hp-photo-grain"></div>
+        </div>
+        <div class="hp-meta">
+          <div class="hp-meta-row">
+            <span class="hp-dot"></span>
+            <span class="hp-meta-lbl">Available now</span>
+          </div>
+          <div class="hp-meta-headline">
+            Open to <em>remote</em> &amp; <em>Brussels-based</em> roles.
+          </div>
+          <div class="hp-meta-row hp-meta-foot">
+            <span class="hp-meta-key">Languages</span>
+            <span class="hp-meta-val">EN &middot; GR &middot; FR</span>
+          </div>
+          <div class="hp-meta-row">
+            <span class="hp-meta-key">Focus</span>
+            <span class="hp-meta-val">Digital marketing, content, community</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rotating wordmark badge stamped over the corner -->
+      <div class="hp-stamp">
+        <svg viewBox="0 0 200 200" class="hp-stamp-svg">
           <defs>
-            <path id="hsArc" d="M 100,100 m -82,0 a 82,82 0 1,1 164,0 a 82,82 0 1,1 -164,0"/>
+            <path id="hpStampArc" d="M 100,100 m -78,0 a 78,78 0 1,1 156,0 a 78,78 0 1,1 -156,0"/>
           </defs>
-          <text class="hs-text">
-            <textPath href="#hsArc" startOffset="0">
-              DIGITAL MARKETING &#x2726;&nbsp;&nbsp; STRATEGY &#x2726;&nbsp;&nbsp; CONTENT &#x2726;&nbsp;&nbsp; COMMUNITY &#x2726;&nbsp;&nbsp;
+          <text class="hp-stamp-text">
+            <textPath href="#hpStampArc" startOffset="0">
+              AVAILABLE FOR WORK &#x2726;&nbsp;&nbsp; REMOTE / BRUSSELS &#x2726;&nbsp;&nbsp;
             </textPath>
           </text>
         </svg>
-      </div>
-      <div class="hs-orbit hs-orbit-inner">
-        <svg viewBox="0 0 200 200" class="hs-circle">
-          <defs>
-            <path id="hsArcInner" d="M 100,100 m -55,0 a 55,55 0 1,0 110,0 a 55,55 0 1,0 -110,0"/>
-          </defs>
-          <text class="hs-text hs-text-inner">
-            <textPath href="#hsArcInner" startOffset="0">
-              &#x2022;&nbsp;&nbsp;&nbsp;&nbsp;AVAILABLE FOR WORK&nbsp;&nbsp;&nbsp;&nbsp;&#x2022;&nbsp;&nbsp;&nbsp;&nbsp;ATHENS / BRUSSELS&nbsp;&nbsp;&nbsp;&nbsp;
-            </textPath>
-          </text>
-        </svg>
-      </div>
-      <div class="hs-core">
-        <span class="hs-mark">N</span>
-        <span class="hs-pulse"></span>
-      </div>
-      <div class="hs-stat hs-stat-tl">
-        <span class="hs-stat-num">06</span>
-        <span class="hs-stat-lbl">Years<br>Brand-side</span>
-      </div>
-      <div class="hs-stat hs-stat-br">
-        <span class="hs-stat-num">+150%</span>
-        <span class="hs-stat-lbl">Engagement<br>uplift</span>
+        <span class="hp-stamp-mark">&#x2726;</span>
       </div>
     </div>
   </div>
