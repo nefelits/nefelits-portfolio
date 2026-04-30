@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='78' text-anchor='middle' font-family='Georgia%2C serif' font-style='italic' font-size='82' fill='%230A0A0A'%3EN%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/png" href="assets/logos/n-logo.png">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Nefeli Tsaousi · Digital Marketing</title>
@@ -262,8 +262,9 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   margin-top:2px;
   transition:color .5s;
 }
-.logo-N svg path,.logo-N svg{stroke:var(--nav-fg);transition:stroke .5s;}
 .logo-N{color:var(--nav-fg);transition:color .5s;}
+.n-logo-img{width:48px;height:auto;display:block;transition:filter .4s;}
+[data-theme="dark"] .n-logo-img{filter:invert(1);}
 .nav-links{
   display:flex;gap:36px;align-items:center;
 }
@@ -360,6 +361,15 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   transition:background 1s ease,color 1s ease;
 }
 .hero-bg{display:none;}
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:url('assets/hero-laptop.jpg') center/cover no-repeat;
+  opacity:0.10;
+  z-index:0;
+  pointer-events:none;
+}
 .hero-tint{
   position:absolute;inset:0;
   background:transparent;
@@ -1923,6 +1933,63 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 .yt-play-btn { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
   filter:drop-shadow(0 2px 8px rgba(0,0,0,.5)); transition:transform .2s; }
 .yt-thumb-link:hover .yt-play-btn { transform:translate(-50%,-50%) scale(1.1); }
+
+/* ── CLOTHESLINE ─────────────────────────── */
+.clothesline{
+  position:absolute;
+  top:78px;
+  left:0;right:0;
+  height:110px;
+  z-index:3;
+  pointer-events:none;
+  overflow:hidden;
+}
+.cl-rope{
+  position:absolute;
+  top:14px;
+  left:0;right:0;
+  height:1.5px;
+  background:linear-gradient(90deg,transparent 0%,rgba(80,60,40,.55) 5%,rgba(80,60,40,.55) 95%,transparent 100%);
+}
+.cl-track{
+  display:flex;
+  align-items:flex-start;
+  gap:0;
+  width:max-content;
+  animation:clScroll 28s linear infinite;
+}
+@keyframes clScroll{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+.cl-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin-right:80px;
+}
+.cl-pin{
+  width:14px;
+  height:28px;
+  flex-shrink:0;
+}
+.cl-card{
+  margin-top:2px;
+  background:#FFFFFF;
+  border:1px solid rgba(0,0,0,.10);
+  padding:7px 18px;
+  font-family:'Inter',sans-serif;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#1F1B16;
+  white-space:nowrap;
+  box-shadow:0 3px 10px rgba(0,0,0,.08);
+  transform:rotate(-1deg);
+}
+.cl-item:nth-child(even) .cl-card{transform:rotate(1deg);}
+.cl-item:nth-child(3n) .cl-card{transform:rotate(-0.5deg);}
 </style>
 </head>
 <body>
@@ -1958,17 +2025,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 <nav class="nav">
   <a href="#top" class="logo-wrap">
     <div class="logo-N" id="logoN">
-      <svg viewBox="0 0 100 100" width="54" height="54" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="ng" x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0" stop-color="#1F1B16"/>
-            <stop offset="1" stop-color="#A8865A"/>
-          </linearGradient>
-        </defs>
-        <text x="50" y="74" text-anchor="middle"
-              font-family="Fraunces, serif" font-style="italic" font-weight="400"
-              font-size="78" fill="url(#ng)">N</text>
-      </svg>
+      <img src="assets/logos/n-logo.png" alt="N logo" class="n-logo-img">
     </div>
     <div class="logo-text">
       <span class="lt-name">NEFELI TSAOUSI</span>
@@ -1991,23 +2048,87 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 <section class="hero" id="top">
   <div class="hero-tint" id="heroTint"></div>
   <div class="hero-fx" id="heroFx" aria-hidden="true">
-    <div class="hero-fx-layer fx-social">
-      <div class="fx-title-bg">social</div>
-      <span class="fx-bubble lg" style="left:14%;top:78%;animation-delay:.0s;">&#10084;&#65039;</span>
-      <span class="fx-bubble" style="left:36%;top:82%;animation-delay:1.7s;">&#128172;</span>
-      <span class="fx-bubble lg" style="left:62%;top:76%;animation-delay:2.9s;">&#128077;</span>
-      <span class="fx-bubble" style="left:84%;top:80%;animation-delay:.9s;">&#10084;&#65039;</span>
-    </div>
-    <div class="hero-fx-layer fx-digital">
-      <div class="fx-title-bg">digital</div>
-      <span class="fx-bubble lg" style="left:14%;top:78%;animation-delay:.4s;">&#9993;&#65039;</span>
-      <span class="fx-bubble" style="left:36%;top:82%;animation-delay:1.9s;">&#128231;</span>
-      <span class="fx-bubble lg" style="left:62%;top:76%;animation-delay:3.1s;">&#128221;</span>
-      <span class="fx-bubble" style="left:84%;top:80%;animation-delay:1.1s;">&#9993;&#65039;</span>
-    </div>
-    <div class="hero-fx-layer fx-event">
-      <div class="fx-title-bg">events</div>
-      <div class="fx-leads-host" id="fxLeadsHost" style="display:none"></div>
+    <div class="hero-fx-layer fx-social"><div class="fx-title-bg">social</div></div>
+    <div class="hero-fx-layer fx-digital"><div class="fx-title-bg">digital</div></div>
+    <div class="hero-fx-layer fx-event"><div class="fx-title-bg">events</div></div>
+  </div>
+
+  <!-- Clothesline -->
+  <div class="clothesline" aria-hidden="true">
+    <div class="cl-rope"></div>
+    <div class="cl-track">
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Social Media Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Digital Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Event Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Social Media Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Digital Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Event Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Social Media Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Digital Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Event Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Social Media Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Digital Marketing</div></div>
+    <div class="cl-item"><svg viewBox="0 0 14 28" width="14" height="28" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5" y="0" width="4" height="16" rx="2" fill="#A8865A"/>
+  <circle cx="7" cy="14" r="3.5" fill="none" stroke="#8B6B3D" stroke-width="1.2"/>
+  <rect x="1" y="13" width="5" height="15" rx="2.5" fill="#A8865A"/>
+  <rect x="8" y="13" width="5" height="15" rx="2.5" fill="#9A7A50"/>
+</svg><div class="cl-card">Event Marketing</div></div>
     </div>
   </div>
   <div class="hero-grid">
