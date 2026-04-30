@@ -720,7 +720,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 
 /* CAPABILITIES - giant faded watermark */
 .italic-marquee{
-  background:#FFFFFF;
+  background:#F1EEE6;
   height:clamp(140px,22vw,280px);
   overflow:hidden;
   position:relative;
@@ -2351,12 +2351,13 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
   background:#A8B89D;
 }
 
-/* Italic marquee — keep the cycling words gold + Fraunces */
+/* Cycling words — bold sans, soft warm-grey (no italics, no green) */
 .italic-marquee .word{
-  font-family:'Fraunces',serif !important;
-  font-style:italic !important;
-  font-weight:400 !important;
-  color:#A8B89D !important;
+  font-family:'DM Sans',sans-serif !important;
+  font-style:normal !important;
+  font-weight:800 !important;
+  letter-spacing:-.045em !important;
+  color:rgba(31,36,25,.13) !important;
 }
 
 /* About lead — accentuate <span class="em"> in italic gold */
@@ -2560,17 +2561,17 @@ body[data-section="work"]{background:#EBE7DD !important;}
   margin:0 auto;
   z-index:2;
 }
-/* Giant background headline (decorative) */
+/* Giant background headline — scroll-driven horizontal drift (like the recording) */
 .t-bg-text{
   position:absolute;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
+  top:50%;left:0;right:0;
+  transform:translateY(-50%);
   display:flex;flex-direction:column;
   gap:.04em;
   pointer-events:none;
   user-select:none;
   z-index:0;
-  width:max-content;
+  --tShift:0px;
 }
 .t-bg-line{
   font-family:'DM Sans',sans-serif;
@@ -2578,9 +2579,14 @@ body[data-section="work"]{background:#EBE7DD !important;}
   font-size:clamp(120px,19vw,320px);
   line-height:.92;
   letter-spacing:-.045em;
-  color:rgba(31,36,25,.06);
+  color:rgba(31,36,25,.07);
   white-space:nowrap;
+  will-change:transform;
+  transition:transform .15s linear;
 }
+/* Two lines drift in opposite directions — driven by JS via --tShift */
+.t-bg-line:nth-child(1){transform:translateX(calc(-1 * var(--tShift)));}
+.t-bg-line:nth-child(2){transform:translateX(var(--tShift));}
 
 /* Header */
 .t-header{
@@ -2630,16 +2636,10 @@ body[data-section="work"]{background:#EBE7DD !important;}
   display:flex;flex-direction:column;
   transition:transform .5s cubic-bezier(.2,.85,.3,1),box-shadow .5s ease;
 }
-.t-card-1{transform:translateY(-24px);}
-.t-card-2{transform:translateY(28px);}
-.t-card-3{transform:translateY(-10px);}
-.t-card:hover{
-  transform:translateY(-32px);
-  box-shadow:
-    0 44px 80px -28px rgba(31,36,25,.22),
-    0 14px 28px -12px rgba(31,36,25,.12);
-}
-.t-card-2:hover{transform:translateY(20px);}
+.t-card{--tcShift:0px;}
+.t-card-1{transform:translateY(calc(-24px + var(--tcShift) * -1));}
+.t-card-2{transform:translateY(calc(28px + var(--tcShift) *  1));}
+.t-card-3{transform:translateY(calc(-10px + var(--tcShift) * -.6));}
 
 .t-quote-mark{
   font-family:'Fraunces',serif;
@@ -3895,6 +3895,48 @@ document.querySelectorAll('video').forEach(function(v){
       if(headline) headline.style.transform='';
     }, 200);
   });
+})();
+
+/* ═══ Testimonials parallax — bg text drifts horizontally, cards stagger ═══ */
+(function(){
+  const section = document.querySelector('.testimonials');
+  if(!section) return;
+  const bg = section.querySelector('.t-bg-text');
+  const cards = section.querySelectorAll('.t-card');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced) return;
+
+  let ticking = false;
+  function update(){
+    const rect = section.getBoundingClientRect();
+    const vh = window.innerHeight;
+    // progress: 0 when section top hits viewport bottom, 1 when section bottom leaves top
+    const total = rect.height + vh;
+    const seen  = vh - rect.top;
+    let p = seen / total;
+    p = Math.max(0, Math.min(1, p));
+    // map 0→1 to -1→1 so motion is centered around the section midpoint
+    const t = (p - 0.5) * 2;
+
+    if(bg){
+      const shift = t * (window.innerWidth < 700 ? 60 : 180);
+      bg.style.setProperty('--tShift', shift + 'px');
+    }
+    cards.forEach((c)=>{
+      // shift -28 → +28 px
+      c.style.setProperty('--tcShift', (t * 28) + 'px');
+    });
+    ticking = false;
+  }
+  function onScroll(){
+    if(!ticking){
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  update();
 })();
 </script>
 
