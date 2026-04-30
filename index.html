@@ -2274,12 +2274,27 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
   letter-spacing:-.018em;
   color:#1F2419;
 }
-.hp-meta-headline em{
-  font-family:'Fraunces',serif;
-  font-style:italic;
-  font-weight:400;
-  color:#8A9B7E;
-  padding:0 .04em;
+.hp-meta-headline{font-style:normal !important;}
+.hp-testimonials-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:4px;
+  padding:12px 20px;
+  background:#1F2419;
+  color:#FFFFFF;
+  font-family:'DM Sans',sans-serif;
+  font-weight:500;
+  font-size:13px;
+  letter-spacing:.02em;
+  text-decoration:none;
+  border-radius:999px;
+  transition:background .3s ease, transform .3s ease;
+  pointer-events:auto;
+  white-space:nowrap;
+}
+.hp-testimonials-btn:hover{
+  background:#A8B89D;
+  color:#1F2419;
+  transform:translateY(-2px);
 }
 
 /* Rotating "AVAILABLE FOR WORK" stamp at the corner */
@@ -3127,16 +3142,11 @@ body{position:relative;}
             <span class="hp-meta-lbl">Available now</span>
           </div>
           <div class="hp-meta-headline">
-            Open to <em>remote</em> &amp; <em>Brussels-based</em> roles.
+            Open to Remote &amp; Brussels-based roles.
           </div>
-          <div class="hp-meta-row hp-meta-foot">
-            <span class="hp-meta-key">Languages</span>
-            <span class="hp-meta-val">EN &middot; GR &middot; FR</span>
-          </div>
-          <div class="hp-meta-row">
-            <span class="hp-meta-key">Focus</span>
-            <span class="hp-meta-val">Digital &middot; Social &middot; CRM &middot; Campaigns</span>
-          </div>
+          <a href="#testimonials" class="hp-testimonials-btn">
+            See what they are saying about me &#8599;
+          </a>
         </div>
       </div>
 
