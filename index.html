@@ -2093,6 +2093,155 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
   body{transition:none !important;}
   .sec-marker{display:none !important;}
 }
+
+/* ===== EDITORIAL GOLD ACCENTS (Fraunces italic #A8865A) ===== */
+
+/* Hero italics — "Nefeli." and "visibility." in editorial gold */
+.hero-greeting .it{
+  font-family:'Fraunces',serif !important;
+  font-style:italic !important;
+  font-weight:400 !important;
+  color:#A8865A !important;
+  letter-spacing:-.01em;
+}
+.hero h1 .it{
+  font-family:'Fraunces',serif !important;
+  font-style:italic !important;
+  font-weight:400 !important;
+  color:#A8865A !important;
+  letter-spacing:-.02em;
+}
+
+/* Section titles — italic spans flip to Fraunces italic gold */
+.section-title .it{
+  font-family:'Fraunces',serif !important;
+  font-style:italic !important;
+  font-weight:400 !important;
+  color:#A8865A !important;
+  letter-spacing:-.01em;
+}
+
+/* Work role labels — editorial italic instead of uppercase tracked */
+.work-role{
+  font-family:'Fraunces',serif !important;
+  font-style:italic !important;
+  font-weight:400 !important;
+  font-size:18px !important;
+  color:#A8865A !important;
+  letter-spacing:.01em !important;
+  text-transform:none !important;
+  margin-bottom:6px !important;
+}
+
+/* Section eyebrows: tiny italic gold accent before label */
+.section-eyebrow{color:#0A0A0A;}
+.section-eyebrow::after{
+  content:'';
+}
+.about .section-eyebrow,
+.featured-work .section-eyebrow,
+.tested-first .section-eyebrow,
+.social-gallery .section-eyebrow,
+.certifications .section-eyebrow,
+.skills .section-eyebrow{
+  position:relative;
+  padding-right:36px;
+}
+.about .section-eyebrow::before,
+.featured-work .section-eyebrow::before,
+.tested-first .section-eyebrow::before,
+.social-gallery .section-eyebrow::before,
+.certifications .section-eyebrow::before,
+.skills .section-eyebrow::before{
+  background:#A8865A;
+}
+
+/* Italic marquee — keep the cycling words gold + Fraunces */
+.italic-marquee .word{
+  font-family:'Fraunces',serif !important;
+  font-style:italic !important;
+  font-weight:400 !important;
+  color:#A8865A !important;
+}
+
+/* About lead — accentuate <span class="em"> in italic gold */
+.about-lead .em{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-weight:400;
+  color:#A8865A;
+}
+
+/* Pull quote — italic gold emphasis already, polish it */
+.pull-quote blockquote .em{
+  font-family:'Fraunces',serif !important;
+  font-style:italic !important;
+  font-weight:400 !important;
+  color:#A8865A !important;
+}
+.pull-quote .quote-mark{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  color:#A8865A;
+  opacity:.65;
+}
+
+/* Decorative italic-gold ampersand divider — usable wherever needed */
+.amp-divider{
+  display:block;
+  text-align:center;
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-weight:400;
+  font-size:clamp(56px,8vw,120px);
+  color:#A8865A;
+  line-height:1;
+  letter-spacing:-.02em;
+  margin:0;
+  padding:60px 0 50px;
+  opacity:.85;
+  user-select:none;
+}
+.amp-divider::before{
+  content:'';
+  display:block;
+  width:1px;height:36px;
+  background:linear-gradient(to bottom, transparent, rgba(168,134,90,.55));
+  margin:0 auto 22px;
+}
+
+/* CTA buttons — italic-gold underline accent on hover (.btn) */
+.btn:hover{color:#A8865A;}
+
+/* Footer "About" headline accent */
+.cf-col h4{position:relative;}
+.cf-col-lead h4::after{
+  content:'';
+  display:inline-block;
+  width:6px;height:6px;border-radius:50%;
+  background:#A8865A;
+  margin-left:10px;
+  vertical-align:middle;
+}
+
+/* Hero eyebrow: italicize the word "Portfolio" via override + use gold */
+.hero-eyebrow{position:relative;}
+.hero-eyebrow .gold-it{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-weight:400;
+  color:#A8865A;
+  text-transform:none;
+  letter-spacing:.01em;
+  margin-left:4px;
+  font-size:13px;
+}
+
+/* Mobile: keep work-role legible */
+@media (max-width:600px){
+  .work-role{font-size:16px !important;}
+  .amp-divider{padding:40px 0 30px;}
+}
 </style>
 </head>
 <body>
@@ -2148,7 +2297,7 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
 
   <div class="hero-grid">
     <div class="hero-headline reveal">
-      <div class="hero-eyebrow">Digital Marketing Portfolio</div>
+      <div class="hero-eyebrow">Digital Marketing <span class="gold-it">Portfolio</span></div>
       <div class="hero-greet-row">
         <div class="hero-portrait-pop" id="heroPortraitPop">
           <img src="assets/portraits/hero-editorial.jpg" alt="Nefeli Tsaousi">
@@ -2559,6 +2708,8 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
     <div class="skill-tile"><img src="assets/skills/the template by nefeli (2000 x 1500 px) (10).png" alt=""><span>Salesforce</span></div>
   </div>
 </section>
+
+<div class="amp-divider" aria-hidden="true">&amp;</div>
 
 <section class="pull-quote">
   <blockquote>
