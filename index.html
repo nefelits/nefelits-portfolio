@@ -454,14 +454,20 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   align-items:end;
 }
 .hero-headline{
-  align-self:start;
+  align-self:stretch;
   color:var(--ink);
-  max-width:760px;
+  max-width:1200px;
   position:relative;
-  padding-top:140px;
+  padding-top:30px;
+  padding-bottom:40px;
+  display:flex;
+  flex-direction:column;
+  min-height:90vh;
 }
+.hero-headline .hero-greet-row{margin-bottom:auto;}
 @media (max-width:900px){
-  .hero-headline{padding-top:60px;}
+  .hero-headline{padding-top:20px;min-height:auto;}
+  .hero-headline .hero-greet-row{margin-bottom:60px;}
 }
 .hero-eyebrow{
   font-family:'Inter',sans-serif;
@@ -2112,9 +2118,11 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
   letter-spacing:-.01em;
 }
 
-/* Hero h1: "Digital Portfolio" — black, normal weight, no italics anywhere */
+/* Hero h1: "Digital Portfolio" — black, normal weight, no italics, BIGGER */
 .hero h1{
   font-weight:500 !important;
+  font-size:clamp(64px,13vw,200px) !important;
+  line-height:.94 !important;
 }
 .hero h1 .it{
   font-family:'Inter',sans-serif !important;
@@ -2124,22 +2132,13 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
   letter-spacing:-.04em !important;
 }
 
-/* Hero background floating words — left-of-center, off the headline column */
-.fx-title-bg{
-  left:38% !important;
-  right:auto !important;
-  transform:translate(-50%, 38px) scale(.96) !important;
-}
-.hero[data-active="social"] .fx-social .fx-title-bg,
-.hero[data-active="digital"] .fx-digital .fx-title-bg,
-.hero[data-active="event"] .fx-event .fx-title-bg{
-  transform:translate(-50%, 0) scale(1) !important;
-}
-@media (max-width:900px){
-  .fx-title-bg{left:50% !important;}
-}
+/* HIDE background floating words AND right-side panels — keep hero clean white */
+.hero-fx,.hero-panels{display:none !important;}
+.hero-grid{grid-template-columns:1fr !important;}
+.hero::before{display:none !important;}
+.hero-tint{display:none !important;}
 
-/* S / D / E panel circles → editorial dusty rose */
+/* S / D / E panel circles (still applied if panels ever return) */
 .panel-thumb{background:#D49A9A !important;color:#FFFFFF !important;}
 .panel.open .panel-thumb{background:#C97B7B !important;}
 .hero h1 .it{
