@@ -2170,16 +2170,24 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
   --travelP:0;
   pointer-events:none;
 }
-/* When the host enters "fixed" travel mode, it pins to viewport */
+/* When the host enters "fixed" travel mode, it pins to the FULL viewport
+   (not just the right half) so the spinning 3D ring travels with the user
+   and reads as a clear, dominant 3D object floating across the page. */
 .hero-3d.is-fixed{
   position:fixed;
   top:0;
+  left:0;
   right:0;
-  width:50vw;
+  width:100vw;
   height:100vh;
-  z-index:60;
+  z-index:5; /* above page content but below nav (nav is z 100+) */
   display:flex;align-items:center;justify-content:center;
   pointer-events:none;
+  /* Lateral drift: travels from right side of viewport (start) toward
+     center (end) as the user scrolls. */
+  --driftX: calc(22vw - var(--travelP) * 22vw);
+  transform: translateX(var(--driftX));
+  transition:none;
 }
 .hero-3d.is-fixed .services-cta{pointer-events:auto;}
 .hero-3d.is-docked{
@@ -2189,14 +2197,14 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
 
 .hero-3d-stage{
   position:relative;
-  width:320px;height:420px;
+  width:420px;height:480px;
   transform-style:preserve-3d;
   /* Continuous circular spin (keyframed) + scroll-coupled extra rotation
-     + breathing zoom in/out. The result reads as a service ring that orbits
-     and pulses while gently following the scroll. */
+     + breathing zoom in/out + a subtle scroll-driven tilt change. */
   transform:
-    rotateX(-8deg)
+    rotateX(calc(-12deg + var(--travelP) * 8deg))
     rotateY(calc(var(--travelP) * 540deg + var(--idleSpin,0deg)))
+    rotateZ(calc(var(--travelP) * -6deg))
     scale(var(--zoom,1));
   transition:none;
   will-change:transform;
@@ -2216,13 +2224,13 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
   100%{--idleSpin:360deg;}
 }
 @keyframes ringZoom{
-  0%,100%{--zoom:1;}
-  50%    {--zoom:1.18;}
+  0%,100%{--zoom:.92;}
+  50%    {--zoom:1.30;}
 }
 .hero-3d-stage{
   animation:
-    idleSpin 14s linear infinite,
-    ringZoom 6.5s ease-in-out infinite;
+    idleSpin 9s linear infinite,
+    ringZoom 5s ease-in-out infinite;
 }
 
 .h3d-card{
@@ -2285,7 +2293,7 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
      stretch (travelP > 0.80) do they collapse inward and fade so the
      CTA can converge out of the same point. */
   --collapseP: max(0, calc((var(--travelP) - 0.80) * 5));
-  --radius: calc(260px - var(--collapseP) * 260px);
+  --radius: calc(340px - var(--collapseP) * 340px);
   --scale:  calc(1 - var(--collapseP) * 0.7);
   --cardOp: calc(1 - var(--collapseP) * 1.4);
   opacity:max(0, var(--cardOp));
