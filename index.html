@@ -4316,17 +4316,8 @@ document.querySelectorAll('video').forEach(function(v){
     // Dock point: when the end section (Featured Work) enters from the bottom
     const dockStart = endRect.top - vh * 0.45;      // <= 0 means end section is approaching
 
-    // travelP progresses across the journey from pinStart=0 → dockStart=0.
-    // Total travel distance in px ≈ (heroBottom - 0.6vh) → (contactTop - 0.9vh).
-    // Compute progress relative to current scroll position.
-    // Using getBoundingClientRect deltas: progress = -pinStart / (-pinStart + (-dockStart - -pinStart))
-    // Simpler: total = pinStart - dockStart (positive); travelled = -dockStart from end? Use absolute.
-    const totalRange = (heroRect.bottom - vh * 0.6) - (contactRect.top - vh * 0.9 - (heroRect.bottom - vh * 0.6 - (heroRect.bottom - vh * 0.6)));
-    // Easier formulation:
-    // start scroll position (in document coords) when pinStart hits 0:
-    //   docTop_pin = window.scrollY + pinStart
-    // end scroll position when dockStart hits 0:
-    //   docTop_dock = window.scrollY + dockStart
+    // travelP progresses from pinStart hitting 0 → dockStart hitting 0.
+    // Convert viewport-relative offsets to document-absolute scroll positions.
     const docPin  = window.scrollY + pinStart;
     const docDock = window.scrollY + dockStart;
     const span    = Math.max(1, docDock - docPin);
