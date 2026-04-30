@@ -2191,22 +2191,39 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
   position:relative;
   width:320px;height:420px;
   transform-style:preserve-3d;
-  /* Smooth scroll-coupled spin: rotateY scales with travel progress (0 → 720deg)
-     plus a slow idle drift while in hero. */
-  transform:rotateX(-8deg) rotateY(calc(var(--travelP) * 720deg + var(--idleSpin,0deg)));
-  transition:transform .12s linear;
+  /* Continuous circular spin (keyframed) + scroll-coupled extra rotation
+     + breathing zoom in/out. The result reads as a service ring that orbits
+     and pulses while gently following the scroll. */
+  transform:
+    rotateX(-8deg)
+    rotateY(calc(var(--travelP) * 540deg + var(--idleSpin,0deg)))
+    scale(var(--zoom,1));
+  transition:none;
   will-change:transform;
-}
-@keyframes idleSpin{
-  0%  {--idleSpin:0deg;}
-  100%{--idleSpin:360deg;}
 }
 @property --idleSpin{
   syntax:'<angle>';
   inherits:true;
   initial-value:0deg;
 }
-.hero-3d-stage{animation:idleSpin 30s linear infinite;}
+@property --zoom{
+  syntax:'<number>';
+  inherits:true;
+  initial-value:1;
+}
+@keyframes idleSpin{
+  0%  {--idleSpin:0deg;}
+  100%{--idleSpin:360deg;}
+}
+@keyframes ringZoom{
+  0%,100%{--zoom:1;}
+  50%    {--zoom:1.18;}
+}
+.hero-3d-stage{
+  animation:
+    idleSpin 14s linear infinite,
+    ringZoom 6.5s ease-in-out infinite;
+}
 
 .h3d-card{
   position:absolute;
@@ -2264,9 +2281,13 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
    at 1 they pull toward the center, scale down, and fade out so
    the converging CTA pill emerges from the same point. */
 .h3d-card{
-  --radius: calc(260px - var(--travelP) * 260px);
-  --scale:  calc(1 - var(--travelP) * 0.7);
-  --cardOp: calc(1 - var(--travelP) * 1.2);
+  /* Cards hold their orbit for most of the journey; only in the final
+     stretch (travelP > 0.80) do they collapse inward and fade so the
+     CTA can converge out of the same point. */
+  --collapseP: max(0, calc((var(--travelP) - 0.80) * 5));
+  --radius: calc(260px - var(--collapseP) * 260px);
+  --scale:  calc(1 - var(--collapseP) * 0.7);
+  --cardOp: calc(1 - var(--collapseP) * 1.4);
   opacity:max(0, var(--cardOp));
 }
 .h3d-card.c1{transform:rotateY(  0deg) translateZ(var(--radius)) scale(var(--scale));}
@@ -2292,8 +2313,11 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
   letter-spacing:.02em;
   text-decoration:none;
   white-space:nowrap;
-  /* Reveal happens in the last 25% of progress */
-  opacity:max(0, calc((var(--travelP) - 0.75) * 4));
+  /* Hidden entirely until the very end; only emerges in the last ~12%
+     of the journey (just before the Featured Work section). */
+  opacity:max(0, calc((var(--travelP) - 0.88) * 8.4));
+  visibility:visible;
+  pointer-events:none;
   box-shadow:
     0 24px 60px -16px rgba(31,36,25,.45),
     0 8px 20px -8px rgba(31,36,25,.25);
@@ -4260,8 +4284,10 @@ document.querySelectorAll('video').forEach(function(v){
   const stage  = document.getElementById('servicesTravel');
   if(!stage) return;
   const hero    = document.querySelector('.hero');
-  const contact = document.getElementById('contact');
-  if(!hero || !contact) return;
+  // Travel ends just before the Featured Work section
+  const endSection = document.getElementById('work') || document.getElementById('contact');
+  const cta = document.getElementById('servicesCta');
+  if(!hero || !endSection) return;
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const clamp = (v,a,b)=> v<a?a : v>b?b : v;
@@ -4283,12 +4309,12 @@ document.querySelectorAll('video').forEach(function(v){
     }
 
     const heroRect    = hero.getBoundingClientRect();
-    const contactRect = contact.getBoundingClientRect();
+    const endRect     = endSection.getBoundingClientRect();
 
     // Activation: pin once the hero has scrolled past ~60% of viewport
     const pinStart  = heroRect.bottom - vh * 0.6;   // <= 0 means we passed it
-    // Dock point: when contact section enters from the bottom
-    const dockStart = contactRect.top - vh * 0.9;   // <= 0 means contact is approaching
+    // Dock point: when the end section (Featured Work) enters from the bottom
+    const dockStart = endRect.top - vh * 0.45;      // <= 0 means end section is approaching
 
     // travelP progresses across the journey from pinStart=0 → dockStart=0.
     // Total travel distance in px ≈ (heroBottom - 0.6vh) → (contactTop - 0.9vh).
@@ -4311,20 +4337,25 @@ document.querySelectorAll('video').forEach(function(v){
     if(window.scrollY < docPin){
       stage.classList.remove('is-fixed','is-docked');
       stage.style.opacity = '1';
+    } else if(window.scrollY >= docDock){
+      // Dock at end of journey: leave fixed so CTA stays put briefly,
+      // then fade out as the end section starts covering the viewport.
+      stage.classList.add('is-fixed');
+      stage.classList.remove('is-docked');
+      const op = clamp((endRect.top - vh * 0.05) / Math.max(1, vh * 0.4), 0, 1);
+      stage.style.opacity = op.toFixed(3);
     } else {
       stage.classList.add('is-fixed');
       stage.classList.remove('is-docked');
-      // Fade the whole pinned stage out as contact section enters viewport
-      const fadeStart = contactRect.top - vh * 0.4;
-      const fadeEnd   = contactRect.top - vh * 0.05;
-      const fadeRange = Math.max(1, fadeStart - fadeEnd);
-      const fadeP = clamp((fadeStart - 0) / fadeRange, 0, 1);
-      // when contactRect.top approaches 0 → fade to 0
-      const op = clamp((contactRect.top - vh * 0.05) / Math.max(1, vh * 0.35), 0, 1);
-      stage.style.opacity = op.toFixed(3);
+      stage.style.opacity = '1';
     }
 
     stage.style.setProperty('--travelP', p.toFixed(4));
+
+    // CTA only becomes interactive when fully revealed (last ~12%)
+    if(cta){
+      cta.style.pointerEvents = (p >= 0.92) ? 'auto' : 'none';
+    }
     ticking = false;
   }
 
