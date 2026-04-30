@@ -4053,13 +4053,10 @@ document.querySelectorAll('video').forEach(function(v){
     //   0.65 – 0.80 : card 3 reveals
     //   0.80 – 1.00 : hold (everything visible) before unpinning
     if(bg){
-      // start at 600px offset, settle near 0 by p=0.45, then a gentle continuing drift
-      const driftIn = clamp((1 - p / 0.45), 0, 1);          // 1 → 0 over first 45%
+      // start at 600px offset, settle to 0 by p=0.30 — then stay put for the rest of the scroll
+      const driftIn = clamp((1 - p / 0.30), 0, 1);          // 1 → 0 over first 30%
       const baseOff = driftIn * (window.innerWidth < 700 ? 220 : 600);
-      // gentle counter-drift after settled
-      const tail = clamp((p - 0.45) / 0.55, 0, 1);
-      const tailShift = (tail - 0.5) * 2 * (window.innerWidth < 700 ? 30 : 80);
-      bg.style.setProperty('--tShift', (baseOff + tailShift) + 'px');
+      bg.style.setProperty('--tShift', baseOff + 'px');
     }
 
     function cardProg(start, end){
