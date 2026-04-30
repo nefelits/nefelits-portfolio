@@ -2551,15 +2551,22 @@ body[data-section="work"]{background:#EBE7DD !important;}
 ═══════════════════════════════════════════ */
 .testimonials{
   position:relative;
-  padding:160px 48px 180px;
-  background:#F1EEE6;
-  overflow:hidden;
+  /* tall scroll track — section stays pinned while user scrolls through this */
+  height:260vh;
+  background:#FFFFFF;
 }
 .testimonials-inner{
-  position:relative;
+  position:sticky;
+  top:0;
+  height:100vh;
+  width:100%;
   max-width:1280px;
   margin:0 auto;
-  z-index:2;
+  padding:0 48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
 }
 /* Giant background headline — scroll-driven horizontal drift (like the recording) */
 .t-bg-text{
@@ -2615,7 +2622,7 @@ body[data-section="work"]{background:#EBE7DD !important;}
   letter-spacing:.005em;
 }
 
-/* Card grid: staggered, asymmetric */
+/* Card grid: 3-up, scroll-driven reveal */
 .t-cards{
   position:relative;
   display:grid;
@@ -2623,6 +2630,7 @@ body[data-section="work"]{background:#EBE7DD !important;}
   gap:32px;
   align-items:start;
   z-index:2;
+  width:100%;
 }
 .t-card{
   position:relative;
@@ -2634,12 +2642,15 @@ body[data-section="work"]{background:#EBE7DD !important;}
     0 30px 60px -28px rgba(31,36,25,.18),
     0 8px 20px -10px rgba(31,36,25,.08);
   display:flex;flex-direction:column;
-  transition:transform .5s cubic-bezier(.2,.85,.3,1),box-shadow .5s ease;
+  /* hidden by default; JS sets --cardP from 0 → 1 to reveal */
+  --cardP:0;
+  opacity:var(--cardP);
+  transform:translateY(calc(60px - var(--cardP) * 60px));
+  will-change:opacity,transform;
 }
-.t-card{--tcShift:0px;}
-.t-card-1{transform:translateY(calc(-24px + var(--tcShift) * -1));}
-.t-card-2{transform:translateY(calc(28px + var(--tcShift) *  1));}
-.t-card-3{transform:translateY(calc(-10px + var(--tcShift) * -.6));}
+.t-card-1{transform:translateY(calc(60px - var(--cardP) * 60px - 24px * var(--cardP)));}
+.t-card-2{transform:translateY(calc(60px - var(--cardP) * 60px + 28px * var(--cardP)));}
+.t-card-3{transform:translateY(calc(60px - var(--cardP) * 60px - 10px * var(--cardP)));}
 
 .t-quote-mark{
   font-family:'Fraunces',serif;
@@ -2704,14 +2715,19 @@ body[data-section="work"]{background:#EBE7DD !important;}
   .t-card-3{grid-column:1 / -1;max-width:520px;margin:0 auto;transform:translateY(0);}
   .t-card-1,.t-card-2{transform:translateY(0);}
 }
-/* Mobile */
+/* Tablet/Mobile: drop pinned behavior, stack normally */
+@media (max-width:1024px){
+  .testimonials{height:auto;padding:80px 0 100px;}
+  .testimonials-inner{position:relative;top:auto;height:auto;padding:0 22px;}
+  .t-card{opacity:1 !important;transform:none !important;}
+  .t-cards{grid-template-columns:1fr 1fr;gap:24px;}
+  .t-card-3{grid-column:1 / -1;max-width:520px;margin:0 auto;}
+}
 @media (max-width:680px){
-  .testimonials{padding:100px 22px 120px;}
   .t-cards{grid-template-columns:1fr;gap:20px;}
-  .t-card{transform:none !important;padding:30px 24px 24px;}
+  .t-card{padding:30px 24px 24px;}
   .t-card-3{max-width:none;}
   .t-bg-line{font-size:clamp(72px,22vw,140px);}
-  .t-header{margin-bottom:56px;}
   .t-quote{font-size:16px;}
 }
 
@@ -3350,18 +3366,12 @@ body{position:relative;}
 <!-- ═══════════ TESTIMONIALS — what they are saying ═══════════ -->
 <section class="testimonials" id="testimonials">
   <div class="testimonials-inner">
-    <div class="section-eyebrow">testimonials</div>
     <div class="t-bg-text" aria-hidden="true">
       <span class="t-bg-line">What they</span>
       <span class="t-bg-line">are saying</span>
     </div>
 
-    <header class="t-header reveal">
-      <h2 class="section-title">What they are <span class="it">saying.</span></h2>
-      <p class="t-subtitle">A few words from the people I&rsquo;ve worked with.</p>
-    </header>
-
-    <div class="t-cards reveal-stagger">
+    <div class="t-cards">
       <article class="t-card t-card-1">
         <div class="t-quote-mark" aria-hidden="true">&ldquo;</div>
         <p class="t-quote">Nefeli became an integral part of our marketing team from the very beginning.</p>
@@ -4006,35 +4016,59 @@ document.querySelectorAll('video').forEach(function(v){
   });
 })();
 
-/* ═══ Testimonials parallax — bg text drifts horizontally, cards stagger ═══ */
+/* ═══ Testimonials: pinned scrub — bg text drifts in from both sides,
+       then cards fade up sequentially while section stays pinned ═══ */
 (function(){
   const section = document.querySelector('.testimonials');
   if(!section) return;
   const bg = section.querySelector('.t-bg-text');
   const cards = section.querySelectorAll('.t-card');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduced) return;
+
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+  function smooth(v){return v*v*(3-2*v);}
 
   let ticking = false;
   function update(){
     const rect = section.getBoundingClientRect();
     const vh = window.innerHeight;
-    // progress: 0 when section top hits viewport bottom, 1 when section bottom leaves top
-    const total = rect.height + vh;
-    const seen  = vh - rect.top;
-    let p = seen / total;
-    p = Math.max(0, Math.min(1, p));
-    // map 0→1 to -1→1 so motion is centered around the section midpoint
-    const t = (p - 0.5) * 2;
 
-    if(bg){
-      const shift = t * (window.innerWidth < 700 ? 60 : 180);
-      bg.style.setProperty('--tShift', shift + 'px');
+    // Mobile/tablet: layout is no longer pinned — show everything plainly
+    if(window.innerWidth <= 1024 || reduced){
+      if(bg) bg.style.setProperty('--tShift','0px');
+      cards.forEach(c=>c.style.setProperty('--cardP','1'));
+      ticking = false;
+      return;
     }
-    cards.forEach((c)=>{
-      // shift -28 → +28 px
-      c.style.setProperty('--tcShift', (t * 28) + 'px');
-    });
+
+    // progress through the pinned scroll: 0 when section top hits top of viewport,
+    // 1 when the section has scrolled (height - vh) past.
+    const scrubLength = rect.height - vh;
+    let p = clamp(-rect.top / scrubLength, 0, 1);
+
+    // Phase split:
+    //   0.00 – 0.35 : background text drifts in from off-screen
+    //   0.35 – 0.50 : card 1 reveals
+    //   0.50 – 0.65 : card 2 reveals
+    //   0.65 – 0.80 : card 3 reveals
+    //   0.80 – 1.00 : hold (everything visible) before unpinning
+    if(bg){
+      // start at 600px offset, settle near 0 by p=0.45, then a gentle continuing drift
+      const driftIn = clamp((1 - p / 0.45), 0, 1);          // 1 → 0 over first 45%
+      const baseOff = driftIn * (window.innerWidth < 700 ? 220 : 600);
+      // gentle counter-drift after settled
+      const tail = clamp((p - 0.45) / 0.55, 0, 1);
+      const tailShift = (tail - 0.5) * 2 * (window.innerWidth < 700 ? 30 : 80);
+      bg.style.setProperty('--tShift', (baseOff + tailShift) + 'px');
+    }
+
+    function cardProg(start, end){
+      return smooth(clamp((p - start) / (end - start), 0, 1));
+    }
+    if(cards[0]) cards[0].style.setProperty('--cardP', cardProg(0.30, 0.50));
+    if(cards[1]) cards[1].style.setProperty('--cardP', cardProg(0.45, 0.65));
+    if(cards[2]) cards[2].style.setProperty('--cardP', cardProg(0.60, 0.80));
+
     ticking = false;
   }
   function onScroll(){
