@@ -2743,16 +2743,37 @@ body[data-section="work"]{background:#EBE7DD !important;}
    FINAL OVERRIDES: white bg, no italics on titles, faded bg-words
 ═══════════════════════════════════════════ */
 
-/* WHITE base: body holds the white, sections are transparent so bg-words can show through */
+/* WHITE base: body holds the white, most sections are transparent so bg-words show through.
+   The contact/footer keeps its intentional dark gradient. */
 html, body{background:#FFFFFF !important;}
-.hero, .work-section, .about, .contact, .skills, .featured-work,
-section, .logo-strip, .testimonials, .pull-quote, #gallery, #certs{
+.hero, .work-section, .about, .skills, .featured-work,
+section:not(.contact), .logo-strip, .testimonials, .pull-quote, #gallery, #certs{
   background:transparent !important;
 }
-body[data-section]{background:#FFFFFF !important;}
+body[data-section]:not([data-section="contact"]){background:#FFFFFF !important;}
 .italic-marquee{background:transparent !important;}
 .about, .about-section, #about{background:transparent !important;}
 .testimonials{background:transparent !important;}
+
+/* Footer / contact: restore the dark "premium" look */
+.contact{
+  background:linear-gradient(180deg,#2B2A28 0%,#1F1E1C 100%) !important;
+  color:#FFFFFF !important;
+}
+.contact .cf-hello,
+.contact .cf-email,
+.contact .cf-col ul a,
+.contact .cf-col ul span,
+.contact .cf-col-loc p,
+.contact .cf-cta-row a{
+  color:#FFFFFF !important;
+}
+.contact .cf-col h4{color:rgba(255,255,255,.55) !important;}
+.contact .cf-col-lead p{color:rgba(255,255,255,.85) !important;}
+.contact .cf-credit{color:rgba(255,255,255,.55) !important;}
+.contact .cf-hello .it{color:#A8B89D !important;}
+.contact .cf-col-loc .gold{color:#A8B89D !important;}
+body[data-section="contact"]{background:#1F1E1C !important;}
 
 /* NO italics on section titles / accent words */
 .section-title,
