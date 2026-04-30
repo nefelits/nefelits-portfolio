@@ -264,6 +264,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 }
 .logo-N{color:var(--nav-fg);transition:color .5s;}
 .n-logo-img{width:48px;height:auto;display:block;transition:filter .4s;}
+.intro-n-logo{width:110px;height:auto;display:block;margin:0 auto;filter:invert(1);transition:filter .4s;}
 [data-theme="dark"] .n-logo-img{filter:invert(1);}
 .nav-links{
   display:flex;gap:36px;align-items:center;
@@ -2001,17 +2002,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   <div class="intro-vignette"></div>
   <div class="intro-content">
     <div class="intro-mono">
-      <svg viewBox="0 0 100 100" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="intro-ng" x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0" stop-color="#FFFFFF"/>
-            <stop offset="1" stop-color="#A8865A"/>
-          </linearGradient>
-        </defs>
-        <text x="50" y="74" text-anchor="middle"
-              font-family="Fraunces, serif" font-style="italic" font-weight="400"
-              font-size="78" fill="url(#intro-ng)">N</text>
-      </svg>
+      <img src="assets/logos/n-logo.png" alt="N" class="intro-n-logo">
     </div>
     <div class="intro-name">Nefeli Tsaousi</div>
     <div class="intro-role">Digital Marketing Portfolio</div>
