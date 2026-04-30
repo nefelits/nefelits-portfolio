@@ -2133,13 +2133,166 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
   letter-spacing:-.04em !important;
 }
 
-/* HIDE background floating words AND right-side panels — keep hero clean white */
+/* HIDE background floating words AND old right-side panels — replaced by 3D visual */
 .hero-fx,.hero-panels{display:none !important;}
-.hero-grid{grid-template-columns:1fr !important;}
 .hero::before{display:none !important;}
 .hero-tint{display:none !important;}
 
-/* S / D / E panel circles (still applied if panels ever return) */
+/* Hero grid: 2-col with 3D visual on the right */
+.hero-grid{grid-template-columns:1.35fr 1fr !important;align-items:center !important;gap:48px !important;}
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr !important;}
+}
+
+/* Fix the wrap bug: keep "Digital" / "Portfolio" each on their own line, never split a word */
+.hero h1{
+  white-space:nowrap !important;
+  font-size:clamp(56px,9.4vw,168px) !important;
+}
+@media (max-width:900px){
+  .hero h1{font-size:clamp(54px,14vw,120px) !important;}
+}
+
+/* ============ HERO 3D VISUAL ============ */
+.hero-3d{
+  position:relative;
+  width:100%;
+  height:560px;
+  perspective:1400px;
+  perspective-origin:50% 50%;
+  display:flex;align-items:center;justify-content:center;
+  align-self:center;
+}
+.hero-3d-stage{
+  position:relative;
+  width:320px;height:420px;
+  transform-style:preserve-3d;
+  animation:stageSpin 28s linear infinite;
+}
+@keyframes stageSpin{
+  0%   {transform:rotateY(0deg) rotateX(-6deg);}
+  100% {transform:rotateY(360deg) rotateX(-6deg);}
+}
+.hero-3d-stage:hover{animation-play-state:paused;}
+
+.h3d-card{
+  position:absolute;
+  top:50%;left:50%;
+  width:200px;height:264px;
+  margin:-132px 0 0 -100px;
+  border-radius:18px;
+  background:linear-gradient(150deg,#FFFFFF 0%,#FAF7F2 100%);
+  box-shadow:
+    0 30px 60px -20px rgba(31,27,22,.18),
+    0 8px 20px -8px rgba(31,27,22,.12),
+    inset 0 1px 0 rgba(255,255,255,.9);
+  border:1px solid rgba(31,27,22,.06);
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:22px 20px;
+  backface-visibility:hidden;
+  transform-style:preserve-3d;
+  transition:transform .6s cubic-bezier(.2,.85,.3,1);
+}
+.h3d-card .h3d-num{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-weight:400;
+  font-size:14px;
+  color:#A8865A;
+  letter-spacing:.04em;
+}
+.h3d-card .h3d-label{
+  font-family:'Inter',sans-serif;
+  font-weight:500;
+  font-size:22px;
+  line-height:1.1;
+  color:#0A0A0A;
+  letter-spacing:-.02em;
+}
+.h3d-card .h3d-tag{
+  font-family:'Inter',sans-serif;
+  font-size:10px;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:rgba(31,27,22,.55);
+}
+.h3d-card .h3d-dot{
+  width:42px;height:42px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-style:italic;font-size:20px;color:#FFFFFF;
+  box-shadow:0 8px 20px -6px rgba(212,154,154,.55);
+}
+
+/* 6 cards arranged around a Y-axis ring */
+.h3d-card.c1{transform:rotateY(  0deg) translateZ(240px);}
+.h3d-card.c2{transform:rotateY( 60deg) translateZ(240px);}
+.h3d-card.c3{transform:rotateY(120deg) translateZ(240px);}
+.h3d-card.c4{transform:rotateY(180deg) translateZ(240px);}
+.h3d-card.c5{transform:rotateY(240deg) translateZ(240px);}
+.h3d-card.c6{transform:rotateY(300deg) translateZ(240px);}
+
+/* Per-card accent on the dot */
+.h3d-card.c1 .h3d-dot{background:#D49A9A;}
+.h3d-card.c2 .h3d-dot{background:#A8865A;}
+.h3d-card.c3 .h3d-dot{background:#C97B7B;}
+.h3d-card.c4 .h3d-dot{background:#1F1B16;}
+.h3d-card.c5 .h3d-dot{background:#7A5C3A;}
+.h3d-card.c6 .h3d-dot{background:#D4B89A;}
+
+/* Soft glow disc behind the ring */
+.hero-3d::before{
+  content:'';
+  position:absolute;
+  width:520px;height:520px;
+  border-radius:50%;
+  background:radial-gradient(closest-side,rgba(212,154,154,.22),rgba(168,134,90,.08) 55%,transparent 75%);
+  filter:blur(8px);
+  z-index:0;
+  pointer-events:none;
+  animation:glowPulse 6s ease-in-out infinite;
+}
+@keyframes glowPulse{
+  0%,100%{transform:scale(1);opacity:.9;}
+  50%{transform:scale(1.06);opacity:1;}
+}
+
+/* Floor reflection ellipse */
+.hero-3d::after{
+  content:'';
+  position:absolute;
+  bottom:8%;left:50%;
+  width:340px;height:30px;
+  margin-left:-170px;
+  border-radius:50%;
+  background:radial-gradient(ellipse at center,rgba(31,27,22,.18),transparent 70%);
+  filter:blur(4px);
+  z-index:0;
+  pointer-events:none;
+}
+
+@media (max-width:900px){
+  .hero-3d{height:380px;margin-top:24px;}
+  .hero-3d-stage{width:240px;height:320px;}
+  .h3d-card{width:160px;height:212px;margin:-106px 0 0 -80px;padding:16px 14px;}
+  .h3d-card .h3d-label{font-size:18px;}
+  .h3d-card.c1,.h3d-card.c2,.h3d-card.c3,.h3d-card.c4,.h3d-card.c5,.h3d-card.c6{
+    /* tighter ring on small screens */
+  }
+  .h3d-card.c1{transform:rotateY(  0deg) translateZ(190px);}
+  .h3d-card.c2{transform:rotateY( 60deg) translateZ(190px);}
+  .h3d-card.c3{transform:rotateY(120deg) translateZ(190px);}
+  .h3d-card.c4{transform:rotateY(180deg) translateZ(190px);}
+  .h3d-card.c5{transform:rotateY(240deg) translateZ(190px);}
+  .h3d-card.c6{transform:rotateY(300deg) translateZ(190px);}
+  .hero-3d::before{width:380px;height:380px;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hero-3d-stage{animation:none !important;transform:rotateY(-22deg) rotateX(-6deg) !important;}
+  .hero-3d::before{animation:none !important;}
+}
+
+/* S / D / E panel circles (legacy — still applied if panels ever return) */
 .panel-thumb{background:#D49A9A !important;color:#FFFFFF !important;}
 .panel.open .panel-thumb{background:#C97B7B !important;}
 .hero h1 .it{
@@ -2397,6 +2550,60 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
           </div>
         </div>
       </button>
+    </div>
+
+    <!-- 3D rotating service ring -->
+    <div class="hero-3d" aria-hidden="true">
+      <div class="hero-3d-stage">
+        <div class="h3d-card c1">
+          <div>
+            <div class="h3d-num">01</div>
+            <div class="h3d-tag" style="margin-top:6px;">Service</div>
+          </div>
+          <div class="h3d-label">Digital<br>Marketing</div>
+          <div class="h3d-dot">D</div>
+        </div>
+        <div class="h3d-card c2">
+          <div>
+            <div class="h3d-num">02</div>
+            <div class="h3d-tag" style="margin-top:6px;">Service</div>
+          </div>
+          <div class="h3d-label">Social<br>Media</div>
+          <div class="h3d-dot">S</div>
+        </div>
+        <div class="h3d-card c3">
+          <div>
+            <div class="h3d-num">03</div>
+            <div class="h3d-tag" style="margin-top:6px;">Service</div>
+          </div>
+          <div class="h3d-label">Events<br>Marketing</div>
+          <div class="h3d-dot">E</div>
+        </div>
+        <div class="h3d-card c4">
+          <div>
+            <div class="h3d-num">04</div>
+            <div class="h3d-tag" style="margin-top:6px;">Service</div>
+          </div>
+          <div class="h3d-label">Content<br>Creation</div>
+          <div class="h3d-dot">C</div>
+        </div>
+        <div class="h3d-card c5">
+          <div>
+            <div class="h3d-num">05</div>
+            <div class="h3d-tag" style="margin-top:6px;">Service</div>
+          </div>
+          <div class="h3d-label">Email<br>Marketing</div>
+          <div class="h3d-dot">M</div>
+        </div>
+        <div class="h3d-card c6">
+          <div>
+            <div class="h3d-num">06</div>
+            <div class="h3d-tag" style="margin-top:6px;">Service</div>
+          </div>
+          <div class="h3d-label">UGC<br>Production</div>
+          <div class="h3d-dot">U</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
