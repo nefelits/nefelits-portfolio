@@ -2096,13 +2096,40 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
 
 /* ===== EDITORIAL GOLD ACCENTS (Fraunces italic #A8865A) ===== */
 
-/* Hero greeting "Nefeli." — match the rest of "Hi, I am" (Inter, black) */
+/* Hero greeting "Nefeli." — match the rest of "Hi, I am" (Inter, black, normal weight) */
 .hero-greeting .it{
   font-family:'Inter',sans-serif !important;
   font-style:normal !important;
-  font-weight:600 !important;
+  font-weight:400 !important;
   color:#0A0A0A !important;
   letter-spacing:-.01em;
+}
+
+/* Hero h1: "Digital Portfolio" — black, normal weight, no italics anywhere */
+.hero h1{
+  font-weight:500 !important;
+}
+.hero h1 .it{
+  font-family:'Inter',sans-serif !important;
+  font-style:normal !important;
+  font-weight:500 !important;
+  color:#0A0A0A !important;
+  letter-spacing:-.04em !important;
+}
+
+/* Hero background floating words — shift right for cohesion */
+.fx-title-bg{
+  left:auto !important;
+  right:-2% !important;
+  transform:translate(0, 38px) scale(.96) !important;
+}
+.hero[data-active="social"] .fx-social .fx-title-bg,
+.hero[data-active="digital"] .fx-digital .fx-title-bg,
+.hero[data-active="event"] .fx-event .fx-title-bg{
+  transform:translate(0, 0) scale(1) !important;
+}
+@media (max-width:900px){
+  .fx-title-bg{right:-4% !important;}
 }
 .hero h1 .it{
   font-family:'Fraunces',serif !important;
@@ -2303,7 +2330,7 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
         </div>
         <p class="hero-greeting">Hi, I am <span class="it">Nefeli.</span></p>
       </div>
-      <h1>Digital <span class="it">Portfolio</span></h1>
+      <h1>Digital<br>Portfolio</h1>
       <div class="hero-meta">
         <div class="item"><strong>6</strong><span>Brands</span></div>
         <div class="item"><strong>+150%</strong><span>Engagement lift</span></div>
