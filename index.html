@@ -3542,6 +3542,129 @@ body{position:relative;}
   transition:opacity .3s ease, transform .3s ease !important;
 }
 
+
+/* ── HAMBURGER BUTTON ── */
+.nav-hamburger {
+  display:none;
+  flex-direction:column;
+  justify-content:space-between;
+  width:28px; height:18px;
+  background:transparent;
+  border:none;
+  cursor:pointer;
+  padding:0;
+  z-index:200;
+}
+.nav-hamburger span {
+  display:block;
+  width:100%; height:2px;
+  background:#1F2419;
+  border-radius:2px;
+  transition:transform .3s ease, opacity .3s ease;
+  transform-origin:center;
+}
+.nav-hamburger.is-open span:nth-child(1){ transform:translateY(8px) rotate(45deg); }
+.nav-hamburger.is-open span:nth-child(2){ opacity:0; }
+.nav-hamburger.is-open span:nth-child(3){ transform:translateY(-8px) rotate(-45deg); }
+
+/* ── MOBILE MENU OVERLAY ── */
+.nav-mobile-menu {
+  display:none;
+  position:fixed;
+  top:0; left:0; right:0; bottom:0;
+  background:#F7F5F2;
+  z-index:150;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  padding:80px 32px 40px;
+  gap:4px;
+}
+.nav-mobile-menu.is-open { display:flex; }
+.nav-mobile-menu a {
+  font-family:'DM Sans',sans-serif;
+  font-weight:600;
+  font-size:clamp(24px,6vw,36px);
+  color:#1F2419;
+  text-decoration:none;
+  letter-spacing:-.02em;
+  padding:8px 0;
+  border-bottom:1px solid rgba(31,36,25,.08);
+  width:100%;
+  transition:color .2s;
+}
+.nav-mobile-menu a:hover { color:#A8B89D; }
+.nav-mobile-menu .nm-cv {
+  margin-top:24px;
+  font-size:13px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight:600;
+  color:#A8B89D;
+  border-bottom:none;
+}
+
+/* ── HERO MOBILE — remove empty top space ── */
+@media (max-width: 720px) {
+  .nav-hamburger { display:flex; }
+  .nav-links { display:none !important; }
+
+  .hero-grid {
+    grid-template-columns:1fr !important;
+    padding:90px 20px 32px !important;
+    gap:0 !important;
+    min-height:auto !important;
+  }
+  .hero-headline {
+    padding-top:0 !important;
+    padding-bottom:20px !important;
+    min-height:auto !important;
+  }
+  .hero-poster {
+    min-height:340px !important;
+    margin-top:0 !important;
+  }
+  .hero-panels { max-width:100% !important; margin-left:0 !important; }
+
+  /* ── WORK BLOCK MOBILE — single column ── */
+  .work-block {
+    grid-template-columns:1fr !important;
+    gap:24px !important;
+    padding:40px 0 !important;
+  }
+  .work-media { order:2; }
+  .work-meta  { order:1; }
+
+  /* Challenge/Result labels as eyebrow on mobile */
+  .wc-item {
+    display:block !important;
+    padding:12px 0 !important;
+    border-top:1px solid rgba(31,36,25,.10) !important;
+  }
+  .wc-label {
+    display:block !important;
+    font-family:'DM Sans',sans-serif !important;
+    font-size:10px !important;
+    font-weight:700 !important;
+    letter-spacing:.2em !important;
+    text-transform:uppercase !important;
+    color:#A8B89D !important;
+    margin-bottom:6px !important;
+  }
+  .work-context {
+    display:flex !important;
+    flex-direction:column !important;
+    gap:0 !important;
+  }
+
+  /* Floating CTA smaller on mobile */
+  .floating-cta {
+    font-size:11px !important;
+    padding:10px 16px !important;
+    bottom:16px !important; right:16px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3598,7 +3721,19 @@ body{position:relative;}
     <a href="#contact">Contact</a>
     <a href="assets/Nefeli_Tsaousi_CV.docx" class="nav-cv" download aria-label="Download Nefeli Tsaousi's CV (Word document)">Download CV</a>
   </div>
+  <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-mobile-menu" aria-hidden="true">
+  <a href="#about">About</a>
+  <a href="#work">Featured Work</a>
+  <a href="#gallery">Social Gallery</a>
+  <a href="#certs">Certifications</a>
+  <a href="#skills">Skills</a>
+  <a href="#contact">Contact</a>
+  <a href="assets/Nefeli_Tsaousi_CV.docx" download class="nm-cv">Download CV ↓</a>
+</div>
 
 <a href="mailto:nefeli@tsaousis.net" class="floating-cta">Email Me <span class="arrow">&rarr;</span></a>
 
@@ -4982,6 +5117,31 @@ document.querySelectorAll('video').forEach(function(v){
     });
   }, { threshold: 0.05 });
   io.observe(contact);
+})();
+</script>
+
+
+<script>
+(function(){
+  var btn = document.querySelector('.nav-hamburger');
+  var menu = document.querySelector('.nav-mobile-menu');
+  if(!btn || !menu) return;
+  btn.addEventListener('click', function(){
+    var open = btn.classList.toggle('is-open');
+    menu.classList.toggle('is-open', open);
+    btn.setAttribute('aria-expanded', open);
+    menu.setAttribute('aria-hidden', !open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      btn.classList.remove('is-open');
+      menu.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', false);
+      menu.setAttribute('aria-hidden', true);
+      document.body.style.overflow = '';
+    });
+  });
 })();
 </script>
 
