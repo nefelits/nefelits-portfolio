@@ -1,0 +1,21 @@
+.DS_Store
+*.log
+
+# Raw source media — not used by the site, kept locally only
+/company logos/
+/skills logos/
+/social media gallery/
+/personal social media & projects : campaigns/
+/the prelevic - social media manager/
+/netdata/
+/deree/
+/liquidbeautyparlor/
+
+# Root-level raw media exports
+/*.mov
+/*.MOV
+/*.mp4
+/*.MP4
+/*.jpeg
+/*.jpg
+/*.png

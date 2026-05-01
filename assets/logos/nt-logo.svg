@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 125 400 320" width="400" height="320">
+  <rect x="0" y="0" width="400" height="500" fill="#F7F5F2"/>
+  <defs>
+    <path id="arc" d="M 60,220 A 380,380 0 0,1 340,220"/>
+  </defs>
+  <!-- MARKETER arc text -->
+  <text fill="#1a1a1a"
+        font-family="'Helvetica Neue', Arial, sans-serif"
+        font-size="13" letter-spacing="10">
+    <textPath href="#arc" startOffset="50%" text-anchor="middle">MARKETER</textPath>
+  </text>
+  <!-- n -->
+  <text fill="#1a1a1a"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-style="italic" font-size="230"
+        x="82" y="375">n</text>
+  <!-- t -->
+  <text fill="#1a1a1a"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-style="italic" font-size="230"
+        x="208" y="375">t</text>
+</svg>
