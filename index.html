@@ -3626,16 +3626,56 @@ body{position:relative;}
   }
   .hero-panels { max-width:100% !important; margin-left:0 !important; }
 
-  /* ── WORK BLOCK MOBILE — single column ── */
+  /* ── WORK BLOCK MOBILE — full redesign ── */
   .work-block {
     grid-template-columns:1fr !important;
-    gap:24px !important;
-    padding:40px 0 !important;
+    gap:0 !important;
+    padding:32px 0 !important;
   }
-  .work-media { order:2; }
   .work-meta  { order:1; }
+  .work-media {
+    order:2;
+    margin-top:20px;
+    /* horizontal scroll strip */
+    display:flex !important;
+    flex-direction:row !important;
+    gap:10px !important;
+    overflow-x:auto !important;
+    overflow-y:visible !important;
+    padding-bottom:8px !important;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+  }
+  .work-media .mm {
+    flex:0 0 160px !important;
+    width:160px !important;
+    height:200px !important;
+    grid-column:unset !important;
+    grid-row:unset !important;
+    scroll-snap-align:start;
+    border-radius:12px !important;
+  }
+  .work-media>.stack-carousel {
+    flex:0 0 260px !important;
+    width:260px !important;
+    height:200px !important;
+    min-height:unset !important;
+    grid-column:unset !important;
+  }
+  .work-media>.stack-controls { display:none !important; }
 
-  /* Challenge/Result labels as eyebrow on mobile */
+  /* readable text sizes */
+  .work-block .work-title { font-size:clamp(22px,5.5vw,28px) !important; }
+  .work-block .work-bullets li { font-size:14px !important; }
+  .work-block .work-metrics .m .num { font-size:24px !important; }
+
+  /* Challenge/Result labels as mint eyebrow */
+  .work-context {
+    display:flex !important;
+    flex-direction:column !important;
+    gap:0 !important;
+    margin-top:12px !important;
+  }
   .wc-item {
     display:block !important;
     padding:12px 0 !important;
@@ -3651,11 +3691,10 @@ body{position:relative;}
     color:#A8B89D !important;
     margin-bottom:6px !important;
   }
-  .work-context {
-    display:flex !important;
-    flex-direction:column !important;
-    gap:0 !important;
-  }
+  .wc-item p { font-size:14px !important; line-height:1.5 !important; }
+
+  /* role title smaller */
+  .work-role, .work-block .work-role { font-size:16px !important; margin-bottom:4px !important; }
 
   /* Floating CTA smaller on mobile */
   .floating-cta {
