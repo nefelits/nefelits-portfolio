@@ -726,8 +726,8 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   flex-shrink:0;
 }
 .ls-set img{
-  height:48px;width:auto;
-  max-width:160px;
+  height:96px;width:auto;
+  max-width:320px;
   object-fit:contain;
   flex-shrink:0;
   filter:grayscale(1) brightness(0);
@@ -926,18 +926,20 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 /* FEATURED WORK */
 .featured-work{
   background:transparent;
-  padding:80px 48px 0;
+  padding:80px 0 0;        /* horizontal padding moved onto children below */
+}
+.featured-work > .section-eyebrow,
+.featured-work > .section-title{
+  padding-left:48px;
+  padding-right:48px;
 }
 .work-block{
   display:grid;
   grid-template-columns:1fr 1.45fr;
   gap:80px;
-  padding:80px 0;
-  border-top:1px solid rgba(31,36,25,.12);
+  padding:80px 48px;       /* full-width bg, content padded inside */
   align-items:start;
 }
-.work-block:first-of-type{border-top:none;padding-top:30px;}
-.work-meta{position:sticky;top:120px;}
 .work-logo{
   height:54px;
   margin-bottom:26px;
@@ -1848,8 +1850,11 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   .hero{grid-template-columns:1fr;padding:120px 24px 60px;}
   .hero-tiles{height:420px;}
   .hero-portrait{width:180px;height:240px;}
-  .section,.about,.featured-work,.social-gallery,.certifications,.skills,.pull-quote,.contact{padding:90px 24px;}
-  .work-block{grid-template-columns:1fr;gap:40px;padding:60px 0;}
+  .section,.about,.social-gallery,.certifications,.skills,.pull-quote,.contact{padding:90px 24px;}
+  .featured-work{padding:90px 0;}
+  .featured-work > .section-eyebrow,
+  .featured-work > .section-title{padding-left:24px;padding-right:24px;}
+  .work-block{grid-template-columns:1fr;gap:40px;padding:60px 24px !important;}
   .work-meta{position:static;}
   .work-media{grid-template-columns:repeat(4,1fr);}
   .skills-grid{grid-template-columns:repeat(3,1fr);}
@@ -1905,8 +1910,10 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   .italic-marquee{ height:clamp(80px,14vw,140px); }
 
   /* ── FEATURED WORK ── */
-  .featured-work{ padding:80px 20px 60px; }
-  .work-block{ grid-template-columns:1fr; gap:32px; padding:48px 0; }
+  .featured-work{ padding:80px 0 60px; }
+  .featured-work > .section-eyebrow,
+  .featured-work > .section-title{ padding-left:20px; padding-right:20px; }
+  .work-block{ grid-template-columns:1fr; gap:32px; padding:48px 20px !important; }
   .work-meta{ position:static; }
   .work-title{ font-size:clamp(22px,7vw,36px); }
   .work-media{
@@ -2044,14 +2051,13 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 /* ===== PHASE 1 POLISH: cursor, magnetic, tilt, letter-reveal ===== */
 
 /* Custom editorial cursor */
-.cursor-dot,.cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;mix-blend-mode:difference;will-change:transform;}
-.cursor-dot{width:6px;height:6px;background:#FFFFFF;transform:translate(-50%,-50%);transition:width .25s ease,height .25s ease,background .25s ease;}
+.cursor-dot,.cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;will-change:transform;}
+.cursor-dot{width:6px;height:6px;background:#FFFFFF;transform:translate(-50%,-50%);transition:width .25s ease,height .25s ease,background .25s ease;mix-blend-mode:difference;}
 .cursor-ring{width:38px;height:38px;border:1px solid rgba(255,255,255,.6);transform:translate(-50%,-50%);transition:width .35s cubic-bezier(.2,.85,.3,1),height .35s cubic-bezier(.2,.85,.3,1),border-color .25s ease,opacity .25s ease;}
 body.has-cursor *{cursor:none !important;}
-body.has-cursor .cursor-ring.is-hovering{width:64px;height:64px;border-color:rgba(255,255,255,.95);}
-body.has-cursor .cursor-dot.is-hovering{width:0;height:0;}
-body.has-cursor .cursor-ring.is-text{width:90px;height:90px;background:rgba(255,255,255,.08);border-color:transparent;}
-.cursor-label{position:fixed;top:0;left:0;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:#FFFFFF;mix-blend-mode:difference;opacity:0;transition:opacity .25s ease;letter-spacing:.02em;}
+body.has-cursor .cursor-ring.is-hovering{border-color:rgba(255,255,255,.95);}
+body.has-cursor .cursor-ring.is-text{background:rgba(255,255,255,.08);border-color:transparent;}
+.cursor-label{position:fixed;top:0;left:0;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:#1F2419;text-shadow:0 1px 2px rgba(255,255,255,.6);opacity:0;transition:opacity .25s ease;letter-spacing:.02em;will-change:transform;}
 .cursor-label.is-visible{opacity:1;}
 @media (max-width:900px),(hover:none){.cursor-dot,.cursor-ring,.cursor-label{display:none !important;}body.has-cursor *{cursor:auto !important;}}
 
@@ -2076,6 +2082,49 @@ html.smooth-active{scroll-behavior:auto !important;}
   .panel.is-tilting,.magnetic{transform:none !important;transition:none !important;}
   .split-char{transform:none !important;opacity:1 !important;}
 }
+
+/* ===== Pause infinite animations on offscreen sections =====
+   Visual-identical perf win: while a section is in viewport,
+   animations run normally; while scrolled away, they pause so
+   the compositor and CPU stop re-rendering hidden layers. */
+.logo-strip:not(.anim-running) .ls-track,
+.social-gallery:not(.anim-running) .vid-reel-track,
+.hero-poster:not(.anim-running) .hp-mesh,
+.hero-poster:not(.anim-running) .hp-card,
+.hero-poster:not(.anim-running) .hp-dot,
+.hero-poster:not(.anim-running) .hp-stamp-svg{
+  animation-play-state: paused;
+}
+
+/* ===== content-visibility: auto on offscreen sections =====
+   Browser skips style/layout/paint for these sections while they
+   are far from the viewport, treating them as a placeholder of the
+   given intrinsic size. When scrolled into view, they render
+   normally — visually identical to before.
+   Excluded: .hero (always near top), .featured-work + .work-pin-wrap
+   (contain sticky-pinned children), .testimonials (sticky child).
+   Intrinsic sizes match measured heights at 1440x900. The "auto"
+   keyword lets the browser remember the actual rendered size on
+   subsequent re-hides, keeping the scrollbar stable. */
+.about,
+.skills,
+.tested-first,
+.social-gallery,
+.certifications,
+.contact{
+  content-visibility: auto;
+}
+/* contain-intrinsic-size sets the content-box height of the placeholder
+   (the section's existing padding adds on top), so these match each
+   section's measured content-box at 1440x900. The "auto" keyword lets
+   the browser switch to last-rendered size on subsequent skip cycles,
+   which adapts automatically to other viewports (mobile, etc.). */
+.about         { contain-intrinsic-size: auto 593px;  }
+.skills        { contain-intrinsic-size: auto 1035px; }
+.tested-first  { contain-intrinsic-size: auto 870px;  }
+.social-gallery{ contain-intrinsic-size: auto 521px;  }
+.certifications{ contain-intrinsic-size: auto 811px;  }
+.contact       { contain-intrinsic-size: auto 1165px; }
 
 /* ===== PHASE 2: Section transitions, mobile-friendly, scroll-driven ===== */
 
@@ -3021,65 +3070,24 @@ body{position:relative;}
 /* Sections that absolutely must stay opaque (intro screen) */
 .intro-screen{background:#FFFFFF !important;z-index:9999 !important;}
 
-/* ── VIDEO LIGHTBOX ─────────────────────────────────── */
-.yt-thumb-btn{
-  position:relative; width:100%; height:100%;
-  border:none; padding:0; margin:0; cursor:pointer;
-  background:#000; border-radius:14px; overflow:hidden;
-  display:block;
-}
-.yt-thumb-btn img{
+/* ── YOUTUBE THUMBNAIL LINK ─────────────────────────── */
+.mm-yt{background:#000; border-radius:14px; overflow:hidden;}
+.yt-thumb-link{display:block; width:100%; height:100%; position:relative;}
+.yt-thumb-link img{
   width:100%; height:100%; object-fit:cover;
   display:block;
   transition:transform .5s ease, filter .4s ease;
   filter:brightness(.88);
 }
-.yt-thumb-btn:hover img{transform:scale(1.04); filter:brightness(.72);}
+.yt-thumb-link:hover img{transform:scale(1.04); filter:brightness(.72);}
 .yt-play-icon{
   position:absolute; inset:0;
   display:flex; align-items:center; justify-content:center;
   pointer-events:none;
   transition:transform .3s ease;
 }
-.yt-thumb-btn:hover .yt-play-icon{transform:scale(1.12);}
+.yt-thumb-link:hover .yt-play-icon{transform:scale(1.12);}
 .yt-play-icon svg{filter:drop-shadow(0 4px 16px rgba(0,0,0,.5));}
-
-/* Lightbox overlay */
-.yt-lightbox{
-  display:none;
-  position:fixed; inset:0; z-index:9999;
-  background:rgba(0,0,0,.88);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
-  align-items:center; justify-content:center;
-}
-.yt-lightbox.is-open{display:flex;}
-.yt-lightbox-inner{
-  position:relative;
-  width:min(90vw, 1120px);
-  aspect-ratio:16/9;
-  border-radius:16px;
-  overflow:hidden;
-  box-shadow:0 40px 100px -20px rgba(0,0,0,.8);
-  animation:lbIn .35s cubic-bezier(.2,.85,.3,1) forwards;
-}
-@keyframes lbIn{
-  from{opacity:0; transform:scale(.92) translateY(24px);}
-  to  {opacity:1; transform:scale(1) translateY(0);}
-}
-.yt-lightbox-inner iframe{
-  position:absolute; inset:0; width:100%; height:100%; border:none;
-}
-.yt-lightbox-close{
-  position:absolute; top:-48px; right:0;
-  background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.18);
-  color:#fff; font-size:22px; line-height:1;
-  width:40px; height:40px; border-radius:50%;
-  cursor:pointer; display:flex; align-items:center; justify-content:center;
-  transition:background .2s;
-}
-.yt-lightbox-close:hover{background:rgba(255,255,255,.28);}
 
 /* ═══════════════════════════════════════════════
    CLEAN ANIMATION POLICY
@@ -3125,10 +3133,6 @@ body{position:relative;}
   transition:none !important;
   animation:none !important;
 }
-.work-block.is-in .work-media img,
-.work-block.is-in .work-media iframe,
-.work-block.is-in .work-media video,
-.work-block.is-in .mm { clip-path:none !important; opacity:1 !important; transform:none !important; }
 .work-media .mm, .work-media img, .work-media video { opacity:1 !important; transform:none !important; transition:box-shadow .3s ease, transform .3s ease !important; }
 
 /* ── 5. Hero: no float, no parallax ── */
@@ -3164,17 +3168,10 @@ body{position:relative;}
 .featured-work { position:relative; background:transparent; }
 /* Each wrap = one viewport tall. Sticky child fills it; subsequent wraps
    slide up from below, covering the previous like stacked pages. */
-.work-pin-wrap {
-  position:relative;
-  min-height:70vh;
-}
-.work-pin-wrap:nth-of-type(1) { z-index:1; }
-.work-pin-wrap:nth-of-type(2) { z-index:2; }
-.work-pin-wrap:nth-of-type(3) { z-index:3; }
-.work-pin-wrap:nth-of-type(4) { z-index:4; }
-.work-pin-wrap:nth-of-type(5) { z-index:5; }
-.work-pin-wrap:nth-of-type(6) { z-index:6; }
-.work-block {
+/* Stacked-cards scroll: each work-block sticks at the top of the viewport
+   while .featured-work scrolls. Source order + per-block z-index makes
+   later sections paint over earlier ones, producing a layered stack. */
+.featured-work .work-block {
   position:sticky !important;
   top:0 !important;
   min-height:100vh;
@@ -3183,10 +3180,25 @@ body{position:relative;}
   opacity:1 !important;
   transform:none !important;
   filter:none !important;
-  background:#F7F5F2;
-  box-shadow:0 -32px 60px rgba(247,245,242,0.95);
-  padding-top:60px !important;
-  padding-bottom:60px !important;
+  padding:60px 48px !important;   /* full-width bg, content padded inside */
+}
+.featured-work .work-block:nth-of-type(1) { z-index:1; }
+.featured-work .work-block:nth-of-type(2) { z-index:2; }
+.featured-work .work-block:nth-of-type(3) { z-index:3; }
+.featured-work .work-block:nth-of-type(4) { z-index:4; }
+.featured-work .work-block:nth-of-type(5) { z-index:5; }
+.featured-work .work-block:nth-of-type(6) { z-index:6; }
+/* Alternating section bg — both warm cream tones, just slightly different
+   so each layer is distinguishable as it stacks. Job-title watermark stays
+   the same gray on both. */
+.featured-work .work-block:nth-of-type(odd) { background:#F7F5F2; }   /* lighter cream */
+.featured-work .work-block:nth-of-type(even){ background:#EBE7DD; }   /* slightly darker cream */
+/* Reduced-motion + small viewports: fall back to natural flow. */
+@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+  .featured-work .work-block {
+    position:static !important;
+    min-height:auto !important;
+  }
 }
 /* When the block becomes a flex container, the inner grid still needs to span the row. */
 .work-block > * { width:100%; }
@@ -3255,91 +3267,19 @@ body{position:relative;}
   .hero-cta-primary,.hero-cta-secondary{font-size:12px;padding:13px 24px;}
 }
 
-/* ════════════════════════════════════════════════════════
-   WORK SECTION — STORYTELLING 3D REVEAL
-   All transforms/opacity only — no layout reflow
-════════════════════════════════════════════════════════ */
-
-/* LEFT COLUMN: initial hidden state — 3D tilt from left */
+/* WORK SECTION — content fully visible (no reveal-on-scroll animations).
+   The whole block is pinned to the viewport via stacked-cards sticky,
+   so per-element reveal would never fire correctly anyway. */
 .work-block .work-logo,
 .work-block .work-role,
 .work-block .work-title,
 .work-block .wc-item,
 .work-block .work-bullets li,
 .work-block .work-metrics .m,
-.work-block .work-link {
-  opacity:0;
-  transform:perspective(900px) translateX(-36px) rotateY(-6deg);
-  transition:opacity .65s cubic-bezier(.2,.85,.3,1),
-             transform .65s cubic-bezier(.2,.85,.3,1);
-  will-change:opacity,transform;
-}
-
-/* RIGHT COLUMN: media slides from right */
+.work-block .work-link,
 .work-block .work-media {
-  opacity:0;
-  transform:translateX(48px);
-  transition:opacity .7s cubic-bezier(.2,.85,.3,1),
-             transform .7s cubic-bezier(.2,.85,.3,1);
-  will-change:opacity,transform;
-}
-
-/* ── REVEALED STATE with staggered delays ── */
-.work-block.is-in .work-logo {
-  opacity:1; transform:none; transition-delay:.05s;
-}
-.work-block.is-in .work-role {
-  opacity:1; transform:none; transition-delay:.14s;
-}
-.work-block.is-in .work-title {
-  opacity:1; transform:none; transition-delay:.22s;
-}
-/* Challenge card */
-.work-block.is-in .wc-item:first-child {
-  opacity:1; transform:none; transition-delay:.34s;
-}
-/* Result card */
-.work-block.is-in .wc-item:last-child {
-  opacity:1; transform:none; transition-delay:.46s;
-}
-/* Bullets — one by one */
-.work-block.is-in .work-bullets li:nth-child(1) {
-  opacity:1; transform:none; transition-delay:.58s;
-}
-.work-block.is-in .work-bullets li:nth-child(2) {
-  opacity:1; transform:none; transition-delay:.66s;
-}
-.work-block.is-in .work-bullets li:nth-child(3) {
-  opacity:1; transform:none; transition-delay:.74s;
-}
-.work-block.is-in .work-bullets li:nth-child(4) {
-  opacity:1; transform:none; transition-delay:.82s;
-}
-/* Metrics */
-.work-block.is-in .work-metrics .m {
-  opacity:1; transform:none; transition-delay:.72s;
-}
-/* Work link */
-.work-block.is-in .work-link {
-  opacity:1; transform:none; transition-delay:.8s;
-}
-/* Media — from right */
-.work-block.is-in .work-media {
-  opacity:1; transform:none; transition-delay:.18s;
-}
-
-/* Reduced motion: skip animation entirely */
-@media (prefers-reduced-motion:reduce) {
-  .work-block .work-logo,
-  .work-block .work-role,
-  .work-block .work-title,
-  .work-block .wc-item,
-  .work-block .work-bullets li,
-  .work-block .work-metrics .m,
-  .work-block .work-media,
-  .work-block .work-link {
-    opacity:1 !important; transform:none !important; transition:none !important;
-  }
+  opacity:1;
+  transform:none;
 }
 
 /* WORK ROLE — big grey watermark letters (matches Selected Clients style) */
@@ -3949,7 +3889,6 @@ body{position:relative;}
   <div class="section-eyebrow">featured work</div>
   <h2 class="section-title">Brands I've <span class="it">helped grow.</span></h2>
 
-  <div class="work-pin-wrap">
   <article class="work-block">
     <div class="work-meta">
       <div class="work-logo"><img loading="lazy" src="assets/logos/netdata.png" alt="Netdata"></div>
@@ -3979,20 +3918,18 @@ body{position:relative;}
     </div>
     <div class="work-media netdata-grid">
       <div class="mm mm-yt">
-        <button class="yt-thumb-btn" data-video="PneGcmV2RVU" aria-label="Play Netdata video">
+        <a class="yt-thumb-link" href="https://www.youtube.com/watch?v=PneGcmV2RVU" target="_blank" rel="noopener noreferrer" aria-label="Watch Netdata video on YouTube">
           <img src="https://img.youtube.com/vi/PneGcmV2RVU/maxresdefault.jpg" alt="Netdata video thumbnail" loading="lazy">
           <span class="yt-play-icon" aria-hidden="true">
             <svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.5 7.7c-.8-2.9-3-5.2-5.9-6C55.8 0 34 0 34 0S12.2 0 7.4 1.7c-2.9.8-5.1 3.1-5.9 6C0 12.5 0 24 0 24s0 11.5 1.5 16.3c.8 2.9 3 5.2 5.9 6C12.2 48 34 48 34 48s21.8 0 26.6-1.7c2.9-.8 5.1-3.1 5.9-6C68 35.5 68 24 68 24s0-11.5-1.5-16.3z" fill="#ff0000"/><path d="M27 34l18-10-18-10v20z" fill="#fff"/></svg>
           </span>
-        </button>
+        </a>
       </div>
       <div class="mm mm-screen"><img src="assets/netdata/event-3.jpg" alt="Netdata event post" loading="lazy"></div>
       <div class="mm mm-screen"><img src="assets/netdata/event-4.jpg" alt="Netdata DevOpsDays post" loading="lazy"></div>
     </div>
   </article>
-  </div>
 
-  <div class="work-pin-wrap">
   <article class="work-block">
     <div class="work-meta">
       <div class="work-logo"><img loading="lazy" src="assets/logos/liquidtransparentlogo copy.png" alt="Liquid Beauty Parlor"></div>
@@ -4025,9 +3962,7 @@ body{position:relative;}
       <div class="mm"><video preload="none" data-src="assets/projects/liquid-social/liquid-tiktok-video.mp4" autoplay muted loop playsinline aria-label="Liquid Beauty Parlor TikTok content reel"></video></div>
     </div>
   </article>
-  </div>
 
-  <div class="work-pin-wrap">
   <article class="work-block">
     <div class="work-meta">
       <div class="work-logo"><img loading="lazy" src="assets/logos/youthlab.png" alt="YouthLab"></div>
@@ -4061,9 +3996,7 @@ body{position:relative;}
       </div>
     </div>
   </article>
-  </div>
 
-  <div class="work-pin-wrap">
   <article class="work-block">
     <div class="work-meta">
       <div class="work-logo"><img loading="lazy" src="assets/logos/dereetraslogo.png" alt="Deree – ACG"></div>
@@ -4095,9 +4028,7 @@ body{position:relative;}
       <div class="mm"><img src="assets/projects/deree-social/deree-insta.jpg" alt="Deree Instagram" loading="lazy"></div>
     </div>
   </article>
-  </div>
 
-  <div class="work-pin-wrap">
   <article class="work-block">
     <div class="work-meta">
       <div class="work-logo"><img loading="lazy" src="assets/logos/lf fitness saloon.png" alt="LF Fitness Salon"></div>
@@ -4127,9 +4058,7 @@ body{position:relative;}
       <div class="mm mm-screen"><img src="assets/projects/lf-fitness/faih-profile.jpg" alt="LF Fitness Instagram profile" loading="lazy"></div>
     </div>
   </article>
-  </div>
 
-  <div class="work-pin-wrap">
   <article class="work-block">
     <div class="work-meta">
       <div class="work-logo"><img loading="lazy" src="assets/logos/theprelevic.png" alt="The Prelevic"></div>
@@ -4164,7 +4093,6 @@ body{position:relative;}
       <div class="mm"><img src="assets/prelevic/feed-5.png" alt="Prelevic feed" loading="lazy"></div>
     </div>
   </article>
-  </div>
 
 </section>
 
@@ -4548,10 +4476,11 @@ if(folderIntro && folderIntro.classList.contains('opened')){
 
 
 const logoN = document.getElementById('logoN');
-window.addEventListener('scroll',function(){
-  const y = window.scrollY;
-  logoN.style.transform = 'rotate('+(y*0.45)+'deg)';
-});
+if(logoN){
+  let logoRaf = null;
+  function logoUpdate(){ logoRaf = null; logoN.style.transform = 'rotate('+(window.scrollY*0.45)+'deg)'; }
+  window.addEventListener('scroll', function(){ if(!logoRaf) logoRaf = requestAnimationFrame(logoUpdate); }, {passive:true});
+}
 
 const io = new IntersectionObserver(function(entries){
   entries.forEach(function(e){
@@ -4618,7 +4547,9 @@ document.querySelectorAll('video').forEach(function(v){
 (function(){
   const pop = document.getElementById('heroPortraitPop');
   if(!pop) return;
+  let raf = null;
   function update(){
+    raf = null;
     const y = window.scrollY;
     const fadeStart = 60;   // px
     const fadeEnd   = 360;  // px - fully gone
@@ -4628,7 +4559,7 @@ document.querySelectorAll('video').forEach(function(v){
     pop.style.opacity = op;
     pop.style.transform = 'scale('+(0.6 + op*0.4)+') translateY('+(-t*16)+'px)';
   }
-  window.addEventListener('scroll',update,{passive:true});
+  window.addEventListener('scroll', function(){ if(!raf) raf = requestAnimationFrame(update); }, {passive:true});
   update();
 })();
 
@@ -4780,8 +4711,17 @@ document.querySelectorAll('video').forEach(function(v){
     document.body.appendChild(dot); document.body.appendChild(ring); document.body.appendChild(label);
     document.body.classList.add('has-cursor');
     let mx=window.innerWidth/2, my=window.innerHeight/2, rx=mx, ry=my;
-    document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; dot.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`; label.style.transform=`translate(${mx}px,${my+34}px) translate(-50%,-50%)`; }, {passive:true});
-    function tick(){ rx += (mx-rx)*0.18; ry += (my-ry)*0.18; ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`; requestAnimationFrame(tick); }
+    // Stash coordinates only; all DOM writes happen in the rAF tick below.
+    // High-Hz mice fire mousemove far more often than the display refreshes —
+    // writing styles synchronously here used to back up the event queue.
+    document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; }, {passive:true});
+    function tick(){
+      rx += (mx-rx)*0.18; ry += (my-ry)*0.18;
+      dot.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;
+      label.style.transform=`translate(${mx}px,${my+34}px) translate(-50%,-50%)`;
+      ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+      requestAnimationFrame(tick);
+    }
     tick();
     // Hover states
     const hoverables = 'a, button, .panel, .work-block, [data-cursor]';
@@ -4824,7 +4764,6 @@ document.querySelectorAll('video').forEach(function(v){
 
   /* ---------- 6. Add cursor labels to key CTAs ---------- */
   if(isDesktop && !reduce){
-    document.querySelectorAll('.work-block').forEach(w=>w.setAttribute('data-cursor','View'));
     document.querySelectorAll('.panel').forEach(p=>p.setAttribute('data-cursor','Open'));
     const contact = document.querySelector('a[href*="contact"], a[href*="mailto"]');
     if(contact) contact.setAttribute('data-cursor','Say hi');
@@ -4969,85 +4908,62 @@ document.querySelectorAll('video').forEach(function(v){
 })();
 
 
-/* ── VIDEO LIGHTBOX ── */
-(function(){
-  const lb      = document.getElementById('ytLightbox');
-  const frame   = document.getElementById('ytLightboxFrame');
-  const closeBtn= document.getElementById('ytLightboxClose');
-  if(!lb || !frame) return;
-
-  function open(videoId){
-    frame.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
-    lb.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
-  }
-  function close(){
-    lb.classList.remove('is-open');
-    frame.src = '';
-    document.body.style.overflow = '';
-  }
-
-  document.querySelectorAll('.yt-thumb-btn').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      open(btn.dataset.video);
-    });
-  });
-  closeBtn.addEventListener('click', close);
-  lb.addEventListener('click', function(e){
-    if(e.target === lb) close();
-  });
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape') close();
-  });
-})();
 
 
 /* ── LAZY VIDEO LOADER ──────────────────────────────────────────
-   Videos use data-src instead of src so the browser never fetches
-   them on page load. This observer sets src + starts playback only
-   when the video is within 200px of the viewport, then stops and
-   clears src when it leaves (saves memory + bandwidth).
+   Two IntersectionObservers manage the video lifecycle without any
+   per-scroll-frame work:
+     • nearIO  — within 600px of viewport: attach src, preload.
+                  Outside that band: drop src and load() to release
+                  the GPU decoder + buffered frames.
+     • visIO   — intersecting viewport: play. Otherwise: pause.
+   This replaces a loop that called getBoundingClientRect() on all
+   ~39 videos every scroll frame.
 ──────────────────────────────────────────────────────────────── */
 (function(){
   var videos = document.querySelectorAll('video[data-src]');
   if(!videos.length) return;
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var visibleSet = new WeakSet();
 
-  function checkVideos(){
-    var vh = window.innerHeight;
-    videos.forEach(function(v){
-      var rect = v.getBoundingClientRect();
-      var nearViewport = rect.top < vh + 400 && rect.bottom > -400;
-      var inViewport = rect.top < vh && rect.bottom > 0;
-
-      if(nearViewport && !v.src && v.dataset.src){
-        v.src = v.dataset.src;
-        v.load();
-      }
-      if(inViewport && !reduced && v.hasAttribute('autoplay')){
-        if(v.paused && v.readyState >= 2) v.play().catch(function(){});
-      } else if(!inViewport && !v.paused){
-        v.pause();
+  var nearIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      var v = e.target;
+      if(e.isIntersecting){
+        if(!v.getAttribute('src') && v.dataset.src){
+          v.src = v.dataset.src;
+          v.load();
+        }
+      } else if(v.getAttribute('src')){
+        try{ v.pause(); }catch(_){}
+        v.removeAttribute('src');
+        v.load(); // releases decoder + buffered frames
       }
     });
-  }
+  }, { rootMargin: '600px 0px 600px 0px', threshold: 0 });
 
-  var raf;
-  function onScroll(){
-    if(raf) return;
-    raf = requestAnimationFrame(function(){ checkVideos(); raf=null; });
-  }
-  window.addEventListener('scroll', onScroll, {passive:true});
-  window.addEventListener('resize', onScroll);
-  // Initial + delayed check (in case layout changes)
-  checkVideos();
-  setTimeout(checkVideos, 500);
-  setTimeout(checkVideos, 1500);
-  // Listen for canplay to play
+  var visIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      var v = e.target;
+      if(e.isIntersecting){
+        visibleSet.add(v);
+        if(!reduced && v.hasAttribute('autoplay') && v.readyState >= 2){
+          v.play().catch(function(){});
+        }
+      } else {
+        visibleSet.delete(v);
+        if(!v.paused){ try{ v.pause(); }catch(_){} }
+      }
+    });
+  }, { threshold: 0 });
+
   videos.forEach(function(v){
+    v.muted = true;
+    nearIO.observe(v);
+    visIO.observe(v);
+    // Once buffered, start playback only if still visible.
     v.addEventListener('canplay', function(){
-      var rect = v.getBoundingClientRect();
-      if(rect.top < window.innerHeight && rect.bottom > 0 && !reduced && v.hasAttribute('autoplay')){
+      if(visibleSet.has(v) && !reduced && v.hasAttribute('autoplay')){
         v.play().catch(function(){});
       }
     });
@@ -5114,6 +5030,7 @@ document.querySelectorAll('video').forEach(function(v){
   const animTargets = [
     { el: document.querySelector('.logo-strip'),     cls: 'anim-running' },
     { el: document.querySelector('.social-gallery'), cls: 'anim-running' },
+    { el: document.querySelector('.hero-poster'),    cls: 'anim-running' },
   ];
   const obs = new IntersectionObserver((entries)=>{
     entries.forEach(en=>{
@@ -5121,7 +5038,8 @@ document.querySelectorAll('video').forEach(function(v){
       else en.target.classList.remove('anim-running');
     });
   }, { threshold: 0.05 });
-  animTargets.forEach(t=>{ if(t.el) obs.observe(t.el); });
+  // Seed running state so the first paint isn't briefly paused before IO fires.
+  animTargets.forEach(t=>{ if(t.el){ t.el.classList.add('anim-running'); obs.observe(t.el); } });
   // Floating CTA: show after page loads, always running
   if(floatingCta){
     floatingCta.classList.add('anim-running');
@@ -5138,37 +5056,9 @@ document.querySelectorAll('video').forEach(function(v){
 
 
 
-  /* ── Work section storytelling: reveal on scroll ── */
-  (function(){
-    const wraps = document.querySelectorAll('.work-pin-wrap');
-    if(!wraps.length) return;
-    const obs = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        var block = en.target.querySelector('.work-block');
-        if(!block) return;
-        if(en.isIntersecting){
-          block.classList.add('is-in');
-        } else {
-          // Remove so it re-animates if user scrolls back up
-          block.classList.remove('is-in');
-        }
-      });
-    }, { threshold: 0.08 });
-    wraps.forEach(function(w){ obs.observe(w); });
-  })();
 
 </script>
 
-
-<!-- VIDEO LIGHTBOX -->
-<div class="yt-lightbox" id="ytLightbox" role="dialog" aria-modal="true" aria-label="Video player">
-  <div class="yt-lightbox-inner" id="ytLightboxInner">
-    <button class="yt-lightbox-close" id="ytLightboxClose" aria-label="Close video">&times;</button>
-    <iframe id="ytLightboxFrame" src="" title="Video" frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen></iframe>
-  </div>
-</div>
 
 <script>
 (function(){
@@ -5211,15 +5101,4 @@ document.querySelectorAll('video').forEach(function(v){
 
 </body>
 </html>
-/* ── Pause animations when out of viewport ── */
-.vid-reel,
-.cl-track,
-.floating-cta{
-  animation-play-state: paused;
-}
-.social-gallery.anim-running .vid-reel,
-.social-gallery.anim-running .cl-track,
-.floating-cta.anim-running{
-  animation-play-state: running;
-}
 
