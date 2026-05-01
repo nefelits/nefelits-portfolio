@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thanks · Nefeli Tsaousi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;900&family=Fraunces:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html,body{min-height:100%;}
+  body{
+    font-family:'DM Sans',sans-serif;
+    background:#1F2419;
+    color:#F7F5F2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:48px 24px;
+    min-height:100vh;
+    line-height:1.55;
+  }
+  .ty-wrap{
+    position:relative;
+    max-width:640px;
+    width:100%;
+    text-align:left;
+  }
+  .ty-wrap::before{
+    content:"Thank you";
+    position:absolute;
+    top:-18px; left:-6px;
+    font-family:'DM Sans',sans-serif;
+    font-weight:900;
+    font-size:clamp(40px,6vw,84px);
+    color:rgba(247,245,242,.10);
+    letter-spacing:-.03em;
+    line-height:1;
+    pointer-events:none;
+    user-select:none;
+    white-space:nowrap;
+  }
+  .ty-eyebrow{
+    position:relative;
+    font-family:'DM Sans',sans-serif;
+    font-weight:600;
+    font-size:11px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:#A8B89D;
+    margin-bottom:18px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .ty-eyebrow::after{
+    content:"";
+    width:8px;height:8px;border-radius:50%;
+    background:#A8B89D;
+  }
+  h1{
+    position:relative;
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:clamp(34px,5vw,56px);
+    line-height:1.05;
+    letter-spacing:-.01em;
+    margin-bottom:18px;
+  }
+  h1 .it{ font-style:italic; color:#A8B89D; }
+  p{
+    position:relative;
+    font-size:16px;
+    color:rgba(247,245,242,.78);
+    max-width:480px;
+    margin-bottom:32px;
+  }
+  .ty-cta{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'DM Sans',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:#1F2419;
+    background:#A8B89D;
+    border:1px solid #A8B89D;
+    border-radius:999px;
+    padding:14px 28px;
+    text-decoration:none;
+    transition:background .25s ease, color .25s ease, transform .2s ease;
+  }
+  .ty-cta:hover{
+    background:transparent;
+    color:#A8B89D;
+    transform:translateY(-1px);
+  }
+  .ty-foot{
+    position:relative;
+    margin-top:40px;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:rgba(247,245,242,.45);
+  }
+  .ty-foot a{ color:#A8B89D; text-decoration:none; }
+  .ty-foot a:hover{ text-decoration:underline; }
+</style>
+</head>
+<body>
+  <div class="ty-wrap">
+    <div class="ty-eyebrow">message received</div>
+    <h1>Thanks for reaching <span class="it">out.</span></h1>
+    <p>Your message just landed in my inbox. I'll get back to you within a couple of days — usually sooner.</p>
+    <a class="ty-cta" href="/nefelits-portfolio/">Back to site &rarr;</a>
+    <div class="ty-foot">
+      In the meantime &middot; <a href="https://www.linkedin.com/in/nefeli-tsaousi/" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="https://www.instagram.com/nefelitsaousi" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+</body>
+</html>
