@@ -3731,6 +3731,54 @@ body{position:relative;}
 }
 .arr { font-style: normal; }
 
+<style>
+/* ── Education section ── */
+.education{
+  background:#fff;
+  padding:140px 48px !important;
+  box-sizing:border-box;
+}
+.edu-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:28px;
+  margin-top:60px;
+}
+.edu-card{
+  background:var(--bone);
+  border-radius:14px;
+  padding:36px 32px;
+  box-shadow:0 14px 40px -10px rgba(31,36,25,.12);
+  transition:transform .5s, box-shadow .5s;
+}
+.edu-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 26px 60px -10px rgba(31,36,25,.20);
+}
+.edu-degree{
+  font-family:'DM Sans',sans-serif;
+  font-weight:700;
+  font-size:17px;
+  line-height:1.3;
+  color:var(--ink);
+  margin-bottom:10px;
+}
+.edu-school{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-size:15px;
+  color:var(--champagne-deep);
+  margin-bottom:8px;
+}
+.edu-detail{
+  font-size:12px;
+  color:var(--taupe);
+  letter-spacing:.04em;
+}
+@media(max-width:720px){
+  .edu-grid{ grid-template-columns:1fr; }
+  .education{ padding:80px 20px; }
+}
 </style>
 </head>
 <body>
@@ -3783,6 +3831,7 @@ body{position:relative;}
     <a href="#work">Featured Work</a>
     <a href="#gallery">Social Media Gallery</a>
     <a href="#certs">Certifications</a>
+    <a href="#education">Education</a>
     <a href="#skills">Skills</a>
     <a href="#contact">Contact</a>
     <a href="assets/Nefeli_Tsaousi_CV.docx" class="nav-cv" download aria-label="Download Nefeli Tsaousi's CV (Word document)">Download CV</a>
@@ -3968,10 +4017,10 @@ body{position:relative;}
         </div>
       </div>
       <ul class="work-bullets">
-        <li>Managed email campaigns for a 400K-user database, achieving 20% open rate and 5% CTR on standard sends, rising to 10% CTR on event-specific campaigns.</li>
-        <li>Coordinated event marketing initiatives that strengthened brand visibility and generated qualified leads from targeted developer audiences.</li>
-        <li>Supported digital marketing activities contributing to 400 daily trial sign-ups, increasing product awareness and new user acquisition.</li>
-        <li>Built performance reports after each campaign cycle, turning data into actionable recommendations that improved future results.</li>
+        <li>Managed Google Ads and Meta Ads campaigns including retargeting, audience segmentation, ad copy development, and A/B testing, contributing to around 400 daily trial sign-ups.</li>
+        <li>Managed email campaigns for a 400K-user database via HubSpot and Encharge, achieving 20% open rate and 5% CTR, rising to 10% CTR for event campaigns.</li>
+        <li>Planned and coordinated event activations and digital campaigns across internal teams, agencies, and external partners.</li>
+        <li>Built performance reports using Google Analytics 4, translating data into recommendations to improve future activations.</li>
       </ul>
       <div class="work-metrics">
         <div class="m"><strong data-count="400" data-suffix="K">0</strong><span>User database</span></div>
@@ -4009,10 +4058,10 @@ body{position:relative;}
         </div>
       </div>
       <ul class="work-bullets">
-        <li>Designed and ran the full content strategy for a new beauty salon, from brand voice to posting calendar to visual identity.</li>
+        <li>Created and executed content strategies supported by Meta Ads campaigns to strengthen brand visibility and drive customer engagement.</li>
         <li>Grew Instagram to 50K monthly views and 1,000+ profile interactions within the first months of launch.</li>
-        <li>Built TikTok from zero to 1,140 followers and 20K likes in 4 months with zero paid budget.</li>
-        <li>Analysed weekly performance data to adjust content type, posting frequency, and format, improving results month-on-month.</li>
+        <li>Built TikTok from zero to 1,140 followers and 20K likes in 4 months.</li>
+        <li>Analysed ad and content performance to refine targeting, creative direction, and campaign effectiveness.</li>
       </ul>
       <div class="work-metrics">
         <div class="m"><strong data-count="50" data-suffix="K">0</strong><span>Monthly views</span></div>
@@ -4065,7 +4114,7 @@ body{position:relative;}
   <article class="work-block">
     <div class="work-meta">
       <div class="work-logo"><img loading="lazy" src="assets/logos/dereetraslogo.png" alt="Deree – ACG"></div>
-      <div class="work-role">Social Media Assistant, Marketing Department</div>
+      <div class="work-role">Social Media Student Assistant, Marketing Department</div>
       <h3 class="work-title">Deree - The American College of Greece</h3>
       <div class="work-context">
         <div class="wc-item">
@@ -4221,6 +4270,23 @@ body{position:relative;}
   </div>
 </section>
 
+<section class="education section" id="education">
+  <div class="section-eyebrow">education</div>
+  <h2 class="section-title reveal">Built on <span class="it">strong foundations.</span></h2>
+  <div class="edu-grid reveal-stagger">
+    <div class="edu-card">
+      <div class="edu-degree">MSc Digital Marketing &amp; Customer Experience Management</div>
+      <div class="edu-school">IESEG School of Management</div>
+      <div class="edu-detail">Lille, France &middot; Graduating June 2026</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">BSc Business Administration, Marketing</div>
+      <div class="edu-school">Deree &ndash; The American College of Greece</div>
+      <div class="edu-detail">Athens, Greece &middot; GPA 3.85/4</div>
+    </div>
+  </div>
+</section>
+
 <section class="tested-first" id="tested">
   <div class="section-eyebrow">personal channels</div>
   <div class="tested-head">
@@ -4310,7 +4376,7 @@ body{position:relative;}
     </div>
     <div class="cc">
       <div class="cert-img"><img src="assets/certifications/cert-5.jpeg" alt="Certification" loading="lazy"></div>
-      <div class="cert-title">Brandstorm 2024 - Youth Innovator</div>
+      <div class="cert-title">Brandstorm 2026 - Participant</div>
       <div class="cert-issuer">L'Oreal</div>
     </div>
     <div class="cc">
@@ -4440,7 +4506,7 @@ body{position:relative;}
 
       <div class="cf-col cf-col-loc">
         <h4>Location</h4>
-        <p><span class="gold">Athens</span>, Greece<br><span class="gold">Europe</span>, open to relocation<br>Available remote worldwide.</p>
+        <p><span class="gold">Lille</span>, France<br><span class="gold">Europe</span>, open to relocation<br>Available remote worldwide.</p>
         <a href="assets/Nefeli_Tsaousi_CV.docx" download class="cf-cv-btn">Download CV &darr;</a>
       </div>
     </div>
