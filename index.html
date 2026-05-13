@@ -1989,6 +1989,7 @@ button{font-family:inherit;cursor:none;border:none;background:none}
 
   /* ── SOCIAL GALLERY ── */
   .social-gallery{ padding:80px 20px 60px; }
+  .gallery-split{ grid-template-columns:1fr; gap:24px; }
   .vid-card{ width:140px; }
 
   /* ── CERTIFICATIONS ── */
@@ -2006,7 +2007,13 @@ button{font-family:inherit;cursor:none;border:none;background:none}
   .cf-hello-row{ flex-direction:column; align-items:flex-start; gap:16px; }
 
   /* ── TESTED ── */
+  .tested-first{ padding:80px 20px; }
+  .tested-head{ flex-direction:column; align-items:flex-start; }
+  .tested-stats{ gap:20px; flex-wrap:wrap; }
   .tested-card{ width:90vw; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-inner{ padding:0 20px; }
 
   /* ── FLOATING CTA ── */
   .floating-cta{ bottom:14px;right:14px;padding:12px 18px;font-size:11px; }
@@ -3778,7 +3785,7 @@ body{position:relative;}
 }
 @media(max-width:720px){
   .edu-grid{ grid-template-columns:1fr; }
-  .education{ padding:80px 20px; }
+  .education{ padding:80px 20px !important; }
 }
 
 /* ── Book a Call / Calendly section ── */
