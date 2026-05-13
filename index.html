@@ -2993,6 +2993,7 @@ section:not(.contact), .logo-strip, .testimonials, #gallery, #certs{
   background:transparent !important;
 }
 body[data-section]:not([data-section="contact"]){background:#F7F5F2 !important;}
+.book-call{background:#1F2419 !important; position:relative; z-index:1;}
 .italic-marquee{background:transparent !important;}
 .about, .about-section, #about{background:transparent !important;}
 .testimonials{background:transparent !important;}
@@ -3779,6 +3780,101 @@ body{position:relative;}
   .edu-grid{ grid-template-columns:1fr; }
   .education{ padding:80px 20px; }
 }
+
+/* ── Book a Call / Calendly section ── */
+.book-call {
+  background: #1F2419 !important;
+  padding: 120px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.book-call::before {
+  content: "Book a call";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 900;
+  font-size: clamp(60px, 12vw, 160px);
+  color: rgba(168,184,157,.08);
+  letter-spacing: -.04em;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+.book-call .section-eyebrow {
+  color: #A8B89D !important;
+  position: relative;
+  z-index: 1;
+}
+.book-call .section-eyebrow::before {
+  background: #A8B89D !important;
+}
+.book-call-title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: clamp(32px, 4vw, 56px);
+  color: #F7F5F2;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+  margin: 0 auto 16px;
+  max-width: 700px;
+  position: relative;
+  z-index: 1;
+}
+.book-call-title .it,
+.book-call-title span.it {
+  font-family: 'Fraunces', serif !important;
+  font-style: italic !important;
+  color: #A8B89D !important;
+}
+.book-call-sub {
+  font-size: 16px;
+  color: rgba(247,245,242,.65);
+  margin: 0 auto 48px;
+  max-width: 480px;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+.book-call-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #1F2419;
+  background: #A8B89D;
+  border: 1px solid #A8B89D;
+  border-radius: 999px;
+  padding: 16px 36px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .25s, color .25s, transform .2s;
+  position: relative;
+  z-index: 1;
+}
+.book-call-btn:hover {
+  background: transparent;
+  color: #A8B89D;
+  transform: translateY(-2px);
+}
+.book-call-note {
+  margin-top: 20px;
+  font-size: 12px;
+  color: rgba(247,245,242,.40);
+  letter-spacing: .08em;
+  position: relative;
+  z-index: 1;
+}
+@media (max-width:720px) {
+  .book-call { padding: 80px 24px; }
+}
 </style>
 </head>
 <body>
@@ -4448,6 +4544,20 @@ body{position:relative;}
       </article>
     </div>
   </div>
+</section>
+
+
+<section class="book-call" id="book" style="background:#1F2419 !important;">
+  <div class="section-eyebrow">let's talk</div>
+  <h2 class="book-call-title">Got a role, a project, or even just a <span class="it">vague idea?</span></h2>
+  <p class="book-call-sub">That's all I need.</p>
+  <p class="book-call-sub" style="margin-top:-24px;">Book a call. 30 minutes. Let's see where it goes.</p>
+  <a class="book-call-btn"
+     href=""
+     onclick="Calendly.initPopupWidget({url: 'https://calendly.com/nefeli-tsaousi'});return false;">
+    Book a call &rarr;
+  </a>
+  <p class="book-call-note">Free &middot; 30 min &middot; Video or phone</p>
 </section>
 
 <section class="contact" id="contact">
@@ -5233,6 +5343,10 @@ document.querySelectorAll('video').forEach(function(v){
 })();
 </script>
 
+
+<!-- Calendly popup widget -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </body>
 </html>
 
