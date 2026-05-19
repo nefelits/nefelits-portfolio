@@ -3787,6 +3787,72 @@ body{position:relative;}
   .edu-grid{ grid-template-columns:1fr; }
   .education{ padding:80px 20px !important; }
 }
+/* ── Reference Letters ── */
+.edu-refs{
+  margin-top:48px;
+  padding-top:32px;
+  border-top:1px solid rgba(31,27,22,.08);
+}
+.edu-refs-label{
+  font-family:'DM Sans',sans-serif;
+  font-weight:600;
+  font-size:11px;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  color:var(--taupe);
+  margin-bottom:18px;
+  display:inline-flex;align-items:center;gap:14px;
+}
+.edu-refs-label::before{
+  content:'';width:32px;height:1px;background:var(--taupe);display:inline-block;
+}
+.edu-refs-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+.edu-ref-btn{
+  display:flex;align-items:center;gap:18px;
+  padding:18px 24px;
+  background:#FFFFFF;
+  border:1px solid rgba(31,27,22,.12);
+  border-radius:14px;
+  text-decoration:none;
+  color:var(--ink);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .35s,box-shadow .35s;
+}
+.edu-ref-btn:hover{
+  transform:translateY(-3px);
+  border-color:var(--ink);
+  box-shadow:0 12px 32px -8px rgba(31,27,22,.14);
+}
+.ref-kind{
+  font-family:'DM Sans',sans-serif;
+  font-weight:700;
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#A8B89D;
+  display:block;
+  margin-bottom:3px;
+}
+.ref-name{
+  font-family:'DM Sans',sans-serif;
+  font-size:13px;
+  font-weight:500;
+  color:var(--ink);
+  display:block;
+}
+.ref-arrow{
+  margin-left:auto;
+  font-size:16px;
+  opacity:.45;
+  flex-shrink:0;
+}
+@media(max-width:720px){
+  .edu-refs-row{ grid-template-columns:1fr; }
+  .edu-ref-btn{ padding:14px 18px; }
+}
 
 /* ── Book a Call / Calendly section ── */
 .book-call {
@@ -4384,9 +4450,25 @@ body{position:relative;}
       <div class="edu-detail">Lille, France &middot; Graduating June 2026</div>
     </div>
     <div class="edu-card">
-      <div class="edu-degree">BSc Business Administration, Marketing</div>
+      <div class="edu-degree">BSc in Marketing</div>
       <div class="edu-school">Deree &ndash; The American College of Greece</div>
       <div class="edu-detail">Athens, Greece &middot; GPA 3.85/4</div>
+    </div>
+  </div>
+
+  <div class="edu-refs">
+    <div class="edu-refs-label">Reference letters</div>
+    <div class="edu-refs-row">
+      <a class="edu-ref-btn" href="assets/reference-letters/Reference_Letter_Academic.pdf" download>
+        <span class="ref-kind">Academic</span>
+        <span class="ref-name">Reference Letter</span>
+        <span class="ref-arrow">&darr;</span>
+      </a>
+      <a class="edu-ref-btn" href="assets/reference-letters/Reference_Letter_Aliki.pdf" download>
+        <span class="ref-kind">Professional</span>
+        <span class="ref-name">Reference Letter &middot; Aliki</span>
+        <span class="ref-arrow">&darr;</span>
+      </a>
     </div>
   </div>
 </section>
