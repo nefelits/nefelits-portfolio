@@ -2140,8 +2140,7 @@ html.smooth-active{scroll-behavior:auto !important;}
 .social-gallery:not(.anim-running) .vid-reel-track,
 .hero-poster:not(.anim-running) .hp-mesh,
 .hero-poster:not(.anim-running) .hp-card,
-.hero-poster:not(.anim-running) .hp-dot,
-.hero-poster:not(.anim-running) .hp-stamp-svg{
+.hero-poster:not(.anim-running) .hp-dot{
   animation-play-state: paused;
 }
 
@@ -2425,44 +2424,7 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
   transform:translateY(-2px);
 }
 
-/* Rotating "AVAILABLE FOR WORK" stamp at the corner */
-.hp-stamp{
-  position:absolute;
-  top:-26px; right:-26px;
-  width:148px; height:148px;
-  z-index:3;
-  display:flex;align-items:center;justify-content:center;
-  pointer-events:none;
-}
-.hp-stamp-svg{
-  position:absolute; inset:0;
-  width:100%;height:100%;
-  animation:hpRotate 22s linear infinite;
-}
-@keyframes hpRotate{
-  from{transform:rotate(0deg);}
-  to  {transform:rotate(360deg);}
-}
-.hp-stamp-text{
-  font-family:'DM Sans',sans-serif;
-  font-weight:600;
-  font-size:11.5px;
-  letter-spacing:.30em;
-  text-transform:uppercase;
-  fill:#1F2419;
-}
-.hp-stamp-mark{
-  position:relative;
-  width:54px;height:54px;
-  border-radius:50%;
-  background:#1F2419;
-  color:#BFCDB5;
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Fraunces',serif;
-  font-style:italic;
-  font-size:22px;
-  box-shadow:0 14px 30px -10px rgba(31,36,25,.50);
-}
+
 
 @media (max-width:1024px){
   .hero-poster{min-height:480px;}
@@ -2471,13 +2433,10 @@ body[data-section="contact"] .sec-marker{color:#F7F5F2;}
 @media (max-width:900px){
   .hero-poster{min-height:auto;margin-top:8px;}
   .hp-card{width:min(360px,100%);padding:14px 14px 18px;}
-  .hp-stamp{width:120px;height:120px;top:-18px;right:-18px;}
-  .hp-stamp-text{font-size:10px;letter-spacing:.26em;}
-  .hp-stamp-mark{width:46px;height:46px;font-size:18px;}
   .hp-meta-headline{font-size:18px;}
 }
 @media (prefers-reduced-motion: reduce){
-  .hp-mesh,.hp-card,.hp-stamp-svg,.hp-dot{animation:none !important;}
+  .hp-mesh,.hp-card,.hp-dot{animation:none !important;}
 }
 
 /* S / D / E panel circles (legacy, still applied if panels ever return) */
@@ -3188,7 +3147,7 @@ body{position:relative;}
 /* ── 5. Hero: no float, no parallax ── */
 .hp-card { animation:none !important; }
 .hp-mesh { animation:none !important; }
-.hp-stamp-svg { animation:idleSpin 28s linear infinite !important; }
+
 .hero-portrait-pop { animation:none !important; }
 
 /* ── 6. Panels: no tilt, allow background color transition ── */
@@ -3248,6 +3207,23 @@ body{position:relative;}
   .featured-work .work-block {
     position:static !important;
     min-height:auto !important;
+    display:grid !important;
+    align-items:start !important;
+    padding:60px 24px !important;
+  }
+}
+@media (max-width: 768px) {
+  .featured-work .work-block {
+    padding:48px 20px !important;
+  }
+  /* Stack Challenge / Result vertically on small screens */
+  .work-context {
+    grid-template-columns:1fr !important;
+  }
+}
+@media (max-width: 480px) {
+  .featured-work .work-block {
+    padding:40px 16px !important;
   }
 }
 /* When the block becomes a flex container, the inner grid still needs to span the row. */
@@ -3754,41 +3730,17 @@ body{position:relative;}
 }
 .edu-card{
   position:relative;
-  padding:14px;
-  background:var(--ink);
-  box-shadow:
-    0 24px 60px -12px rgba(31,36,25,.22),
-    0 6px 16px rgba(31,36,25,.10);
-  transition:transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s;
+  background:#FFFFFF;
+  border:1px solid rgba(31,36,25,.07);
+  border-top:3px solid var(--champagne);
+  box-shadow:0 4px 20px -4px rgba(31,36,25,.10),0 1px 4px rgba(31,36,25,.05);
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s;
 }
 .edu-card:hover{
-  transform:translateY(-6px);
-  box-shadow:
-    0 36px 80px -12px rgba(31,36,25,.28),
-    0 10px 24px rgba(31,36,25,.14);
+  transform:translateY(-5px);
+  box-shadow:0 18px 48px -8px rgba(31,36,25,.16),0 6px 14px rgba(31,36,25,.07);
 }
-.edu-corner{
-  position:absolute;
-  width:14px;
-  height:14px;
-  z-index:3;
-  pointer-events:none;
-}
-.edu-corner::before,
-.edu-corner::after{
-  content:'';
-  position:absolute;
-  background:var(--champagne);
-}
-.edu-corner::before{width:100%;height:2px;top:0;left:0;}
-.edu-corner::after{width:2px;height:100%;top:0;left:0;}
-.edu-corner--tl{top:6px;left:6px;}
-.edu-corner--tr{top:6px;right:6px;transform:rotate(90deg);}
-.edu-corner--bl{bottom:6px;left:6px;transform:rotate(-90deg);}
-.edu-corner--br{bottom:6px;right:6px;transform:rotate(180deg);}
 .edu-frame-inner{
-  background:var(--cream);
-  border:1px solid rgba(31,36,25,.12);
   padding:52px 44px 48px;
   display:flex;
   flex-direction:column;
@@ -3802,12 +3754,12 @@ body{position:relative;}
   font-size:13px;
   color:var(--champagne-deep);
   margin-bottom:24px;
-  letter-spacing:.15em;
+  letter-spacing:.20em;
 }
 .edu-degree{
   font-family:'DM Sans',sans-serif;
   font-weight:700;
-  font-size:17px;
+  font-size:18px;
   line-height:1.35;
   color:var(--ink);
   margin:0;
@@ -3815,7 +3767,7 @@ body{position:relative;}
 .edu-school{
   font-family:'Fraunces',serif;
   font-style:italic;
-  font-size:13px;
+  font-size:14px;
   color:var(--champagne-deep);
   letter-spacing:.02em;
   margin:0;
@@ -4105,20 +4057,6 @@ body{position:relative;}
         </div>
       </div>
 
-      <!-- Rotating wordmark badge stamped over the corner -->
-      <div class="hp-stamp">
-        <svg viewBox="0 0 200 200" class="hp-stamp-svg">
-          <defs>
-            <path id="hpStampArc" d="M 100,100 m -78,0 a 78,78 0 1,1 156,0 a 78,78 0 1,1 -156,0"/>
-          </defs>
-          <text class="hp-stamp-text">
-            <textPath href="#hpStampArc" startOffset="0">
-              AVAILABLE FOR WORK &#x2726;&nbsp;&nbsp; REMOTE / EUROPE &#x2726;&nbsp;&nbsp;
-            </textPath>
-          </text>
-        </svg>
-        <span class="hp-stamp-mark">&#x2726;</span>
-      </div>
     </div>
   </div>
 </section>
@@ -4430,10 +4368,6 @@ body{position:relative;}
   <h2 class="section-title reveal">Built on <span class="it">strong foundations.</span></h2>
   <div class="edu-grid reveal-stagger">
     <div class="edu-card">
-      <span class="edu-corner edu-corner--tl"></span>
-      <span class="edu-corner edu-corner--tr"></span>
-      <span class="edu-corner edu-corner--bl"></span>
-      <span class="edu-corner edu-corner--br"></span>
       <div class="edu-frame-inner">
         <div class="edu-ornament">✦</div>
         <div class="edu-school">IESEG School of Management</div>
@@ -4444,10 +4378,6 @@ body{position:relative;}
       </div>
     </div>
     <div class="edu-card">
-      <span class="edu-corner edu-corner--tl"></span>
-      <span class="edu-corner edu-corner--tr"></span>
-      <span class="edu-corner edu-corner--bl"></span>
-      <span class="edu-corner edu-corner--br"></span>
       <div class="edu-frame-inner">
         <div class="edu-ornament">✦</div>
         <div class="edu-school">Deree &ndash; The American College of Greece</div>
@@ -4577,7 +4507,7 @@ body{position:relative;}
     <div class="t-cards">
       <article class="t-card t-card-1">
         <div class="t-quote-mark" aria-hidden="true">&ldquo;</div>
-        <p class="t-quote">Nefeli became an integral part of our marketing team from the very beginning.</p>
+        <p class="t-quote">Nefeli became an integral part of our marketing team from the very beginning. Her initiative, professionalism, and ability to manage multiple projects make her a valuable asset to any team.</p>
         <div class="t-meta">
           <div class="t-stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <div class="t-author">
@@ -4592,14 +4522,14 @@ body{position:relative;}
 
       <article class="t-card t-card-2">
         <div class="t-quote-mark" aria-hidden="true">&ldquo;</div>
-        <p class="t-quote">Her initiative, professionalism, and ability to manage multiple projects make her a valuable asset to any team.</p>
+        <p class="t-quote">Nephele is full of talent and ideas. She has an innate ability to immediately grasp the aesthetic and concept, matching the style of whoever she&rsquo;s working with. She took on my website, social media and content creation, and we have a wonderful collaboration. She understood exactly the style and result I wanted, and elevated it with her expertise and professional eye.</p>
         <div class="t-meta">
           <div class="t-stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <div class="t-author">
-            <div class="t-avatar" aria-hidden="true">A</div>
+            <div class="t-avatar" aria-hidden="true">V</div>
             <div class="t-author-text">
-              <div class="t-name">Aliki Mitropoulou</div>
-              <div class="t-role">Head of Marketing &middot; Netdata</div>
+              <div class="t-name">Viktoria Kalogera</div>
+              <div class="t-role">Liquid Beauty Parlor</div>
             </div>
           </div>
         </div>
@@ -4694,7 +4624,7 @@ body{position:relative;}
 
       <div class="cf-col cf-col-loc">
         <h4>Location</h4>
-        <p><span class="gold">Lille</span>, France<br><span class="gold">Europe</span>, open to relocation<br>Available remote worldwide.</p>
+        <p><span class="gold">Athens</span>, Greece<br><span class="gold">Europe</span>, open to relocation<br>Available remote worldwide.</p>
         <a href="assets/Nefeli_Tsaousi_CV.docx" download class="cf-cv-btn">Download CV &darr;</a>
       </div>
     </div>
